@@ -1,1 +1,3 @@
-# cypher
+# cypher  
+
+pip3 install -r requirements.txt
