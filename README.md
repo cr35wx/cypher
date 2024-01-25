@@ -1,3 +1,6 @@
 # cypher  
 
-pip3 install -r requirements.txt
+cd cypher  
+python3 -m venv .venv  
+source .venv/bin/activate  
+pip3 install -r requirements.txt  
