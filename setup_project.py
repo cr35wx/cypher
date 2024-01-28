@@ -7,14 +7,17 @@ def run_command(command):
 
 def activate_venv():
     if sys.platform.startswith('win'):
-        return ".venv\\Scripts\\Activate.ps1 ;"
+        if 'PSVersionTable' in os.environ:
+            return ".venv\\Scripts\\Activate.ps1 ;"
+        elif 'CMDCMDLINE' in os.environ:
+            return ".venv\\Scripts\\activate.bat &"
     else:
         return "source .venv/bin/activate &&"
     
 
 def setup():
     # Create virtual environment
-    run_command("python3 -m venv .venv")
+    run_command(f"{'python' if sys.platform.startswith('win') else 'python3'} -m venv .venv")
 
     # Activate virtual environment within subprocess
     activate_command = activate_venv()
