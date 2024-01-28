@@ -16,14 +16,15 @@ def activate_venv():
     
 
 def setup():
+    python, pip = ('python3', 'pip3') if 'python3' in sys.executable else ('python', 'pip')
     # Create virtual environment
-    run_command(f"{'python' if sys.platform.startswith('win') else 'python3'} -m venv .venv")
+    run_command(f"{python} -m venv .venv")
 
     # Activate virtual environment within subprocess
     activate_command = activate_venv()
 
     # Install Python dependencies
-    run_command(f"{activate_command} pip3 install -r requirements.txt")
+    run_command(f"{activate_command} {pip} install -r requirements.txt")
 
     # Install Node.js dependencies in the frontend directory
     os.chdir("frontend")
