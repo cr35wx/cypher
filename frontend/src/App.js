@@ -1,12 +1,13 @@
 import "./App.css";
 import Button from "./components/Button";
-import Form from "./components/StudentForm"
+import StudentForm from "./components/StudentForm"
 
 function App() {
   return (
     <div>
       <Button />
-      <Form />
+      {/* <Form /> */}
+      <StudentForm />
     </div>
   );
 }
