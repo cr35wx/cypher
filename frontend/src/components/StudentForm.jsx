@@ -2,17 +2,23 @@ import React, { useState } from "react";
 
 const Name = ({ name, setName }) => {
   return (
-    <input
-      className="mb-2 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-      type="text"
-      placeholder="Student Name"
-      value={name}
-      onChange={(e) => setName(e.target.value)}
-      autoComplete="name"
-      required
-      min={2}
-      max={30}
-    />
+    <>
+      <label htmlFor="name" className=" text-gray-700 text-sm font-bold">
+        Student Name:
+      </label>
+      <input
+        id="name"
+        className="mb-2 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+        type="text"
+        placeholder="Student Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        autoComplete="name"
+        required
+        min={2}
+        max={30}
+      />
+    </>
   );
 };
 
@@ -65,8 +71,11 @@ const School = ({ college, setCollege }) => {
 
   return (
     <>
-      <label>Select School:</label>
+      <label htmlFor="schools" className="text-gray-700 text-sm font-bold">
+        Select School:
+      </label>
       <select
+        id="schools"
         className="mb-2 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
         value={college.school}
         onChange={(e) => setCollege({ school: e.target.value, major: "" })}
@@ -80,9 +89,12 @@ const School = ({ college, setCollege }) => {
       </select>
       <br />
       {college.school && (
-        <div>
-          <label>Select Major:</label>
+        <>
+          <label htmlFor="majors" className="text-gray-700 text-sm font-bold">
+            Select Major:
+          </label>
           <select
+            id="majors"
             className="mb-2 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
             value={college.major}
             onChange={(e) => setCollege({ ...college, major: e.target.value })}
@@ -96,7 +108,7 @@ const School = ({ college, setCollege }) => {
                 </option>
               ))}
           </select>
-        </div>
+        </>
       )}
     </>
   );
@@ -105,8 +117,11 @@ const School = ({ college, setCollege }) => {
 const YearStanding = ({ yearStanding, setYearStanding }) => {
   return (
     <>
-      <label>Year Standing:</label>
+      <label htmlFor="yearStanding" className="text-gray-700 text-sm font-bold">
+        Year Standing:
+      </label>
       <select
+        id="yearStanding"
         className="mb-2 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
         value={yearStanding}
         onChange={(e) => setYearStanding(e.target.value)}
@@ -124,9 +139,15 @@ const YearStanding = ({ yearStanding, setYearStanding }) => {
 const GraduationDate = ({ graduationDate, setGraduationState }) => {
   return (
     <>
-      <label>Graduation Date:</label>
+      <label
+        htmlFor="graduationQuarter"
+        className="text-gray-700 text-sm font-bold"
+      >
+        Graduation Date:
+      </label>
       <div className="flex space-x-4">
         <select
+          id="graduationQuarter"
           className="mb-2 block appearance-none w-1/2 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           value={graduationDate.quarter}
           onChange={(e) =>
@@ -140,9 +161,14 @@ const GraduationDate = ({ graduationDate, setGraduationState }) => {
           <option value="Summer">Summer</option>
         </select>
 
+        <label htmlFor="graduationYear" className="hidden"></label>
         <input
+          id="graduationYear"
           className="appearance-none block w-1/2 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-          type="text"
+          type="number"
+          min={new Date().getFullYear()}
+          max={new Date().getFullYear() + 4}
+          step="1"
           value={graduationDate.year}
           onChange={(e) =>
             setGraduationState({ ...graduationDate, year: e.target.value })
@@ -154,25 +180,29 @@ const GraduationDate = ({ graduationDate, setGraduationState }) => {
   );
 };
 
-const ProjectType = ({
+const PrerequisiteCourses = () => {
+  // TODO
+  return (
+    <></>
+  )
+};
+
+export const ProjectType = ({
   projectType,
   setProjectType,
   otherDescription,
   setOtherDescription,
 }) => {
   return (
-    <div>
-      <label
-        htmlFor="projectType"
-        className="block text-gray-700 text-sm font-bold mb-2"
-      >
+    <>
+      <label htmlFor="projectType" className="text-gray-700 text-sm font-bold">
         Project Type of Interest:
       </label>
       <select
         id="projectType"
         value={projectType}
         onChange={(e) => setProjectType(e.target.value)}
-        className="w-full bg-gray-200 border border-gray-300 p-2 rounded"
+        className="w-full bg-gray-200 border border-gray-300 p-2 rounded mb-2"
       >
         <option value="">Select...</option>
         <option value="riskAssessment">General Risk Assessment</option>
@@ -180,52 +210,58 @@ const ProjectType = ({
         <option value="policyReview">Policy Review</option>
         <option value="other">Other</option>
       </select>
-
+      <br />
       {projectType === "other" && (
-        <div>
+        <>
           <label
             htmlFor="otherDescription"
-            className="block text-gray-700 text-sm font-bold mt-2"
+            className="text-gray-700 text-sm font-bold"
           >
             Briefly Describe Other:
           </label>
           <textarea
             id="otherDescription"
             value={otherDescription}
+            maxLength={300}
             onChange={(e) => setOtherDescription(e.target.value)}
             className="w-full bg-gray-200 border border-gray-300 p-2 rounded resize-y"
             style={{ minHeight: "50px", maxHeight: "200px" }}
           />
-        </div>
+        </>
       )}
-    </div>
+    </>
   );
 };
 
-const ClinicOutreach = ({
-  howDidYouHear,
-  setHowDidYouHear,
-  heardAboutMonth,
-  setHeardAboutMonth,
-  heardAboutYear,
-  setHeardAboutYear,
-}) => {
+export const ClinicOutreach = ({ howDidYouHear, setHowDidYouHear }) => {
   return (
-    <div>
+    <>
       <label
         htmlFor="howDidYouHear"
-        className="block text-gray-700 text-sm font-bold mb-2"
+        className="text-gray-700 text-sm font-bold"
       >
         How did you hear about the clinic?
       </label>
       <textarea
         id="howDidYouHear"
         value={howDidYouHear}
+        maxLength={300}
         onChange={(e) => setHowDidYouHear(e.target.value)}
         className="w-full bg-gray-200 border border-gray-300 p-2 rounded"
         style={{ minHeight: "50px", maxHeight: "200px" }}
       />
+    </>
+  );
+};
 
+const ClinicOutreachDate = ({
+  heardAboutMonth,
+  setHeardAboutMonth,
+  heardAboutYear,
+  setHeardAboutYear,
+}) => {
+  return (
+    <>
       <label
         htmlFor="heardAboutMonth"
         className="block text-gray-700 text-sm font-bold mt-2"
@@ -240,7 +276,7 @@ const ClinicOutreach = ({
         max={12}
         step="1"
         value={heardAboutMonth}
-        className="w-1/2 bg-gray-200 border border-gray-300 p-2 rounded"
+        className="w-1/2 bg-gray-200 border border-gray-300 p-2 rounded mb-2"
       />
 
       <label htmlFor="heardAboutYear" className="hidden"></label>
@@ -252,17 +288,20 @@ const ClinicOutreach = ({
         max={new Date().getFullYear()}
         step="1"
         value={heardAboutYear}
-        className="w-1/2 bg-gray-200 border border-gray-300 p-2 rounded"
+        className="w-1/2 bg-gray-200 border border-gray-300 p-2 rounded mb-2"
       />
-    </div>
+    </>
   );
 };
 
 const Gender = ({ gender, setGender }) => {
   return (
     <>
-      <label>Gender:</label>
+      <label htmlFor="gender" className="text-gray-700 text-sm font-bold">
+        Gender:
+      </label>
       <select
+        id="gender"
         className="mb-2 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
         value={gender}
         onChange={(e) => setGender(e.target.value)}
@@ -279,8 +318,11 @@ const Gender = ({ gender, setGender }) => {
 const Ethnicity = ({ ethnicity, setEthnicity }) => {
   return (
     <>
-      <label>Ethnicity:</label>
+      <label htmlFor="ethnicity" className="text-gray-700 text-sm font-bold">
+        Ethnicity:
+      </label>
       <select
+        id="ethnicity"
         className="mb-2 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
         value={ethnicity}
         onChange={(e) => setEthnicity(e.target.value)}
@@ -302,9 +344,9 @@ export default function StudentForm() {
   const [yearStanding, setYearStanding] = useState("");
   const [graduationDate, setGraduationState] = useState({
     quarter: "",
-    year: "",
+    year: new Date().getFullYear(),
   });
-  const [prerequisiteCourses, setPrerequesiteCourses] = useState([]); // TODO
+  const [prerequisiteCourses, setPrerequesiteCourses] = useState([]);
   const [projectType, setProjectType] = useState("");
   const [otherDescription, setOtherDescription] = useState("");
   const [howDidYouHear, setHowDidYouHear] = useState("");
@@ -317,21 +359,10 @@ export default function StudentForm() {
   const [gender, setGender] = useState("");
   const [ethnicity, setEthnicity] = useState("");
 
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   console.log(e)
-  //   console.log(name, value)
-  //   setFormData({ ...formData, [name]: value });
-  // };
 
-  // const handleCheckboxChange = (e) => {
-  //   const { name, value } = e.target;
-  //   const updatedCourses = formData.prerequisiteCourses.includes(value)
-  //     ? formData.prerequisiteCourses.filter((course) => course !== value)
-  //     : [...formData.prerequisiteCourses, value];
+  const validateForm = () => {
 
-  //   setFormData({ ...formData, [name]: updatedCourses });
-  // };
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -340,8 +371,6 @@ export default function StudentForm() {
       alert("Please select a school and major!");
       return;
     }
-    // construct object of all states, loop through and do validation like above
-    // validate: yearStanding is set;
 
     const formData = {
       name,
@@ -351,8 +380,8 @@ export default function StudentForm() {
       prerequisiteCourses,
       projectType,
       otherDescription,
-      clinicOutreach: {
-        howDidYouHear,
+      howDidYouHear,
+      whenDidYouHear: {
         heardAboutMonth,
         heardAboutYear,
       },
@@ -365,7 +394,7 @@ export default function StudentForm() {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="max-w-xl w-full">
         <Name name={name} setName={setName} />
         <School college={college} setCollege={setCollege} />
         <YearStanding
@@ -376,6 +405,10 @@ export default function StudentForm() {
           graduationDate={graduationDate}
           setGraduationState={setGraduationState}
         />
+        <PrerequisiteCourses
+          prerequisiteCourses={prerequisiteCourses}
+          setPrerequesiteCourses={setPrerequesiteCourses}
+        />
         <ProjectType
           projectType={projectType}
           setProjectType={setProjectType}
@@ -385,6 +418,8 @@ export default function StudentForm() {
         <ClinicOutreach
           howDidYouHear={howDidYouHear}
           setHowDidYouHear={setHowDidYouHear}
+        />
+        <ClinicOutreachDate
           heardAboutMonth={heardAboutMonth}
           setHeardAboutMonth={setHeardAboutMonth}
           heardAboutYear={heardAboutYear}
