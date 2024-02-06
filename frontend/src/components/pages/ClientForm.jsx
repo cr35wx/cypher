@@ -248,7 +248,7 @@ const RequestsOrComments = ({ requestsOrComments, setRequestsOrComments }) => {
 };
 
 
-export default function ClientForm() {
+export function ClientForm() {
   const [orgName, setOrgName] = useState("");
   const [orgType, setOrgType] = useState("");
   const [contactPersonName, setContactPersonName] = useState("");

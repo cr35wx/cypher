@@ -338,7 +338,7 @@ const Ethnicity = ({ ethnicity, setEthnicity }) => {
   );
 };
 
-export default function StudentForm() {
+export function StudentForm() {
   const [name, setName] = useState("");
   const [college, setCollege] = useState({ school: "", major: "" });
   const [yearStanding, setYearStanding] = useState("");
