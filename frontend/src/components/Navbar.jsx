@@ -24,6 +24,13 @@ export const Navbar = () => {
           <NavLink to="/services">Services</NavLink>
         </li>
         <li>
+          <NavLink to="/student">Student Application</NavLink>
+        </li>
+        <li>
+          {/* TODO: Client Form is not showing fully because of CSS */}
+          <NavLink to="/client">Client Application</NavLink>
+        </li>
+        <li>
           <NavLink to="/contact">Contact</NavLink>
         </li>
       </ul>
