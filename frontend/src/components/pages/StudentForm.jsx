@@ -15,7 +15,7 @@ const Name = ({ name, setName }) => {
         onChange={(e) => setName(e.target.value)}
         autoComplete="name"
         required
-        min={2}
+        min={3}
         max={30}
       />
     </>
@@ -143,7 +143,7 @@ const GraduationDate = ({ graduationDate, setGraduationState }) => {
         htmlFor="graduationQuarter"
         className="text-gray-700 text-sm font-bold"
       >
-        Graduation Date:
+        Graduation Quarter:
       </label>
       <div className="flex space-x-4">
         <select
@@ -360,18 +360,19 @@ export function StudentForm() {
   const [ethnicity, setEthnicity] = useState("");
 
 
+  // Just extra client side validation, it still needs to be done on the server
   const validateForm = () => {
-
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission, e.g., send data to the server
     if (college.school === "" || college.major === "") {
       alert("Please select a school and major!");
       return;
     }
+    // TODO
+  }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    
     const formData = {
       name,
       college,
@@ -390,6 +391,16 @@ export function StudentForm() {
     };
 
     console.log(formData);
+
+    fetch('/api/student',{
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    }).then(() =>
+    console.log("application sent")
+    )
   };
 
   return (
