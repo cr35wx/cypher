@@ -14,6 +14,7 @@ def create_app():
     db.init_app(app)
 
     from .routes import api
+
     app.register_blueprint(api)
 
     return app
