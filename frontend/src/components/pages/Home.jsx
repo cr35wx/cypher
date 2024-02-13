@@ -4,9 +4,34 @@ import './Home.css';
 export const Home = () => {
   return ( 
   <div>
-    <h1 className = "Header">
-      Welcome to <span style={{ fontStyle: 'italic' }}> Cypher's</span> Cybersecurity Clinic
-    </h1>;
+    
+
+    <div class="container mx-auto p-8 ">                                                {/* Welcome with button */}
+      <h1 class="text-4xl font-sans font-bold mb-4 mt-4">Welcome to Cypher's Cybersecurity Clinic</h1>
+      <p class="text-gray-700 mt-8">Please create an account to work with us.</p>
+      <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mb-4 ml-10">Register</button>
+      
+  
+    </div>
+  
+  <span class="flex items-center mt-28 mb-8">                                                {/*services divider*/}
+          <span class="h-px flex-1 bg-black"></span>
+          <span class="shrink-0 px-6 text-2xl font-bold">Our Services</span>
+          <span class="h-px flex-1 bg-black"></span>
+  </span>
+
+
+  <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">                          {/* new 3 areas */}
+    <div class="h-64 rounded-lg bg-gray-200 flex items-center justify-center">
+    <p class = "text-4xl font-sans font-bold" >General Security Risk</p> 
+    </div>
+    <div class="h-64 rounded-lg bg-gray-200 flex items-center justify-center">
+    <p class = "text-4xl font-sans font-bold" >Audit</p> 
+    </div>
+    <div class="h-64 rounded-lg bg-gray-200 flex items-center justify-center">
+    <p class = "text-4xl font-sans font-bold" >Policy Reivew</p> 
+    </div>
+  </div>
 {/*
     <div className = "missionStatement"> 
     <p>
@@ -22,7 +47,11 @@ export const Home = () => {
     </ul>
     </div>
   */}
-      <section class="container mx-auto px-8 py-8 lg:py-40">
+
+
+
+
+      <section class="container mx-auto px-8 py-8 lg:py-40">                            {/*image grid */}
         <h2 class="block antialiased tracking-normal font-sans text-4xl font-semibold leading-[1.3] text-blue-gray-900 !text-3xl !leading-snug lg:!text-4xl">Our clinic focuses on three main areas</h2>
         <p class="block antialiased font-sans text-xl font-normal leading-relaxed text-inherit mt-2 w-full font-normal !text-gray-500 lg:w-5/12">Read about our latest achievements and milestones.</p>
         {/*   <a href="https://www.material-tailwind.com/" target="_blank">Generated with <b>Magic AI Blocks</b> by Creative Tim</a>.   */}
@@ -57,8 +86,18 @@ export const Home = () => {
         </div>
       </section>
       
-    </div>
+
+
+
+
+
+
+
+
+
+</div>
   
   );
 };
 
+   
