@@ -20,6 +20,7 @@ def students(num):
     students = []
     for _ in range(num):
         student = StudentParticipant(
+            student_id=faker.random_number(digits=7),
             first_name=faker.first_name(),
             last_name=faker.last_name(),
             college_school=faker.company(),
