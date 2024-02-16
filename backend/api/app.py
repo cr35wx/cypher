@@ -13,7 +13,8 @@ def create_app():
     db.init_app(app)
 
     from .routes import api
-
     app.register_blueprint(api)
+    from .fake import fake
+    app.register_blueprint(fake)
 
     return app

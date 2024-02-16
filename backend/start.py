@@ -12,7 +12,7 @@ app = create_app()
 def manage_db(command):
     """
     Drop all database tables or create tables from all the defined model classes.
-    This does not create the database itself.
+    This does not create the database itself, or the table records.
 
     Usage: flask manage-db [create|drop]
     """
