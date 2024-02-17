@@ -66,3 +66,40 @@ class AcademicUnit(db.Model):
     faculty_contact_fname = mapped_column(String(30))
     faculty_contact_lname = mapped_column(String(30))
     faculty_contact_email = mapped_column(String(30))
+
+
+class ParticipantStatus(db.Model):
+    __tablename__ = "participant_statuses"
+    status_id = mapped_column(Integer, primary_key=True)
+    status_date = mapped_column(String(10))
+    clinic_participant_contact = mapped_column(String(30))
+
+
+class Course(db.Model):
+    __tablename__ = "courses"
+    course_id = mapped_column(Integer, primary_key=True)
+    course_department = mapped_column(String(30))
+    course_number = mapped_column(String(30))
+
+    def __repr__(self):
+        return f"{self.course_department}-{self.course_number}"
+
+
+class StudentGroup(db.Model):
+    __tablename__ = "student_groups"
+    group_id = mapped_column(Integer, primary_key=True)
+    group_name = mapped_column(String(30))
+
+
+class ClinicServiceArea(db.Model):
+    __tablename__ = "clinic_service_areas"
+    service_area_id = mapped_column(Integer, primary_key=True)
+    service_area_name = mapped_column(String(30))
+
+
+class ClinicJobRole(db.Model):
+    __tablename__ = "clinic_job_roles"
+    role_id = mapped_column(Integer, primary_key=True)
+    role_name = mapped_column(String(30))
+    system_access = mapped_column(Integer)
+

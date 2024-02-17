@@ -8,7 +8,7 @@ app = create_app()
 
 
 @app.cli.command("manage-db")
-@click.argument("command", type=click.Choice(["create", "drop"]))
+@click.argument("command", type=click.Choice(["create", "drop", "populate"]))
 def manage_db(command):
     """
     Drop all database tables or create tables from all the defined model classes.
@@ -23,3 +23,10 @@ def manage_db(command):
     elif command == "create":
         db.create_all()
         click.echo("Database tables created successfully.")
+    elif command == "populate":
+        # i dont know the best way to do this but for now we can just put all the tables that will always be present under here
+        from populate import huge_gross_tuple
+        for record in huge_gross_tuple:
+            db.session.add(record)
+        db.session.commit()
+        click.echo("Database tables populated successfully.")
