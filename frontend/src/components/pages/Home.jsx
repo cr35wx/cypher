@@ -1,7 +1,20 @@
 import React from "react";
 import './Home.css'; 
+import {useState} from 'react'; 
+import CustomModal from "../Modal";
 
 export const Home = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+
   return ( 
   <div>
     
@@ -19,12 +32,12 @@ export const Home = () => {
       </p>
 
       <div class="mt-8 flex flex-wrap justify-center gap-4">
-        <a
+        <button
+          onClick={openModal}
           class="block w-full rounded bg-Blue px-12 py-3 text-xl font-medium text-white shadow hover:bg-darkBlue focus:outline-none focus:ring active:bg-lightBlue sm:w-auto"
-          href="#"
         >
           Register
-        </a>
+        </button>
 
         <a
           class="block w-full rounded px-12 py-3 text-xl font-medium text-lightBlue shadow hover:text-darkBlue focus:outline-none focus:ring active:text-lightBlue sm:w-auto"
@@ -48,10 +61,12 @@ export const Home = () => {
     </span>
   </div>
 
+
+
   <section class="bg-gray-900 text-white">
   <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
     <div class="mx-auto max-w-lg text-center">
-      <h2 class="text-3xl font-bold sm:text-4xl">Learn about our serivces</h2>
+      <h2 class="text-3xl font-bold sm:text-4xl">Learn about our services</h2>
 
       <p class="mt-4 text-gray-300">
       Students perform needed professional services to under-
@@ -146,7 +161,7 @@ export const Home = () => {
 
     <div class="mt-12 text-center">
       <a
-        href="student"
+        onClick={openModal}
         class="inline-block rounded bg-Blue px-12 py-3 text-xl font-medium text-white transition hover:bg-darkBlue focus:outline-none focus:ring focus:ring-lightBlue"
       >
         Get Started Today
@@ -225,7 +240,7 @@ export const Home = () => {
         </div>
       </section>
   
-
+<CustomModal isOpen={isModalOpen} onRequestClose={closeModal} />
 </div>
   
   );
