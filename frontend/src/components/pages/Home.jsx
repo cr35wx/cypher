@@ -2,6 +2,8 @@ import React from "react";
 import './Home.css'; 
 import {useState} from 'react'; 
 import CustomModal from "../Modal";
+import Fade from "../Carousel"
+
 
 
 export const Home = () => {
@@ -55,34 +57,31 @@ export const Home = () => {
 
 
   <div id = "divider">                                            {/*services divider*/}
-
-
-
-
-
-    <span class="flex items-center mt-28 mb-8">                   {/* text box description*/}                             
+    <span class="flex items-center mt-28 mb-8">                                            
             <span class="h-px flex-1 bg-black"></span>
             <span class="shrink-0 px-6 text-2xl font-bold">Who we are</span>
             <span class="h-px flex-1 bg-black"></span>
     </span>
   </div>
   
+ 
 
-
-
-  <div class="max-w-screen-lg mx-52 my-4 bg-gray-200 p-8 rounded-lg shadow-md">
-  <h1 class="text-4xl font-bold mb-6 text-Blue">Cypher's Cybersecurity Clinic</h1>
+<div className="max-w-screen-xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+  <div class="max-w-screen-lg mx-0 my-4 bg-gray-200 p-8 rounded-lg shadow-md">               {/* text box description*/} 
+    <h1 class="text-4xl font-bold mb-6 text-Blue">Cypher's Cybersecurity Clinic</h1>
   
-  <p class="text-xl text-gray-700">
-  Cypher's Cybersecurity Clinic ("Clinic") is an interdisciplinary collaboration between the 
-    <a href= "https://www.cdm.depaul.edu/Pages/default.aspx"> School of Computing</a>, the 
-    <a href= "https://business.depaul.edu/Pages/default.aspx"> Driehaus College of Business</a>, and the 
-    <a href = "https://law.depaul.edu/Pages/default.aspx"> College of Law</a>.
-  The Clinic provides students with hands-on, real-world experience working on cybersecurity projects for organizational clients that helps prepare them for careers in the cybersecurity workforce. Participating DePaul students come from a variety of undergraduate and graduate degree majors across the three colleges. The Clinic partners with 
-    <a href = "https://resources.depaul.edu/steans-center-community-based-service-learning/about/Pages/default.aspx"> DePaul's Steans Center</a> to serve community-based non-profit organizations that have limited resources yet have a need for cybersecurity assessment services. The Clinic also provides services to Chicago-area small businesses.
-  </p>
+    <p class="text-xl text-gray-700">
+      Cypher's Cybersecurity Clinic ("Clinic") is an interdisciplinary collaboration between the 
+      <a href= "https://www.cdm.depaul.edu/Pages/default.aspx"> School of Computing</a>, the 
+      <a href= "https://business.depaul.edu/Pages/default.aspx"> Driehaus College of Business</a>, and the 
+      <a href = "https://law.depaul.edu/Pages/default.aspx"> College of Law</a>.
+      The Clinic provides students with hands-on, real-world experience working on cybersecurity projects for organizational clients that helps prepare them for careers in the cybersecurity workforce. Participating DePaul students come from a variety of undergraduate and graduate degree majors across the three colleges. The Clinic partners with 
+      <a href = "https://resources.depaul.edu/steans-center-community-based-service-learning/about/Pages/default.aspx"> DePaul's Steans Center</a> to serve community-based non-profit organizations that have limited resources yet have a need for cybersecurity assessment services. The Clinic also provides services to Chicago-area small businesses.
+    </p>
+  </div>
 
-</div>
+  <Fade />
+  </div>
 
 
  
@@ -229,6 +228,7 @@ export const Home = () => {
           </div>
         </div>
       </section>
+
   
 <CustomModal isOpen={isModalOpen} onRequestClose={closeModal} />
 </div>
