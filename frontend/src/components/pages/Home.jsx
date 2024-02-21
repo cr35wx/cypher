@@ -3,6 +3,7 @@ import './Home.css';
 import {useState} from 'react'; 
 import CustomModal from "../Modal";
 
+
 export const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -19,7 +20,7 @@ export const Home = () => {
   <div>
     
   
-  <section class="bg-gray-50">                                                    {/* Landing */}
+  <section class="bg-gray-50">                                  {/* Landing */}
   <div class="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center">
     <div class="mx-auto max-w-50 text-center">
       <h1 class="text-3xl font-extrabold sm:text-5xl">
@@ -53,36 +54,59 @@ export const Home = () => {
 
 
 
-  <div id = "divider">                  {/*services divider*/}
-    <span class="flex items-center mt-28 mb-8">                                                
+  <div id = "divider">                                            {/*services divider*/}
+
+
+
+
+
+    <span class="flex items-center mt-28 mb-8">                   {/* text box description*/}                             
             <span class="h-px flex-1 bg-black"></span>
-            <span class="shrink-0 px-6 text-2xl font-bold">Our Services</span>
+            <span class="shrink-0 px-6 text-2xl font-bold">Who we are</span>
             <span class="h-px flex-1 bg-black"></span>
     </span>
   </div>
+  
 
 
 
-  <section class="bg-gray-900 text-white">
+  <div class="max-w-screen-lg mx-52 my-4 bg-gray-200 p-8 rounded-lg shadow-md">
+  <h1 class="text-4xl font-bold mb-6 text-Blue">Cypher's Cybersecurity Clinic</h1>
+  
+  <p class="text-xl text-gray-700">
+  Cypher's Cybersecurity Clinic ("Clinic") is an interdisciplinary collaboration between the 
+    <a href= "https://www.cdm.depaul.edu/Pages/default.aspx"> School of Computing</a>, the 
+    <a href= "https://business.depaul.edu/Pages/default.aspx"> Driehaus College of Business</a>, and the 
+    <a href = "https://law.depaul.edu/Pages/default.aspx"> College of Law</a>.
+  The Clinic provides students with hands-on, real-world experience working on cybersecurity projects for organizational clients that helps prepare them for careers in the cybersecurity workforce. Participating DePaul students come from a variety of undergraduate and graduate degree majors across the three colleges. The Clinic partners with 
+    <a href = "https://resources.depaul.edu/steans-center-community-based-service-learning/about/Pages/default.aspx"> DePaul's Steans Center</a> to serve community-based non-profit organizations that have limited resources yet have a need for cybersecurity assessment services. The Clinic also provides services to Chicago-area small businesses.
+  </p>
+
+</div>
+
+
+ 
+
+
+  <section class="bg-gray-900 text-white">                    {/*3 box infographic -- maybe change this infographic to talk about the 3 schools involved?*/}
   <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
     <div class="mx-auto max-w-lg text-center">
       <h2 class="text-3xl font-bold sm:text-4xl">Learn about our services</h2>
 
       <p class="mt-4 text-gray-300">
-      Students perform needed professional services to under-
-      resourced external clients. In exchange, students gain a transformative educational experience
+      Students perform needed professional services to under-resourced external clients. In exchange, students gain a transformative educational experience
       from working on real-world projects in their area of study, while providing a public good.
       </p>
     </div>
 
     <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
       <a
-        class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
-        href="#"
+        class="block rounded-xl border border-gray-800 p-8 shadow-md transition hover:border-lighterBlue hover:shadow-lighterBlue no-underline"
+        href="https://www.cdm.depaul.edu/Pages/default.aspx"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="size-10 text-pink-500"
+          class="size-10 text-lighterBlue"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -104,12 +128,12 @@ export const Home = () => {
       </a>
 
       <a
-        class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
-        href="#"
+        class="block rounded-xl border border-gray-800 p-8 shadow-md transition hover:border-lighterBlue hover:shadow-lighterBlue no-underline"
+        href="https://business.depaul.edu/Pages/default.aspx"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="size-10 text-pink-500"
+          class="size-10 text-lighterBlue"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -131,12 +155,12 @@ export const Home = () => {
       </a>
 
       <a
-        class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
-        href="#"
+        class="block rounded-xl border border-gray-800 p-8 shadow-md transition hover:border-lighterBlue hover:shadow-lighterBlue no-underline"
+        href="https://law.depaul.edu/Pages/default.aspx"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="size-10 text-pink-500"
+          class="size-10 text-lighterBlue"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -162,50 +186,16 @@ export const Home = () => {
     <div class="mt-12 text-center">
       <a
         onClick={openModal}
-        class="inline-block rounded bg-Blue px-12 py-3 text-xl font-medium text-white transition hover:bg-darkBlue focus:outline-none focus:ring focus:ring-lightBlue"
+        class="inline-block rounded bg-Blue px-12 py-3 text-xl font-medium text-white transition hover:bg-darkBlue focus:outline-none focus:ring focus:ring-lightBlue no-underline"
       >
-        Get Started Today
+        Get Started 
       </a>
     </div>
   </div>
 </section>
 
 
-{/* new 3 areas
-  <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">                         
-    <div class="h-64 rounded-lg bg-gray-200 flex items-center justify-center">
-    <p class = "text-4xl font-sans font-bold" >General Security Risk</p> 
-    </div>
-    <div class="h-64 rounded-lg bg-gray-200 flex items-center justify-center">
-    <p class = "text-4xl font-sans font-bold" >Audit</p> 
-    </div>
-    <div class="h-64 rounded-lg bg-gray-200 flex items-center justify-center">
-    <p class = "text-4xl font-sans font-bold" >Policy Reivew</p> 
-    </div>
-  </div>
-
-
-*/}
-{/*
-    <div className = "missionStatement"> 
-    <p>
-      A cybersecurity clinic is similar in concept to a Law Clinic in that students perform needed professional services to under-resourced external clients. In exchange, students gain a transformative educational experiencefrom working on real-world projects in their area of study, while providing a public good.
-    </p>
-    <p>
-      Our clinic focuses on three main areas: 
-    </p>
-    <ul class="list-disc">
-      <li>General Security Risk</li>
-      <li>Audit</li>
-      <li>Policy Review</li>
-    </ul>
-    </div>
-  */}
-
-
-
-
-      <section class="container mx-auto px-8 py-8 lg:py-40">                            {/*image grid */}
+      <section class="container mx-auto px-8 py-8 lg:py-40">       {/*image grid */}
         <h2 class="block antialiased tracking-normal font-sans text-4xl font-semibold leading-[1.3] text-blue-gray-900 !text-3xl !leading-snug lg:!text-4xl">Our clinic focuses on three main areas</h2>
         <p class="block antialiased font-sans text-xl font-normal leading-relaxed text-inherit mt-2 w-full font-normal !text-gray-500 lg:w-5/12">Read about our latest achievements and milestones.</p>
         {/*   <a href="https://www.material-tailwind.com/" target="_blank">Generated with <b>Magic AI Blocks</b> by Creative Tim</a>.   */}
