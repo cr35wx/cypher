@@ -6,12 +6,18 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #0f172a;
+    background-color: rgb(35, 86, 177);
     color: white;
     position: sticky;
     top: 0;
 }
 
+nav .logo img {
+    width: 100px; 
+    height: auto; 
+    margin: 0 1rem; 
+  }
+  
 nav .title {
     font-size: 1.5rem;
     margin: 1rem;
