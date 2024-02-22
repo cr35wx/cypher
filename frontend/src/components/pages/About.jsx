@@ -1,66 +1,104 @@
 import React from "react";
-import FacultyMember from './about/FacultyMember';
-import FacultyData from './about/FacultyData';
+import "./about/about.css";
+import FacultyMember from "./about/FacultyMember";
+import FacultyData from "./about/FacultyData";
+import { DownloadIcon } from "@heroicons/react/outline";
+import dummyForm from './about/dummy-form.txt';
 
-export const About = () => {
+const About = () => {
+
+  const handleContactClick = () => {
+    window.location.href = "mailto:jspears2@depaul.edu";
+  };
+
+  const handleDownload = () => {
+    const link = document.createElement("a");
+    link.href = dummyForm;
+    link.download = "dummy-form.txt";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
-    <div className="flex justify-center bg-gray-100 rounded-lg p-6">
-      <div className="w-full md:w-3/4 lg:w-2/3">
-        
-        {/* Mission Statement Section */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-4">Our Mission</h2>
-          <p className="text-lg">
-            Raise organizational awareness of information security and privacy 
-            risks discovered from a student-led risk assessment so that incremental
-            improvements are made in the client's security policies and practices 
-            while students in turn gain real-world experience that contributes to a cyber
-            security workforce.
+    <div>
+      {/* Mission Statement Section */}
+      <section className="bg-white py-20">
+        <div className="max-w-screen-xl mx-auto px-4 text-center">
+          <h1 className="text-3xl font-extrabold sm:text-5xl mb-4">
+            Our Mission
+          </h1>
+          <p className="text-lg sm:text-xl text-gray-700">
+            Raise organizational awareness of information security and privacy
+            risks discovered from a student-led risk assessment so that
+            incremental improvements are made in the client's security policies
+            and practices while students in turn gain real-world experience that
+            contributes to a cybersecurity workforce.
           </p>
         </div>
-        
-        {/* Contact Information */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-4">Contact Information</h2>
-          <p className="text-lg font-semibold">For additional information, please contact us at:</p>
-          <p className="mt-2">Email: <a href="mailto:jspears2@depaul.edu">jspears2@depaul.edu</a></p>
-        </div>
+      </section>
 
-        {/* Risk Assessment Form */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-4">Risk Assessment Form</h2>
-          <p className="text-lg">
-            Blank general security risk assessment form (provided to you) for download.
+      {/* Risk Assessment Form */}
+      <section className="bg-gray-900 py-20">
+        <div className="max-w-screen-xl mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-4 text-white">Risk Assessment Form</h2>
+          <p className="text-lg mb-4 text-gray-300">
+            Download our blank general security risk assessment form for your use.
           </p>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Download Form
+          <button
+            onClick={handleDownload}
+            className="btn-blue"
+          >
+            <DownloadIcon className="w-6 h-6 mr-2" /> Download Form
           </button>
         </div>
+      </section>
 
-        {/* Cybersecurity Resources */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-4">Cybersecurity Resources</h2>
-          <p className="text-lg">
-            Links to major cybersecurity resources used during risk assessments that will help through the process of filling the form.
+      {/* Cybersecurity Resources */}
+      <section className="bg-white py-20">
+        <div className="max-w-screen-xl mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-4">Cybersecurity Resources</h2>
+          <p className="text-lg mb-4 text-gray-700">
+            Links to valuable cybersecurity resources used during risk
+            assessments.
           </p>
-          <ul className="mt-4">
-            <li className="mb-2">
-              <a href="#" className="text-blue-500 hover:text-blue-700 font-bold">Resource 1</a>
-            </li>
-            <li className="mb-2">
-              <a href="#" className="text-blue-500 hover:text-blue-700 font-bold">Resource 2</a>
-            </li>
-            <li className="mb-2">
-              <a href="#" className="text-blue-500 hover:text-blue-700 font-bold">Resource 3</a>
-            </li>
-            {/* Add more links as needed, currently using dummy links */}
-          </ul>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <a
+              href="#"
+              className="resource bg-gray-200 rounded-lg p-8 shadow-md hover:shadow-lg transition duration-300 block"
+            >
+              <h3 className="text-xl font-bold mb-2 text-Blue">Resource 1</h3>
+              <p className="text-base text-gray-700">
+                Description of Resource 1
+              </p>
+            </a>
+            <a
+              href="#"
+              className="resource bg-gray-200 rounded-lg p-8 shadow-md hover:shadow-lg transition duration-300 block"
+            >
+              <h3 className="text-xl font-bold mb-2 text-Blue">Resource 2</h3>
+              <p className="text-base text-gray-700">
+                Description of Resource 2
+              </p>
+            </a>
+            <a
+              href="#"
+              className="resource bg-gray-200 rounded-lg p-8 shadow-md hover:shadow-lg transition duration-300 block"
+            >
+              <h3 className="text-xl font-bold mb-2 text-Blue">Resource 3</h3>
+              <p className="text-base text-gray-700">
+                Description of Resource 3
+              </p>
+            </a>
+          </div>
         </div>
-        
-        {/* Faculty Section */}
-        <div>
-          <h2 className="text-2xl font-bold mb-4">Participating Faculty</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      </section>
+
+      {/* Faculty Section */}
+      <section className="bg-gray-900 py-20 faculty-section">
+        <div className="max-w-screen-xl mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-4 text-white">Participating Faculty</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {FacultyData.map((faculty) => (
               <FacultyMember
                 key={faculty.id}
@@ -73,7 +111,26 @@ export const About = () => {
             ))}
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* Contact Information */}
+      <section className="bg-white py-20">
+        <div className="max-w-screen-xl mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-4">Contact Information</h2>
+          <p className="text-lg mb-4 text-gray-700">
+            Have questions or need more information about our program? Reach
+            out to us!
+          </p>
+          <button
+            className="btn-white"
+            onClick={handleContactClick}
+          >
+            Contact Us
+          </button>
+        </div>
+      </section>
     </div>
   );
 };
+
+export default About;

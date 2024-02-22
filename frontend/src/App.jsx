@@ -1,7 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Navbar } from "./components/Navbar";
-import { About, Contact, Home, Services, StudentForm, ClientForm } from "./components/pages";
+import About from "./components/pages/About";
+import { Contact, Home, StudentForm, ClientForm } from "./components/pages";
 
 function App() {
   return (
