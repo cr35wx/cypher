@@ -97,6 +97,10 @@ class Course(db.Model):
     course_department = mapped_column(String(30))
     course_number = mapped_column(String(30))
 
+    __table_args__ = (
+        UniqueConstraint("course_department", "course_number", name="course_department_course_number_uc"),
+    )
+
     def __repr__(self):
         return f"{self.course_department}-{self.course_number}"
 
@@ -152,3 +156,20 @@ class ClientProject(db.Model):
     project_end_date = mapped_column(String(10))
     clinic_service_area_id = mapped_column(Integer, ForeignKey("clinic_service_areas.service_area_id"))
     student_team_id = mapped_column(Integer) # ????
+
+
+# any model added to this tuple will be added to the admin interface
+admin_models = (
+    ProspectiveStudentParticipant,
+    StudentParticipant,
+    DegreeMajor,
+    AcademicUnit,
+    ParticipantStatus,
+    Course,
+    StudentGroup,
+    ClinicServiceArea,
+    ClinicJobRole,
+    ClientOrganization,
+    ClientOrgnizationType,
+    ClientProject,
+)

@@ -12,8 +12,14 @@ def create_app():
 
     db.init_app(app)
 
+    from .admin import create_admin
+    from .models import admin_models
+    admin = create_admin(db, admin_models)
+    admin.init_app(app)
+
     from .routes import api
     app.register_blueprint(api)
+
     from .fake import fake
     app.register_blueprint(fake)
 
