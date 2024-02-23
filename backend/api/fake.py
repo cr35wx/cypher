@@ -54,6 +54,9 @@ def students(num):
                 elements=("Winter", "Spring", "Summer", "Fall")
             ),
             expected_graduation_year=faker.random_int(min=2022, max=2026),
+            clinic_participant_status=faker.random_element(
+                elements=("In review", "Denied")
+            )
         )
         students.append(student)
         db.session.add(student)
@@ -73,6 +76,9 @@ def students(num):
         )
         click.echo(
             f"  Student Expected Graduation Year: {student.expected_graduation_year}"
+        )
+        click.echo(
+            f"  Student Participant Status: {student.clinic_participant_status}"
         )
         click.echo("")
 

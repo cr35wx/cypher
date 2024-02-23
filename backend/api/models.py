@@ -48,7 +48,7 @@ class StudentParticipant(db.Model):
     clinic_training_date = mapped_column(String(10)) # will possibly need to change to date type
     expected_graduation_qtr = mapped_column(Enum("Fall", "Winter", "Spring", "Summer"))
     expected_graduation_year = mapped_column(Integer)
-
+    clinic_participant_status = mapped_column(Enum("In review", "Accepted", "Denied"))
 
 class DegreeMajor(db.Model):
     __tablename__ = "degree_majors"
