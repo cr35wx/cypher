@@ -125,11 +125,12 @@ def student_application():
     pprint.pprint(form_data)
 
     first_name, *last_names = form_data.get("name").split()
-    # this could get the id of the undergrad or grad versions of the degree,
-    # the form currently doesnt ask if you are undergrad or grad, it just assumes youre undergrad
+    ug_or_grad = "Graduate" if form_data.get("yearStanding") == "Graduate" else "Undergraduate"
+
     student_degree_id = (
         db.session.query(DegreeMajor.degree_id)
-        .where(DegreeMajor.degree_name == form_data.get("college").get("major"))
+        .filter(DegreeMajor.degree_name == form_data.get("college").get("major"))
+        .filter(DegreeMajor.ug_or_grad == ug_or_grad)
         .first()
     )
     student = ProspectiveStudentParticipant(  # man....
@@ -151,6 +152,7 @@ def student_application():
         expected_graduation_year=form_data.get("graduationDate").get("year"),
         gender=form_data.get("gender"),
         ethnicity=form_data.get("ethnicity"),
+        clinic_participant_status="In review",
     )
 
     try:
@@ -287,16 +289,13 @@ def client_application():
         return (
             jsonify({
                 "errors": "An organization with this ID or Name already exists in our records. Please contact faculty."
-                }), 409,
+                }),
+            409,
         )
 
     print(f"A client application has been submitted and added to the database.")
     return jsonify({"message": "Application submitted successfully."}), 201
-
-
 ######################### CLIENT APPLICATION ###############################
-
-
 
 
 @api.route("/student", methods=["GET"])

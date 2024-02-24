@@ -93,7 +93,7 @@ const School = ({ college, setCollege }) => {
         "Actuarial Science",
         "Business Administration",
         "Business Analytics",
-        "Computer Science + Economics",
+        "Computer Science + Economics (DCOB)",
         "Economic Data Analytics",
         "Economics",
         "Entrepreneurship",
@@ -175,6 +175,7 @@ const YearStanding = ({ yearStanding, setYearStanding }) => {
         <option value="Sophomore">Sophomore</option>
         <option value="Junior">Junior</option>
         <option value="Senior">Senior</option>
+        <option value="Graduate">Graduate</option>
       </select>
     </>
   );
