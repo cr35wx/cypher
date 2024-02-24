@@ -61,7 +61,7 @@ const ContactPersonName = ({ contactPersonName, setContactPersonName }) => {
         autoComplete="name"
         required
         min={2}
-        max={30}
+        max={61}
       />
     </>
   );
@@ -150,6 +150,8 @@ const AnnualRevenue = ({ annualRevenue, setAnnualRevenue }) => {
         type="text"
         placeholder="$"
         onChange={(e) => setAnnualRevenue(e.target.value)}
+        max={999999999999}
+        required
       />
     </>
   );
@@ -171,7 +173,9 @@ const ITEmployeeCount = ({ ITemployeeCount, setITemployeeCount }) => {
         placeholder="Number of IT Staff"
         onChange={(e) => setITemployeeCount(e.target.value)}
         min={0}
+        max={100000}
         step={1}
+        required
       />
     </>
   );
@@ -217,7 +221,7 @@ const RecentRiskAssessment = ({
         onChange={(e) => setRecentRiskAssessment(e.target.value)}
       >
         <option value="">Select...</option>
-        <option value="never">Never</option>
+        <option value="Never">Never</option>
         <option value="1-2 years ago">1-2 years ago</option>
         <option value="3-5 years ago">3-5 years ago</option>
         <option value="> 5 years ago">&gt; 5 years ago</option>
@@ -260,18 +264,65 @@ export function ClientForm() {
   const [dataDescription, setDataDescription] = useState("");
   const [recentRiskAssessment, setRecentRiskAssessment] = useState("");
   const [projectType, setProjectType] = useState("");
+  const [otherDescription, setOtherDescription] = useState("");
   const [howDidYouHear, setHowDidYouHear] = useState("");
   const [requestsOrComments, setRequestsOrComments] = useState("");
 
-  const validateForm = () => {
-
-  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = {};
+
+    const formData = {
+      orgName,
+      orgType,
+      contactPersonName,
+      contactPersonEmail,
+      contactPersonPhone,
+      orgWebsite,
+      annualRevenue,
+      ITemployeeCount,
+      dataDescription,
+      recentRiskAssessment,
+      projectType,
+      otherDescription,
+      howDidYouHear,
+      requestsOrComments,
+    };
 
     console.log(formData);
+
+    fetch('/client-application', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        if (data.errors) {
+          console.log(data);
+          alert(data.errors);
+        } else {
+          console.log(data)
+          setOrgName("");
+          setOrgType("");
+          setContactPersonName("");
+          setContactPersonEmail("");
+          setContactPersonPhone("");
+          setOrgWebsite("");
+          setAnnualRevenue(0);
+          setITemployeeCount(0);
+          setDataDescription("");
+          setRecentRiskAssessment("");
+          setProjectType("");
+          setOtherDescription("");
+          setHowDidYouHear("");
+          setRequestsOrComments("");
+        }
+      })
   };
 
   return (
@@ -311,6 +362,8 @@ export function ClientForm() {
         <ProjectType
           projectType={projectType}
           setProjectType={setProjectType}
+          otherDescription={otherDescription}
+          setOtherDescription={setOtherDescription}
         />
         <ClinicOutreach
           howDidYouHear={howDidYouHear}

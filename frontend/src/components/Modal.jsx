@@ -3,6 +3,11 @@ import React from 'react';
 import Modal from 'react-modal';
 import { Link } from 'react-router-dom';
 
+/*Modal is a pop-up that appears when the user hits the register or get started button. 
+It prompts the user to fill out the student form or the client form. 
+It is only present on the homePage
+*/
+
 Modal.setAppElement('#root');
 
 function CustomModal({ isOpen, onRequestClose }) {

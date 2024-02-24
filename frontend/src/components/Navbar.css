@@ -1,3 +1,6 @@
+
+/*this is the css for the navBar, it was implemented prior to us using tailwind*/
+
 .active{
     background-color: #1d4ed8;
 }

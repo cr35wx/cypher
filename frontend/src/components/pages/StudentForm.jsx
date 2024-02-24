@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Name = ({ name, setName }) => {
   return (
@@ -16,7 +16,51 @@ const Name = ({ name, setName }) => {
         autoComplete="name"
         required
         min={3}
-        max={30}
+        max={61}
+      />
+    </>
+  );
+};
+
+const StudentID = ({ studentID, setStudentID }) => {
+  return (
+    <>
+      <label htmlFor="studentID" className="text-gray-700 text-sm font-bold">
+        DePaul Student ID:
+      </label>
+      <input
+        id="studentID"
+        className="mb-2 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+        type="text"
+        placeholder="Student ID"
+        value={studentID}
+        onChange={(e) => setStudentID(e.target.value)}
+        minLength={7}
+        maxLength={7}
+        required
+      />
+    </>
+  );
+};
+
+const StudentEmail = ({ studentEmail, setStudentEmail }) => {
+  return (
+    <>
+      <label
+        htmlFor="studentEmail"
+        className="text-gray-700 text-sm font-bold"
+      >
+        Student Email:
+      </label>
+      <input
+        id="studentEmail"
+        className="mb-2 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+        type="email"
+        placeholder="Email"
+        value={studentEmail}
+        onChange={(e) => setStudentEmail(e.target.value)}
+        autoComplete="email"
+        required
       />
     </>
   );
@@ -49,7 +93,7 @@ const School = ({ college, setCollege }) => {
         "Actuarial Science",
         "Business Administration",
         "Business Analytics",
-        "Computer Science + Economics",
+        "Computer Science + Economics (DCOB)",
         "Economic Data Analytics",
         "Economics",
         "Entrepreneurship",
@@ -131,6 +175,7 @@ const YearStanding = ({ yearStanding, setYearStanding }) => {
         <option value="Sophomore">Sophomore</option>
         <option value="Junior">Junior</option>
         <option value="Senior">Senior</option>
+        <option value="Graduate">Graduate</option>
       </select>
     </>
   );
@@ -205,13 +250,13 @@ export const ProjectType = ({
         className="w-full bg-gray-200 border border-gray-300 p-2 rounded mb-2"
       >
         <option value="">Select...</option>
-        <option value="riskAssessment">General Risk Assessment</option>
-        <option value="audit">Audit</option>
-        <option value="policyReview">Policy Review</option>
-        <option value="other">Other</option>
+        <option value="General Risk Assessment">General Risk Assessment</option>
+        <option value="Audit">Audit</option>
+        <option value="Policy Review">Policy Review</option>
+        <option value="Other">Other</option>
       </select>
       <br />
-      {projectType === "other" && (
+      {projectType === "Other" && (
         <>
           <label
             htmlFor="otherDescription"
@@ -266,7 +311,7 @@ const ClinicOutreachDate = ({
         htmlFor="heardAboutMonth"
         className="block text-gray-700 text-sm font-bold mt-2"
       >
-        When did you first hear about the Clinic?
+        When did you first hear about the Clinic? (MM/YYYY)
       </label>
       <input
         id="heardAboutMonth"
@@ -340,6 +385,8 @@ const Ethnicity = ({ ethnicity, setEthnicity }) => {
 
 export function StudentForm() {
   const [name, setName] = useState("");
+  const [studentID, setStudentID] = useState("");
+  const [studentEmail, setStudentEmail] = useState("");
   const [college, setCollege] = useState({ school: "", major: "" });
   const [yearStanding, setYearStanding] = useState("");
   const [graduationDate, setGraduationState] = useState({
@@ -358,23 +405,21 @@ export function StudentForm() {
   );
   const [gender, setGender] = useState("");
   const [ethnicity, setEthnicity] = useState("");
-
-
-  // Just extra client side validation, it still needs to be done on the server
-  const validateForm = () => {
-    if (college.school === "" || college.major === "") {
-      alert("Please select a school and major!");
-      return;
-    }
-    // TODO
-  }
+  
+  // useEffect(() => {
+  //   fetch('/student')
+  //     .then(response => response.json())
+  //     .then(data => console.log(data))
+  //     .catch(error => console.error('Error fetching:', error));
+  // }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    
     const formData = {
       name,
+      studentID,
+      studentEmail,
       college,
       yearStanding,
       graduationDate,
@@ -390,23 +435,46 @@ export function StudentForm() {
       ethnicity,
     };
 
-    console.log(formData);
-
-    fetch('/api/student',{
+    fetch('/student-application', {
       method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(formData),
-    }).then(() =>
-    console.log("application sent")
-    )
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        if (data.errors) {
+          console.log(data);
+          alert(data.errors);
+        } else {
+          console.log(data)
+          setName("");
+          setStudentID("");
+          setStudentEmail("");
+          setCollege({ school: "", major: "" });
+          setYearStanding("");
+          setGraduationState({ quarter: "", year: new Date().getFullYear() });
+          setPrerequesiteCourses([]);
+          setProjectType("");
+          setOtherDescription("");
+          setHowDidYouHear("");
+          setHeardAboutMonth(new Date().getMonth() + 1);
+          setHeardAboutYear(new Date().getFullYear());
+          setGender("");
+          setEthnicity("");
+        }
+      })
   };
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <form onSubmit={handleSubmit} className="max-w-xl w-full">
         <Name name={name} setName={setName} />
+        <StudentID studentID={studentID} setStudentID={setStudentID} />
+        <StudentEmail studentEmail={studentEmail} setStudentEmail={setStudentEmail} />
         <School college={college} setCollege={setCollege} />
         <YearStanding
           yearStanding={yearStanding}
