@@ -94,6 +94,10 @@ class DegreeMajor(db.Model):
         # CheckConstraint(ug_or_grad.in_(['Undergraduate', 'Graduate']), name='ug_or_grad_check'),
     )
 
+    def to_json(self):
+        return {"id": self.degree_id, "name": self.degree_name}
+    
+
 
 class AcademicUnit(db.Model):
     __tablename__ = "academic_units"
@@ -108,6 +112,9 @@ class AcademicUnit(db.Model):
     )
     students = db.relationship("StudentParticipant", backref="academic_unit")
     majors = db.relationship("DegreeMajor", backref="academic_unit")
+
+    def to_json(self):
+        return {"id": self.academic_unit_id, "name": self.college_name}
 
 
 class ParticipantStatus(db.Model):
@@ -147,6 +154,9 @@ class ClinicServiceArea(db.Model):
     service_area_name = mapped_column(String(30), unique=True)
 
     projects = db.relationship("ClientProject", backref="clinic_service_area")
+
+    def to_json(self):
+        return {"id": self.service_area_id, "name": self.service_area_name}
 
 
 class ClinicJobRole(db.Model):
