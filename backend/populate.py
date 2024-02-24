@@ -9,6 +9,7 @@ from api.models import (
     ClinicJobRole,
     AcademicUnit,
     DegreeMajor,
+    ClientOrgnizationType
 )
 
 # Schools
@@ -131,6 +132,10 @@ public = ClinicJobRole(role_name="Public")
 # Participant status
 
 
+# Client Organization Types
+non_profit = ClientOrgnizationType(org_type_name="Non-Profit")
+for_profit = ClientOrgnizationType(org_type_name="For-Profit")
+
 
 
 
@@ -219,4 +224,6 @@ huge_gross_tuple = (
     clinic_director,
     board_of_directors,
     public,
+    non_profit,
+    for_profit
 )
