@@ -417,12 +417,12 @@ export function StudentForm() {
   const [gender, setGender] = useState("");
   const [ethnicity, setEthnicity] = useState("");
 
-  useEffect(() => {
-    fetch("/student")
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.error("Error fetching:", error));
-  }, []);
+//  useEffect(() => {
+//    fetch("/student")
+//      .then((response) => response.json())
+//      .then((data) => console.log(data))
+//      .catch((error) => console.error("Error fetching:", error));
+//  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
