@@ -307,20 +307,20 @@ export function ClientForm() {
           alert(data.errors);
         } else {
           console.log(data)
-          // setOrgName("");
-          // setOrgType("");
-          // setContactPersonName("");
-          // setContactPersonEmail("");
-          // setContactPersonPhone("");
-          // setOrgWebsite("");
-          // setAnnualRevenue(0);
-          // setITemployeeCount(0);
-          // setDataDescription("");
-          // setRecentRiskAssessment("");
-          // setProjectType("");
-          // setOtherDescription("");
-          // setHowDidYouHear("");
-          // setRequestsOrComments("");
+          setOrgName("");
+          setOrgType("");
+          setContactPersonName("");
+          setContactPersonEmail("");
+          setContactPersonPhone("");
+          setOrgWebsite("");
+          setAnnualRevenue(0);
+          setITemployeeCount(0);
+          setDataDescription("");
+          setRecentRiskAssessment("");
+          setProjectType("");
+          setOtherDescription("");
+          setHowDidYouHear("");
+          setRequestsOrComments("");
         }
       })
   };
