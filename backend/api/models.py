@@ -28,7 +28,7 @@ class ProspectiveStudentParticipant(db.Model):
         String(50), ForeignKey("academic_units.college_name")
     )
     degree_id = mapped_column(Integer, ForeignKey("degree_majors.degree_id"))
-    year_standing = mapped_column(Enum("Freshman", "Sophomore", "Junior", "Senior"))
+    year_standing = mapped_column(Enum("Freshman", "Sophomore", "Junior", "Senior", "Graduate"))
     project_interest = mapped_column(
         Enum("General Risk Assessment", "Audit", "Policy Review", "Other")
     )
@@ -57,7 +57,7 @@ class StudentParticipant(db.Model):
         String(50), ForeignKey("academic_units.college_name")
     )
     degree_id = mapped_column(Integer, ForeignKey("degree_majors.degree_id"))
-    year_standing = mapped_column(Enum("Freshman", "Sophomore", "Junior", "Senior"))
+    year_standing = mapped_column(Enum("Freshman", "Sophomore", "Junior", "Senior", "Graduate"))
     project_interest = mapped_column(
         Enum("General Risk Assessment", "Audit", "Policy Review", "Other")
     )

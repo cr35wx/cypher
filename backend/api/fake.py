@@ -47,7 +47,7 @@ def students(num):
             email=faker.email(),
             college_school=random_school,
             degree_id=random_degree_id,
-            year_standing=faker.random_element(elements=("Freshman", "Sophomore", "Junior", "Senior")),
+            year_standing=faker.random_element(elements=("Freshman", "Sophomore", "Junior", "Senior", "Graduate")),
             project_interest=faker.random_element(elements=("General Risk Assessment", "Audit", "Policy Review", "Other")),
             other_description="", # reading 300 characters of text in the shell is not fun
             how_did_you_hear="", # reading 300 characters of text in the shell is not fun
