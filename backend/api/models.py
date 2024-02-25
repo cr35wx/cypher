@@ -12,6 +12,14 @@ from .app import db
 
 # Tables not yet implemented: StudentInterest, StudentPrerequesite, ApprovedPrerequesites
 
+class ClinicUser(db.Model):
+    __tablename__ = "clinic_users"
+    email = mapped_column(String(30), primary_key=True)
+    password = mapped_column(String(200))
+
+    # there will be a one to one relationship with a StudentParticipant or ClientOrganization
+    # and some relationship with a ClinicJobRole for role based access control
+
 
 # with how bloated these two models are, you'll need 'select * from [prospective_]student_participants\G;' to see anything
 class ProspectiveStudentParticipant(db.Model):
@@ -239,6 +247,7 @@ class ClientProject(db.Model):
 
 # any model added to this tuple will be added to the admin interface
 admin_models = (
+    ClinicUser,
     ProspectiveStudentParticipant,
     StudentParticipant,
     DegreeMajor,
