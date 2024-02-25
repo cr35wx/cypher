@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+//carousel component using react-slick. It is used on the homepage as < Fade/> 
 
 
 function Fade() {

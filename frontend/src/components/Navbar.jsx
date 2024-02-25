@@ -3,6 +3,10 @@ import "./Navbar.css";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../images/logo.png"; 
 
+/* Static navBar which is at the top of all frontend pages It utilizes react-router
+
+*/
+
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -31,7 +35,7 @@ export const Navbar = () => {
           <NavLink to="/client">Client Application</NavLink>
         </li>
         <li>
-          <NavLink to="/contact">Contact</NavLink>
+          <NavLink to="/login">Login</NavLink>
         </li>
       </ul>
     </nav>

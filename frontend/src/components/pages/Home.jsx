@@ -4,6 +4,11 @@ import {useState} from 'react';
 import CustomModal from "../Modal";
 import Fade from "../Carousel"
 
+/*Homepage that includes two react libraries react-modal and react-slick. Modal is a pop-up that appears when the user hits the register or get started button. 
+It prompts the user to fill out the student form or the client form. 
+React-slick allows us to import the carousel which cycles thorugh 3 stock images of the clinic 
+*/
+
 
 
 export const Home = () => {
