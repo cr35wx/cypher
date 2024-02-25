@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./about/about.css";
 import FacultyMember from "./about/FacultyMember";
 import FacultyData from "./about/FacultyData";
@@ -19,6 +19,16 @@ const About = () => {
     link.click();
     document.body.removeChild(link);
   };
+
+  const [selectedCategory, setSelectedCategory] = useState("all");
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+  };
+
+  const filteredFacultyData = selectedCategory === "all"
+    ? FacultyData
+    : FacultyData.filter(faculty => faculty.college.toLowerCase().replace(/ /g, "_") === selectedCategory);
 
   return (
     <div>
@@ -97,9 +107,43 @@ const About = () => {
       {/* Faculty Section */}
       <section className="bg-gray-900 py-20 faculty-section">
         <div className="max-w-screen-xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4 text-white">Participating Faculty</h2>
+          <h2 className="text-3xl font-bold mb-4 text-white">
+            Participating Faculty
+          </h2>
+          <div className="flex flex-row justify-center mb-8 space-x-4">
+            <button
+              onClick={() => handleCategoryChange("all")}
+              className={`${selectedCategory === "all" ? "btn-blue" : "btn-white"} mr-4`}
+            >
+              All
+            </button>
+            <button
+              onClick={() => handleCategoryChange("school_of_computing")}
+              className={`${selectedCategory === "school_of_computing" ? "btn-blue" : "btn-white"} mr-4`}
+            >
+              School of Computing
+            </button>
+            <button
+              onClick={() => handleCategoryChange("college_of_business")}
+              className={`${selectedCategory === "college_of_business" ? "btn-blue" : "btn-white"} mr-4`}
+            >
+              College of Business
+            </button>
+            <button
+              onClick={() => handleCategoryChange("law")}
+              className={`${selectedCategory === "law" ? "btn-blue" : "btn-white"} mr-4`}
+            >
+              Law
+            </button>
+            <button
+              onClick={() => handleCategoryChange("steans_center")}
+              className={`${selectedCategory === "steans_center" ? "btn-blue" : "btn-white"} mr-4`}
+            >
+              Steans Center
+            </button>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {FacultyData.map((faculty) => (
+            {filteredFacultyData.map((faculty) => (
               <FacultyMember
                 key={faculty.id}
                 photo={faculty.photo}
@@ -112,6 +156,7 @@ const About = () => {
           </div>
         </div>
       </section>
+
 
       {/* Contact Information */}
       <section className="bg-white py-20">
