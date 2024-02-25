@@ -2,7 +2,9 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Navbar } from "./components/Navbar";
 import About from "./components/pages/About";
-import { Contact, Home, StudentForm, ClientForm } from "./components/pages";
+import Login from "./components/pages/Login";
+//import { Contact, Home, StudentForm, ClientForm } from "./components/pages";
+import { Home, StudentForm, ClientForm } from "./components/pages";
 
 function App() {
   return (
@@ -12,7 +14,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home/>} />
         <Route path="/about" element={<About />} />
-        <Route path="/login" element={<Contact />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/student" element={<StudentForm />} />
         <Route path="/client" element={<ClientForm />} />
         
