@@ -165,7 +165,7 @@ const Login = () => {
                         <button disabled={!validName || !validPwd || !validMatch} className={`bg-blue-500 ${(!validName || !validPwd || !validMatch) ? 'bg-gray-400' : 'hover:bg-blue-600'} text-white py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300`}>Sign Up</button>
                       
                         <p className="text-gray-700">
-                            Already registered?<br />
+                            Have an account?<br />
                             <span className="line">
                                 {/* WILL SET UP ROUTING FOR SIGN IN PAGE */}
                                 <a href="#" className="text-gray-700">Sign In</a>
