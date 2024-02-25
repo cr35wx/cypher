@@ -119,6 +119,7 @@ wicys = StudentGroup(group_name="Women in Cybersecurity")
 gen_risk_assessment = ClinicServiceArea(service_area_name="General Risk Assessment")
 policy_review = ClinicServiceArea(service_area_name="Policy Review")
 audit = ClinicServiceArea(service_area_name="Audit")
+other = ClinicServiceArea(service_area_name="Other")
 
 # Job Roles
 student_participant = ClinicJobRole(role_name="Student Participant")
@@ -218,6 +219,7 @@ huge_gross_tuple = (
     gen_risk_assessment,
     policy_review,
     audit,
+    other,
     student_participant,
     student_leader,
     admin_assistant,

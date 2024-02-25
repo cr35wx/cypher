@@ -9,6 +9,8 @@ from .models import (
     DegreeMajor,
     ProspectiveClientOrganization,
     ClientOrgnizationType,
+    ClinicServiceArea,
+    AcademicUnit,
 )
 from .app import db
 
@@ -298,43 +300,44 @@ def client_application():
 ######################### CLIENT APPLICATION ###############################
 
 
-@api.route("/student", methods=["GET"])
-def stuff():
-    return jsonify({"message": "test msg."}), 201
+# Also known as "Project Type" on the application forms...
+@api.route('/api/clinic-service-areas')
+def get_service_areas_all():
+    service_areas = ClinicServiceArea.query.order_by(ClinicServiceArea.service_area_id).all()
+    return jsonify([area.to_json() for area in service_areas])
 
 
 @api.route("/api/academic-units", methods=["GET"])
-def academic_units():
-    # return db.session.query(AcademicUnit).all()
-    pass
+def get_academic_units_all():
+    academic_units = AcademicUnit.query.order_by(AcademicUnit.academic_unit_id).all()
+    return jsonify([unit.to_json() for unit in academic_units])
 
-
-@api.route("/api/academic-units/<int:academic_unit_id>", methods=["GET"])
-def academic_unit(academic_unit_id):
-    pass
-
-
-@api.route("/api/courses", methods=["GET"])
-def courses():
-    pass
-
-
-@api.route("/api/courses/<int:course_id>", methods=["GET"])
 @api.route("/api/degree-majors", methods=["GET"])
-def degree_majors():
+def get_degree_majors_all():
     pass
 
+# @api.route("/api/degree-majors/<int:academic_unit_id>", methods=["GET"])
+# def degree_majors(academic_unit_id):
+#     distinct_degree_names = (
+#         db.session.query(distinct(DegreeMajor.degree_name))
+#         .filter(DegreeMajor.academic_unit_id == academic_unit_id)
+#         .subquery()
+#     )
 
-@api.route("/api/degree-majors/<int:degree_id>", methods=["GET"])
-def degree_major(degree_id):
-    pass
+#     degree_majors = (
+#         DegreeMajor.query
+#         .filter(DegreeMajor.degree_name.in_(distinct_degree_names))
+#         .order_by(DegreeMajor.degree_id)
+#         .all()
+#     )
+
+#     return jsonify([major.to_json() for major in degree_majors])
 
 
-@api.route("/api/student-participants/", methods=["GET"])
-def student_participants():
-    pass
 
-
-@api.route("/api/student-participants/<int:student_id>", methods=["GET"])
-def student_participant(student_id):
-    pass
+    # degree_majors = (
+    #     DegreeMajor.query
+    #     .filter(DegreeMajor.academic_unit_id == academic_unit_id)
+    #     .distinct(DegreeMajor.degree_name)
+    #     .order_by(DegreeMajor.degree_id)
+    #     .all())

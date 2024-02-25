@@ -46,10 +46,7 @@ const StudentID = ({ studentID, setStudentID }) => {
 const StudentEmail = ({ studentEmail, setStudentEmail }) => {
   return (
     <>
-      <label
-        htmlFor="studentEmail"
-        className="text-gray-700 text-sm font-bold"
-      >
+      <label htmlFor="studentEmail" className="text-gray-700 text-sm font-bold">
         Student Email:
       </label>
       <input
@@ -227,9 +224,7 @@ const GraduationDate = ({ graduationDate, setGraduationState }) => {
 
 const PrerequisiteCourses = () => {
   // TODO
-  return (
-    <></>
-  )
+  return <></>;
 };
 
 export const ProjectType = ({
@@ -238,6 +233,18 @@ export const ProjectType = ({
   otherDescription,
   setOtherDescription,
 }) => {
+  // const [serviceAreas, setServiceAreas] = useState([]);
+
+  // useEffect(() => {
+  //   fetch('/api/clinic-service-areas')
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       console.log(data);
+  //       setServiceAreas(data);
+  //     })
+  //     .catch(error => console.error('Error fetching service areas:', error));
+  // }, []);
+
   return (
     <>
       <label htmlFor="projectType" className="text-gray-700 text-sm font-bold">
@@ -250,11 +257,15 @@ export const ProjectType = ({
         className="w-full bg-gray-200 border border-gray-300 p-2 rounded mb-2"
       >
         <option value="">Select...</option>
+        {/* {serviceAreas.map(area => (
+          <option key={area.id} value={area.name}>{area.name}</option>
+        ))} */}
         <option value="General Risk Assessment">General Risk Assessment</option>
         <option value="Audit">Audit</option>
         <option value="Policy Review">Policy Review</option>
         <option value="Other">Other</option>
       </select>
+
       <br />
       {projectType === "Other" && (
         <>
@@ -405,13 +416,13 @@ export function StudentForm() {
   );
   const [gender, setGender] = useState("");
   const [ethnicity, setEthnicity] = useState("");
-  
-  // useEffect(() => {
-  //   fetch('/student')
-  //     .then(response => response.json())
-  //     .then(data => console.log(data))
-  //     .catch(error => console.error('Error fetching:', error));
-  // }, []);
+
+//  useEffect(() => {
+//    fetch("/student")
+//      .then((response) => response.json())
+//      .then((data) => console.log(data))
+//      .catch((error) => console.error("Error fetching:", error));
+//  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -435,22 +446,22 @@ export function StudentForm() {
       ethnicity,
     };
 
-    fetch('/student-application', {
-      method: 'POST',
+    fetch("/student-application", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
     })
-      .then(response => {
+      .then((response) => {
         return response.json();
       })
-      .then(data => {
+      .then((data) => {
         if (data.errors) {
           console.log(data);
           alert(data.errors);
         } else {
-          console.log(data)
+          console.log(data);
           setName("");
           setStudentID("");
           setStudentEmail("");
@@ -466,7 +477,7 @@ export function StudentForm() {
           setGender("");
           setEthnicity("");
         }
-      })
+      });
   };
 
   return (
@@ -474,7 +485,10 @@ export function StudentForm() {
       <form onSubmit={handleSubmit} className="max-w-xl w-full">
         <Name name={name} setName={setName} />
         <StudentID studentID={studentID} setStudentID={setStudentID} />
-        <StudentEmail studentEmail={studentEmail} setStudentEmail={setStudentEmail} />
+        <StudentEmail
+          studentEmail={studentEmail}
+          setStudentEmail={setStudentEmail}
+        />
         <School college={college} setCollege={setCollege} />
         <YearStanding
           yearStanding={yearStanding}
