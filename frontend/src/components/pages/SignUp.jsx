@@ -1,3 +1,5 @@
+// SHOULD HAVE PROBABLY CALLED THIS SignUp.jsx
+
 import { useRef, useState, useEffect } from "react";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,7 +10,7 @@ const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = '/login';
 
-const Login = () => {
+const SignUp = () => {
     const userRef = useRef();
     const errRef = useRef();
 
@@ -178,4 +180,4 @@ const Login = () => {
     );
 }
 
-export default Login
+export default SignUp;
