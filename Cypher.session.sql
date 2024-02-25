@@ -1,4 +1,6 @@
-SHOW tables; INSERT INTO student_participants (
+SHOW tables; 
+
+INSERT INTO student_participants (
     student_id,
     first_name,
     last_name,
@@ -9,21 +11,22 @@ SHOW tables; INSERT INTO student_participants (
     clinic_training,
     clinic_training_date,
     expected_graduation_qtr,
-    expected_graduation_year
+    expected_graduation_year,
     clinic_participant_status
   )
+
 VALUES (
-    student_id:int,
+    @student_id,
     'first_name:varchar',
     'last_name:varchar',
     'college_school:varchar',
-    degree_id:int,
+    @degree_id,
     'clinic_application_date:varchar',
-    pre_req_id:int,
+    @pre_req_id,
     'clinic_training:enum',
     'clinic_training_date:varchar',
     'expected_graduation_qtr:enum',
-    expected_graduation_year:int
+    @expected_graduation_year,
     'clinic_participant_status:enum'
   );
 
