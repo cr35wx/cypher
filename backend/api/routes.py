@@ -3,6 +3,7 @@ import pprint
 from datetime import datetime
 from flask import Blueprint, request, jsonify
 from sqlalchemy.exc import IntegrityError
+from werkzeug.security import check_password_hash, generate_password_hash
 
 from .models import (
     ProspectiveStudentParticipant,
@@ -11,6 +12,7 @@ from .models import (
     ClientOrgnizationType,
     ClinicServiceArea,
     AcademicUnit,
+    ClinicUser,
 )
 from .app import db
 
@@ -298,6 +300,24 @@ def client_application():
     print(f"A client application has been submitted and added to the database.")
     return jsonify({"message": "Application submitted successfully."}), 201
 ######################### CLIENT APPLICATION ###############################
+
+@api.route('/login', methods=['POST'])
+def login():
+    login_data = request.json
+    (email, password) = login_data.get("email", ""), login_data.get("pwd", "")
+
+    user = ClinicUser.query.filter_by(email=email).first()
+
+    if not user:
+        return {"error": "invalid email"} # placeholder
+
+    if not check_password_hash(user.password, password):
+        return {"error": "invalid password"} # placeholder
+
+    # some type of jwt token stuff happens on success
+    return jsonify({"message": "Login successful."}), 200
+
+
 
 
 # Also known as "Project Type" on the application forms...

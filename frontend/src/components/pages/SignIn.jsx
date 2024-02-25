@@ -5,7 +5,7 @@ const SignIn = () => {
     const userRef = useRef();
     const errRef = useRef();
 
-    const [user, setUser] = useState('');
+    const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
@@ -17,7 +17,7 @@ const SignIn = () => {
 
     useEffect(() => {
         setErrMsg('');
-    }, [user, pwd])
+    }, [email, pwd])
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -29,11 +29,29 @@ const SignIn = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(user);
+        console.log(email);
         console.log(pwd);
-        setUser('');
-        setPwd('');
-        setSuccess(true);
+        fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, pwd }),
+        }).then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    setErrMsg(data.error);
+                    userRef.current.focus();
+                } else {
+                    setSuccess(true);
+                    setEmail('');
+                    setPwd('');
+                    setSuccess(true);
+                }
+            }).catch(err => {
+                console.log(err);
+            });
+
     }
 
     return (
@@ -52,14 +70,14 @@ const SignIn = () => {
                     <p ref={errRef} className={`text-firebrick font-bold py-2 px-4 mb-2 ${errMsg ? '' : 'hidden'}`}>{errMsg}</p>
                     <h1 className="text-3xl font-extrabold text-Blue sm:text-5xl mb-4">Sign In</h1>
                     <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-96">
-                        <label htmlFor="username" className="text-gray-700">Username:</label>
+                        <label htmlFor="email" className="text-gray-700">Email:</label>
                         <input
-                            type="text"
-                            id="username"
+                            type="email"
+                            id="email"
                             ref={userRef}
                             autoComplete="off"
-                            onChange={(e) => setUser(e.target.value)}
-                            value={user}
+                            onChange={(e) => setEmail(e.target.value)}
+                            value={email}
                             required
                             className="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500"
                         />

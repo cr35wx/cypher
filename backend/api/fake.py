@@ -2,8 +2,9 @@
 
 import click
 from flask import Blueprint
+from werkzeug.security import generate_password_hash
 from faker import Faker
-from .models import StudentParticipant, DegreeMajor, AcademicUnit
+from .models import StudentParticipant, DegreeMajor, AcademicUnit, ClinicUser
 from .app import db
 
 fake = Blueprint("fake", __name__)
@@ -99,3 +100,35 @@ def students(num):
         click.echo("")
 
     click.echo(f"Added {num} fake students to the db")
+
+
+@fake.cli.command("login")
+@click.argument("num", type=click.IntRange(1, 100))
+def students(num):
+    """
+    Add <num> fake "ClinicUser" records to the db (for testing the login page).
+
+    See models.py for why this is different than StudentParticipant.
+    """
+
+    logins = []
+    for _ in range(num):
+        email = faker.email()
+        password = faker.password()
+        click.echo(f"unhashed password for {email}: {password}")
+        login = ClinicUser(
+            email=email,
+            password=generate_password_hash(password)
+        )
+        logins.append(login)
+        db.session.add(login)
+
+    db.session.commit()
+
+    for login in logins:
+        click.echo(f"Clinic User:")
+        click.echo(f"  Login Email: {login.email}")
+        click.echo(f"  Hashed Login Password: {login.password}")
+        click.echo("")
+
+    click.echo(f"Added {num} fake ClinicUser records to the db")
