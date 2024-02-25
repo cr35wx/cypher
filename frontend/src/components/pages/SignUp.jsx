@@ -1,3 +1,5 @@
+// SHOULD HAVE PROBABLY CALLED THIS SignUp.jsx
+
 import { useRef, useState, useEffect } from "react";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,7 +10,7 @@ const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = '/login';
 
-const Login = () => {
+const SignUp = () => {
     const userRef = useRef();
     const errRef = useRef();
 
@@ -165,7 +167,7 @@ const Login = () => {
                         <button disabled={!validName || !validPwd || !validMatch} className={`bg-blue-500 ${(!validName || !validPwd || !validMatch) ? 'bg-gray-400' : 'hover:bg-blue-600'} text-white py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300`}>Sign Up</button>
                       
                         <p className="text-gray-700">
-                            Already registered?<br />
+                            Have an account?<br />
                             <span className="line">
                                 {/* WILL SET UP ROUTING FOR SIGN IN PAGE */}
                                 <a href="#" className="text-gray-700">Sign In</a>
@@ -178,4 +180,4 @@ const Login = () => {
     );
 }
 
-export default Login
+export default SignUp;
