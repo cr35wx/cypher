@@ -6,6 +6,9 @@ import sharevskiImg from './sharevski.jpg';
 import shoreImg from './shore.jpg';
 import spearsImg from './spears.jpg';
 import strandberryImg from './strandberry_wallace.jpg';
+import studentFormImg from './studentForm.jpg';
+import clientFormImg from './clientForm.jpg';
+import loginImg from './login.jpg';
 
 export {
     haleyImg,
@@ -15,5 +18,8 @@ export {
     sharevskiImg,
     shoreImg,
     spearsImg,
-    strandberryImg
+    strandberryImg,
+    studentFormImg,
+    clientFormImg,
+    loginImg
 };
