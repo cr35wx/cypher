@@ -149,7 +149,6 @@ const About = () => {
                 photo={faculty.photo}
                 name={faculty.name}
                 title={faculty.title}
-                college={faculty.college}
                 facultyPage={faculty.facultyPage}
               />
             ))}
