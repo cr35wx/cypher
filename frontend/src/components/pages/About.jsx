@@ -28,7 +28,7 @@ const About = () => {
 
   const filteredFacultyData = selectedCategory === "all"
     ? FacultyData
-    : FacultyData.filter(faculty => faculty.college.toLowerCase().replace(/ /g, "_") === selectedCategory);
+    : FacultyData.filter(faculty => faculty.college.toLowerCase() === selectedCategory);
 
   return (
     <div>
@@ -110,39 +110,39 @@ const About = () => {
           <h2 className="text-3xl font-bold mb-4 text-white">
             Participating Faculty
           </h2>
-          <div className="flex flex-row justify-center mb-8 space-x-4">
+          <div className="flex flex-row justify-center mb-8 space-x-4 flex-wrap">
             <button
               onClick={() => handleCategoryChange("all")}
-              className={`${selectedCategory === "all" ? "btn-blue" : "btn-white"} mr-4`}
+              className={`${selectedCategory === "all" ? "btn-blue" : "btn-white"} mx-2 my-1`}
             >
               All
             </button>
             <button
-              onClick={() => handleCategoryChange("school_of_computing")}
-              className={`${selectedCategory === "school_of_computing" ? "btn-blue" : "btn-white"} mr-4`}
+              onClick={() => handleCategoryChange("school of computing")}
+              className={`${selectedCategory === "school of computing" ? "btn-blue" : "btn-white"} mx-2 my-1 mr-4`}
             >
               School of Computing
             </button>
             <button
-              onClick={() => handleCategoryChange("college_of_business")}
-              className={`${selectedCategory === "college_of_business" ? "btn-blue" : "btn-white"} mr-4`}
+              onClick={() => handleCategoryChange("college of business")}
+              className={`${selectedCategory === "college of business" ? "btn-blue" : "btn-white"} mx-2 my-1 mr-4`}
             >
               College of Business
             </button>
             <button
               onClick={() => handleCategoryChange("law")}
-              className={`${selectedCategory === "law" ? "btn-blue" : "btn-white"} mr-4`}
+              className={`${selectedCategory === "law" ? "btn-blue" : "btn-white"} mx-2 my-1 mr-4`}
             >
               Law
             </button>
             <button
-              onClick={() => handleCategoryChange("steans_center")}
-              className={`${selectedCategory === "steans_center" ? "btn-blue" : "btn-white"} mr-4`}
+              onClick={() => handleCategoryChange("steans center")}
+              className={`${selectedCategory === "steanscenter" ? "btn-blue" : "btn-white"} mx-2 my-1 mr-4`}
             >
               Steans Center
             </button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredFacultyData.map((faculty) => (
               <FacultyMember
                 key={faculty.id}
