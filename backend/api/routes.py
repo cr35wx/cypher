@@ -6,13 +6,12 @@ from sqlalchemy.exc import IntegrityError
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from .models import (
-    ProspectiveStudentParticipant,
     DegreeMajor,
-    ProspectiveClientOrganization,
     ClientOrgnizationType,
     ClinicServiceArea,
     AcademicUnit,
-    ClinicUser,
+    StudentParticipant,
+    ClientOrganization,
 )
 from .app import db
 
@@ -137,11 +136,12 @@ def student_application():
         .filter(DegreeMajor.ug_or_grad == ug_or_grad)
         .first()
     )
-    student = ProspectiveStudentParticipant(  # man....
+    student = StudentParticipant(  # man....
         student_id=form_data.get("studentID"),
         first_name=first_name,
         last_name=" ".join(last_names),
         email=form_data.get("studentEmail"),
+        password=None,
         college_school=form_data.get("college").get("school"),
         degree_id=student_degree_id[0],
         year_standing=form_data.get("yearStanding"),
@@ -267,7 +267,7 @@ def client_application():
         .first()
     )
 
-    client = ProspectiveClientOrganization(
+    client = ClientOrganization(
         org_name=form_data.get("orgName"),
         org_type_id=org_type_id[0],
         org_contact_fname=contact_fname,
@@ -306,7 +306,8 @@ def login():
     login_data = request.json
     (email, password) = login_data.get("email", ""), login_data.get("pwd", "")
 
-    user = ClinicUser.query.filter_by(email=email).first()
+    user = (StudentParticipant.query.filter_by(email=email).first() or 
+            ClientOrganization.query.filter_by(org_contact_email=email).first())
 
     if not user:
         return {"error": "invalid email"} # placeholder
