@@ -84,7 +84,7 @@ const SignUp = () => {
             {success ? (
                 <section className="flex flex-col items-center justify-center min-h-screen bg-dodgerblue">
                     <h1 className="text-white">Success!</h1>
-                    <p> 
+                    <p>
                         {/* SET UP ROUTING FOR SIGN IN PAGE */}
                         <a href="#" className="text-white">Sign In</a>
                     </p>
@@ -95,30 +95,18 @@ const SignUp = () => {
                     <h1 className="text-3xl font-extrabold text-Blue sm:text-5xl mb-4">Register</h1>
                     <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-96">
                         {/* Username Input Field */}
-                        <label className="text-gray-700">
-                            Username:
-                            <FontAwesomeIcon icon={faCheck} className={validName ? "text-limegreen" : "hidden"} />
-                            <FontAwesomeIcon icon={faTimes} className={validName || !user ? "hidden" : "text-red"} />
-                        </label>
+                        <label htmlFor="email" className="text-gray-700">Email:</label>
                         <input
-                            type="text"
-                            id="username"
+                            type="email"
+                            id="email"
                             ref={userRef}
                             autoComplete="off"
-                            onChange={(e) => setUser(e.target.value)}
-                            value={user}
+                            onChange={(e) => setEmail(e.target.value)}
+                            value={email}
                             required
                             className="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500"
-                            onFocus={() => setUserFocus(true)}
-                            onBlur={() => setUserFocus(false)}
                         />
-                        <p className={`text-gray-700 text-xs ${userFocus && user && !validName ? 'block' : 'hidden'}`}>
-                            <FontAwesomeIcon icon={faInfoCircle} className="mr-1" />
-                            4 to 24 characters.<br />
-                            Must begin with a letter.<br />
-                            Letters, numbers, underscores, hyphens allowed.
-                        </p>
-    
+
                         {/* Password Input Field */}
                         <label className="py-2 text-gray-700">
                             Password:
@@ -141,7 +129,7 @@ const SignUp = () => {
                             Must include uppercase and lowercase letters, a number and a special character.<br />
                             Allowed special characters: ! @ # $ %
                         </p>
-    
+
                         {/* Confirm Password Input Field */}
                         <label className="py-2 text-gray-700">
                             Confirm Password:
@@ -162,10 +150,10 @@ const SignUp = () => {
                             <FontAwesomeIcon icon={faInfoCircle} className="mr-1" />
                             Must match the first password input field.
                         </p>
-    
+
                         {/* Submit Button */}
                         <button disabled={!validName || !validPwd || !validMatch} className={`bg-blue-500 ${(!validName || !validPwd || !validMatch) ? 'bg-gray-400' : 'hover:bg-blue-600'} text-white py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300`}>Sign Up</button>
-                      
+
                         <p className="text-gray-700">
                             Have an account?<br />
                             <span className="line">
