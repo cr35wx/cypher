@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Navbar.css";
 import { Link, NavLink } from "react-router-dom";
-import logo from "../images/logo.png"; 
+import logo from "../images/logo.png";
 
 /* Static navBar which is at the top of all frontend pages It utilizes react-router
 
@@ -13,7 +13,7 @@ export const Navbar = () => {
   return (
     <nav>
       <Link to="/" className="logo">
-      <img src={logo} alt="Logo" />
+        <img src={logo} alt="Logo" />
       </Link>
       <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
         <span></span>

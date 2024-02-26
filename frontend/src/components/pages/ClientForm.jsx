@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ProjectType, ClinicOutreach } from "./StudentForm";
+import { clientFormImg } from "../../images";
 
 const OrgName = ({ orgName, setOrgName }) => {
   return (
@@ -326,61 +327,65 @@ export function ClientForm() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <form onSubmit={handleSubmit} className="max-w-xl w-full">
-        <OrgName orgName={orgName} setOrgName={setOrgName} />
-        <OrgType orgType={orgType} setOrgType={setOrgType} />
-        <ContactPersonName
-          contactPersonName={contactPersonName}
-          setContactPersonName={setContactPersonName}
-        />
-        <ContactPersonEmail
-          contactPersonEmail={contactPersonEmail}
-          setContactPersonEmail={setContactPersonEmail}
-        />
-        <ContactPersonPhone
-          contactPersonPhone={contactPersonPhone}
-          setContactPersonPhone={setContactPersonPhone}
-        />
-        <OrgWebsite orgWebsite={orgWebsite} setOrgWebsite={setOrgWebsite} />
-        <AnnualRevenue
-          annualRevenue={annualRevenue}
-          setAnnualRevenue={setAnnualRevenue}
-        />
-        <ITEmployeeCount
-          ITemployeeCount={ITemployeeCount}
-          setITemployeeCount={setITemployeeCount}
-        />
-        <DataDescription
-          dataDescription={dataDescription}
-          setDataDescription={setDataDescription}
-        />
-        <RecentRiskAssessment
-          recentRiskAssessment={recentRiskAssessment}
-          setRecentRiskAssessment={setRecentRiskAssessment}
-        />
-        <ProjectType
-          projectType={projectType}
-          setProjectType={setProjectType}
-          otherDescription={otherDescription}
-          setOtherDescription={setOtherDescription}
-        />
-        <ClinicOutreach
-          howDidYouHear={howDidYouHear}
-          setHowDidYouHear={setHowDidYouHear}
-        />
-        <RequestsOrComments
-          requestsOrComments={requestsOrComments}
-          setRequestsOrComments={setRequestsOrComments}
-        />
+    <div className="flex justify-center items-center min-h-screen bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: `url(${clientFormImg})` }}
+    >
+      <div className="form-container my-auto mt-32 px-4">
+        <form onSubmit={handleSubmit} className="max-w-md w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+          <OrgName orgName={orgName} setOrgName={setOrgName} />
+          <OrgType orgType={orgType} setOrgType={setOrgType} />
+          <ContactPersonName
+            contactPersonName={contactPersonName}
+            setContactPersonName={setContactPersonName}
+          />
+          <ContactPersonEmail
+            contactPersonEmail={contactPersonEmail}
+            setContactPersonEmail={setContactPersonEmail}
+          />
+          <ContactPersonPhone
+            contactPersonPhone={contactPersonPhone}
+            setContactPersonPhone={setContactPersonPhone}
+          />
+          <OrgWebsite orgWebsite={orgWebsite} setOrgWebsite={setOrgWebsite} />
+          <AnnualRevenue
+            annualRevenue={annualRevenue}
+            setAnnualRevenue={setAnnualRevenue}
+          />
+          <ITEmployeeCount
+            ITemployeeCount={ITemployeeCount}
+            setITemployeeCount={setITemployeeCount}
+          />
+          <DataDescription
+            dataDescription={dataDescription}
+            setDataDescription={setDataDescription}
+          />
+          <RecentRiskAssessment
+            recentRiskAssessment={recentRiskAssessment}
+            setRecentRiskAssessment={setRecentRiskAssessment}
+          />
+          <ProjectType
+            projectType={projectType}
+            setProjectType={setProjectType}
+            otherDescription={otherDescription}
+            setOtherDescription={setOtherDescription}
+          />
+          <ClinicOutreach
+            howDidYouHear={howDidYouHear}
+            setHowDidYouHear={setHowDidYouHear}
+          />
+          <RequestsOrComments
+            requestsOrComments={requestsOrComments}
+            setRequestsOrComments={setRequestsOrComments}
+          />
 
-        <button
-          className="submit-button shadow w-full hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-          type="submit"
-        >
-          Submit
-        </button>
-      </form>
+          <button
+            className="submit-button shadow w-full hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+            type="submit"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

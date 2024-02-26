@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
 import CustomModal from '../Modal';
+import { loginImg } from '../../images';
 
 const SignIn = () => {
     const userRef = useRef();
@@ -66,10 +67,12 @@ const SignIn = () => {
                     </p>
                 </section>
             ) : (
-                <section className="flex flex-col items-center justify-center min-h-screen bg-dodgerblue">
+                <section className="flex flex-col items-center justify-center min-h-screen bg-dodgerblue"
+                    style={{ backgroundImage: `url(${loginImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+                >
                     <p ref={errRef} className={`text-firebrick font-bold py-2 px-4 mb-2 ${errMsg ? '' : 'hidden'}`}>{errMsg}</p>
-                    <h1 className="text-3xl font-extrabold text-Blue sm:text-5xl mb-4">Sign In</h1>
                     <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-96">
+                        <h1 className="text-center text-3xl font-extrabold text-blue-700 sm:text-4xl mb-4">Log In</h1>
                         <label htmlFor="email" className="text-gray-700">Email:</label>
                         <input
                             type="email"
@@ -82,7 +85,7 @@ const SignIn = () => {
                             className="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500"
                         />
 
-                        <label htmlFor="password" className="py-2 text-gray-700">Password:</label>
+                        <label htmlFor="password" className="py-2 my-auto text-gray-700">Password:</label>
                         <input
                             type="password"
                             id="password"
@@ -91,11 +94,11 @@ const SignIn = () => {
                             required
                             className="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500"
                         />
-                        <button className="bg-blue-500  hover:bg-blue-600 text-white py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300">Sign In</button>
-                        <p className="text-gray-700">
+                        <button className="bg-blue-500  hover:bg-blue-600 text-white py-2 px-4 my-auto rounded object-center focus:outline-none focus:ring focus:border-blue-300">Sign In</button>
+                        <p className="text-gray-700 my-auto">
                             Need an Account?<br />
                             <span className="line">
-                                <a href="#" className="text-gray-700" onClick={openModal}>Fill Out Application</a>
+                                <a href="#" className="text-gray-700 my-auto" onClick={openModal}>Fill Out Application</a>
                             </span>
                         </p>
                     </form>
