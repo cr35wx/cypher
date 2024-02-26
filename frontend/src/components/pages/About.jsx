@@ -113,31 +113,31 @@ const About = () => {
           <div className="flex flex-row justify-center mb-8 space-x-4 flex-wrap">
             <button
               onClick={() => handleCategoryChange("all")}
-              className={`${selectedCategory === "all" ? "btn-blue" : "btn-white"}`}
+              className={`${selectedCategory === "all" ? "btn-blue" : "btn-white"} mx-2 my-1`}
             >
               All
             </button>
             <button
-              onClick={() => handleCategoryChange("school_of_computing")}
-              className={`${selectedCategory === "school_of_computing" ? "btn-blue" : "btn-white"} mr-4`}
+              onClick={() => handleCategoryChange("school of computing")}
+              className={`${selectedCategory === "school of computing" ? "btn-blue" : "btn-white"} mx-2 my-1 mr-4`}
             >
               School of Computing
             </button>
             <button
-              onClick={() => handleCategoryChange("college_of_business")}
-              className={`${selectedCategory === "college_of_business" ? "btn-blue" : "btn-white"} mr-4`}
+              onClick={() => handleCategoryChange("college of business")}
+              className={`${selectedCategory === "college of business" ? "btn-blue" : "btn-white"} mx-2 my-1 mr-4`}
             >
               College of Business
             </button>
             <button
               onClick={() => handleCategoryChange("law")}
-              className={`${selectedCategory === "law" ? "btn-blue" : "btn-white"} mr-4`}
+              className={`${selectedCategory === "law" ? "btn-blue" : "btn-white"} mx-2 my-1 mr-4`}
             >
               Law
             </button>
             <button
-              onClick={() => handleCategoryChange("steans_center")}
-              className={`${selectedCategory === "steans_center" ? "btn-blue" : "btn-white"} mr-4`}
+              onClick={() => handleCategoryChange("steans center")}
+              className={`${selectedCategory === "steanscenter" ? "btn-blue" : "btn-white"} mx-2 my-1 mr-4`}
             >
               Steans Center
             </button>
