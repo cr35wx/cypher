@@ -4,7 +4,7 @@ import click
 from flask import Blueprint
 from werkzeug.security import generate_password_hash
 from faker import Faker
-from .models import StudentParticipant, DegreeMajor, AcademicUnit, ClinicUser
+from .models import StudentParticipant, DegreeMajor, AcademicUnit
 from .app import db
 
 fake = Blueprint("fake", __name__)
@@ -39,13 +39,22 @@ def students(num):
 
     students = []
     for _ in range(num):
+        first_name = faker.first_name()
+        last_name = faker.last_name()
+        email = faker.email()
+        password = faker.password()
         random_school = faker.random_element(elements=major_ids.keys())
         random_degree_id = faker.random_element(elements=major_ids[random_school])
+
+        # for login testing
+        click.echo(f"{first_name} {last_name}'s unhashed password: {password} (email: {email})")
+
         student = StudentParticipant(
             student_id=faker.random_number(digits=7),
-            first_name=faker.first_name(),
-            last_name=faker.last_name(),
-            email=faker.email(),
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            password=generate_password_hash(password),
             college_school=random_school,
             degree_id=random_degree_id,
             year_standing=faker.random_element(elements=("Freshman", "Sophomore", "Junior", "Senior", "Graduate")),
@@ -75,6 +84,7 @@ def students(num):
         click.echo(f"Student: {student.first_name} {student.last_name}")
         click.echo(f"  Student ID: {student.student_id}")
         click.echo(f"  Student Email: {student.email}")
+        click.echo(f"  Student Password (Hashed): {student.password}")
         click.echo(f"  Student College: {student.college_school}")
         click.echo(f"  Student Degree ID: {student.degree_id}")
         click.echo(f"  Student Year Standing: {student.year_standing}")
@@ -102,33 +112,3 @@ def students(num):
     click.echo(f"Added {num} fake students to the db")
 
 
-@fake.cli.command("login")
-@click.argument("num", type=click.IntRange(1, 100))
-def students(num):
-    """
-    Add <num> fake "ClinicUser" records to the db (for testing the login page).
-
-    See models.py for why this is different than StudentParticipant.
-    """
-
-    logins = []
-    for _ in range(num):
-        email = faker.email()
-        password = faker.password()
-        click.echo(f"unhashed password for {email}: {password}")
-        login = ClinicUser(
-            email=email,
-            password=generate_password_hash(password)
-        )
-        logins.append(login)
-        db.session.add(login)
-
-    db.session.commit()
-
-    for login in logins:
-        click.echo(f"Clinic User:")
-        click.echo(f"  Login Email: {login.email}")
-        click.echo(f"  Hashed Login Password: {login.password}")
-        click.echo("")
-
-    click.echo(f"Added {num} fake ClinicUser records to the db")
