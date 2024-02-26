@@ -100,8 +100,8 @@ const SignUp = () => {
                             id="email"
                             ref={userRef}
                             autoComplete="off"
-                            onChange={(e) => setEmail(e.target.value)}
-                            value={email}
+                            onChange={(e) => setUser(e.target.value)}
+                            value={user}
                             required
                             className="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500"
                         />
