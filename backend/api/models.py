@@ -6,14 +6,13 @@ from sqlalchemy import (
     CheckConstraint,
     Enum,
 )
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, validates
 
 from .app import db
 
 # Tables not yet implemented: StudentInterest, StudentPrerequesite, ApprovedPrerequesites
 
 
-# Email needs to somehowbe unique across the student and client tables since it's used for login
 class StudentParticipant(db.Model):
     """The model that will be used to store applicants and students participating in the clinic."""
 
@@ -48,6 +47,13 @@ class StudentParticipant(db.Model):
     clinic_participant_status = mapped_column(Enum("In review", "Accepted", "Denied"))
 
 
+    @validates('email')
+    def validate_email(self, key, email):
+        if db.session.query(ClientOrganization).filter_by(org_contact_email=email).first():
+            raise ValueError('Student email already exists in ClientOrganization table')
+        return email
+
+
 class ClientOrganization(db.Model):
     __tablename__ = "client_organizations"
     org_id = mapped_column(Integer, primary_key=True)
@@ -76,6 +82,12 @@ class ClientOrganization(db.Model):
     clinic_participant_status = mapped_column(Enum("In review", "Accepted", "Denied"))
 
     projects = db.relationship("ClientProject", backref="client_organization")
+
+    @validates('org_contact_email')
+    def validate_email(self, key, email):
+        if db.session.query(StudentParticipant).filter_by(email=email).first():
+            raise ValueError('Organization Contact Email already exists in StudentParticipant table')
+        return email
 
 
 class DegreeMajor(db.Model):
