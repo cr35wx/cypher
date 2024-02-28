@@ -1,7 +1,6 @@
-
 /*this is the css for the navBar, it was implemented prior to us using tailwind*/
 
-.active{
+.active {
     background-color: #1d4ed8;
 }
 
@@ -12,15 +11,19 @@ nav {
     background-color: rgb(35, 86, 177);
     color: white;
     position: sticky;
+    z-index: 50;
     top: 0;
 }
 
+/* i added z-index for the about page scroll so sections arent block */
+
+
 nav .logo img {
-    width: 100px; 
-    height: auto; 
-    margin: 0 1rem; 
-  }
-  
+    width: 100px;
+    height: auto;
+    margin: 0 1rem;
+}
+
 nav .title {
     font-size: 1.5rem;
     margin: 1rem;
@@ -34,7 +37,7 @@ nav ul {
 }
 
 nav ul li {
-   list-style: none; 
+    list-style: none;
 }
 
 nav ul li a {
@@ -47,7 +50,7 @@ nav ul li a {
 }
 
 nav ul li a:not(.active):hover {
-    background-color:#172554 ;
+    background-color: #172554;
 }
 
 nav .menu {

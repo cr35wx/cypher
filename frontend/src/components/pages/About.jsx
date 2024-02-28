@@ -4,6 +4,7 @@ import FacultyMember from "./about/FacultyMember";
 import FacultyData from "./about/FacultyData";
 import { DownloadIcon } from "@heroicons/react/outline";
 import dummyForm from './about/dummy-form.txt';
+import { missionImg } from "../../images";
 
 const About = () => {
 
@@ -32,19 +33,23 @@ const About = () => {
 
   return (
     <div>
-      {/* Mission Statement Section */}
-      <section className="bg-white py-20">
-        <div className="max-w-screen-xl mx-auto px-4 text-center">
-          <h1 className="text-3xl font-extrabold sm:text-5xl mb-4">
-            Our Mission
-          </h1>
-          <p className="text-lg sm:text-xl text-gray-700">
-            Raise organizational awareness of information security and privacy
-            risks discovered from a student-led risk assessment so that
-            incremental improvements are made in the client's security policies
-            and practices while students in turn gain real-world experience that
-            contributes to a cybersecurity workforce.
-          </p>
+      <section className="top-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div className="lg:col-span-1">
+            <img
+              className="h-full w-full object-cover lg:h-auto"
+              src={missionImg}
+              alt="Mission"
+            />
+          </div>
+          <div className="bg-white md:max-w-2xl md:z-10 md:shadow-lg md:flex md:justify-center md:mx-auto lg:w-full lg:mt-0 lg:py-12">
+            <div className="flex flex-col p-4 md:px-16 md:pb-1 lg:mt-12">
+              <h2 className="text-2xl text-center font-bold uppercase text-blue-700 lg:text-4xl">Our Mission</h2>
+              <p className="mt-4 p-2 lg:p-0 text-center text-xl">
+                Raise organizational awareness of information security and privacy risks discovered from a student-led risk assessment so that incremental improvements are made in the client's security policies and practices while students in turn gain real-world experience that contributes to a cybersecurity workforce.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 

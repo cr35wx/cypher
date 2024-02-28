@@ -486,7 +486,7 @@ export function StudentForm() {
       style={{ backgroundImage: `url(${studentFormImg})` }}
     >
       <div className="form-container my-auto mt-32 px-4 bg-white shadow-md rounded w-full max-w-md">
-        <form onSubmit={handleSubmit} className="max-w-md w-full px-8 pt-6 pb-8 mb-4">
+        <form onSubmit={handleSubmit} className="my-auto w-full px-8 pt-6 pb-8 mb-4">
           <Name name={name} setName={setName} />
           <StudentID studentID={studentID} setStudentID={setStudentID} />
           <StudentEmail

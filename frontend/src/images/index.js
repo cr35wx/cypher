@@ -9,6 +9,7 @@ import strandberryImg from './strandberry_wallace.jpg';
 import studentFormImg from './studentForm.jpg';
 import clientFormImg from './clientForm.jpg';
 import loginImg from './login.jpg';
+import missionImg from './mission.jpg';
 
 export {
     haleyImg,
@@ -21,5 +22,6 @@ export {
     strandberryImg,
     studentFormImg,
     clientFormImg,
-    loginImg
+    loginImg,
+    missionImg
 };
