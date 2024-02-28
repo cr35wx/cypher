@@ -1,6 +1,6 @@
 import React from "react";
-import './Home.css'; 
-import {useState} from 'react'; 
+import './Home.css';
+import { useState } from 'react';
 import CustomModal from "../Modal";
 import Fade from "../Carousel"
 
@@ -23,180 +23,180 @@ export const Home = () => {
   };
 
 
-  return ( 
-  <div>
-    
-  
-  <section class="bg-gray-50">                                  {/* Landing */}
-  <div class="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center">
-    <div class="mx-auto max-w-50 text-center">
-      <h1 class="text-3xl font-extrabold sm:text-5xl">
-        Welcome to 
-        <strong class="mt-2 font-extrabold text-Blue sm:block"> Cypher's Cybersecurity Clinic </strong>
-      </h1>
+  return (
+    <div>
 
-      <p class="mt-4 sm:text-xl/relaxed">
-        The one-stop shop for student-preformed professional services. 
-      </p>
 
-      <div class="mt-8 flex flex-wrap justify-center gap-4">
-        <button
-          onClick={openModal}
-          class="block w-full rounded bg-Blue px-12 py-3 text-xl font-medium text-white shadow hover:bg-darkBlue focus:outline-none focus:ring active:bg-lightBlue sm:w-auto"
-        >
-          Register
-        </button>
+      <section class="bg-white">                                  {/* Landing */}
+        <div class="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center">
+          <div class="mx-auto max-w-50 text-center">
+            <h1 class="text-3xl font-extrabold sm:text-5xl">
+              Welcome to
+              <strong class="mt-2 font-extrabold text-Blue sm:block"> Cypher's Cybersecurity Clinic </strong>
+            </h1>
 
-        <a
-          class="block w-full rounded px-12 py-3 text-xl font-medium text-lightBlue shadow hover:text-darkBlue focus:outline-none focus:ring active:text-lightBlue sm:w-auto"
-          href="#divider"
-        >
-          Learn More
-        </a>
+            <p class="mt-4 sm:text-xl/relaxed">
+              The one-stop shop for student-performed professional services.
+            </p>
+
+            <div class="mt-8 flex flex-wrap justify-center gap-4">
+              <button
+                onClick={openModal}
+                class="block w-full rounded bg-Blue px-12 py-3 text-xl font-medium text-white shadow hover:bg-darkBlue focus:outline-none focus:ring active:bg-lightBlue sm:w-auto"
+              >
+                Register
+              </button>
+
+              <a
+                class="block w-full rounded px-12 py-3 text-xl font-medium text-lightBlue shadow hover:text-darkBlue focus:outline-none focus:ring active:text-lightBlue sm:w-auto"
+                href="#divider"
+              >
+                Learn More
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+
+      <div id="divider">                                            {/*services divider*/}
+        <span class="flex items-center mt-28 mb-8">
+          <span class="h-px flex-1 bg-black"></span>
+          <span class="shrink-0 px-6 text-2xl font-bold">Who we are</span>
+          <span class="h-px flex-1 bg-black"></span>
+        </span>
       </div>
-    </div>
-  </div>
-  </section>
-  
 
 
 
-  <div id = "divider">                                            {/*services divider*/}
-    <span class="flex items-center mt-28 mb-8">                                            
-            <span class="h-px flex-1 bg-black"></span>
-            <span class="shrink-0 px-6 text-2xl font-bold">Who we are</span>
-            <span class="h-px flex-1 bg-black"></span>
-    </span>
-  </div>
-  
- 
+      <div className="max-w-screen-xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="max-w-screen-lg mx-0 my-4 bg-gray-200 p-8 rounded-lg shadow-md">               {/* text box description*/}
+          <h1 class="text-4xl font-bold mb-6 text-Blue">Cypher's Cybersecurity Clinic</h1>
 
-<div className="max-w-screen-xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
-  <div class="max-w-screen-lg mx-0 my-4 bg-gray-200 p-8 rounded-lg shadow-md">               {/* text box description*/} 
-    <h1 class="text-4xl font-bold mb-6 text-Blue">Cypher's Cybersecurity Clinic</h1>
-  
-    <p class="text-xl text-gray-700">
-      Cypher's Cybersecurity Clinic ("Clinic") is an interdisciplinary collaboration between the 
-      <a href= "https://www.cdm.depaul.edu/Pages/default.aspx"> School of Computing</a>, the 
-      <a href= "https://business.depaul.edu/Pages/default.aspx"> Driehaus College of Business</a>, and the 
-      <a href = "https://law.depaul.edu/Pages/default.aspx"> College of Law</a>.
-      The Clinic provides students with hands-on, real-world experience working on cybersecurity projects for organizational clients that helps prepare them for careers in the cybersecurity workforce. Participating DePaul students come from a variety of undergraduate and graduate degree majors across the three colleges. The Clinic partners with 
-      <a href = "https://resources.depaul.edu/steans-center-community-based-service-learning/about/Pages/default.aspx"> DePaul's Steans Center</a> to serve community-based non-profit organizations that have limited resources yet have a need for cybersecurity assessment services. The Clinic also provides services to Chicago-area small businesses.
-    </p>
-  </div>
+          <p class="text-xl text-gray-700">
+            Cypher's Cybersecurity Clinic ("Clinic") is an interdisciplinary collaboration between the
+            <a href="https://www.cdm.depaul.edu/Pages/default.aspx"> School of Computing</a>, the
+            <a href="https://business.depaul.edu/Pages/default.aspx"> Driehaus College of Business</a>, and the
+            <a href="https://law.depaul.edu/Pages/default.aspx"> College of Law</a>.
+            The Clinic provides students with hands-on, real-world experience working on cybersecurity projects for organizational clients that helps prepare them for careers in the cybersecurity workforce. Participating DePaul students come from a variety of undergraduate and graduate degree majors across the three colleges. The Clinic partners with
+            <a href="https://resources.depaul.edu/steans-center-community-based-service-learning/about/Pages/default.aspx"> DePaul's Steans Center</a> to serve community-based non-profit organizations that have limited resources yet have a need for cybersecurity assessment services. The Clinic also provides services to Chicago-area small businesses.
+          </p>
+        </div>
 
-  <Fade />
-  </div>
+        <Fade />
+      </div>
 
 
- 
 
 
-  <section class="bg-gray-900 text-white">                    {/*3 box infographic -- maybe change this infographic to talk about the 3 schools involved?*/}
-  <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
-    <div class="mx-auto max-w-lg text-center">
-      <h2 class="text-3xl font-bold sm:text-4xl">Learn about our services</h2>
 
-      <p class="mt-4 text-gray-300">
-      Students perform needed professional services to under-resourced external clients. In exchange, students gain a transformative educational experience
-      from working on real-world projects in their area of study, while providing a public good.
-      </p>
-    </div>
+      <section class="bg-gray-900 text-white">                    {/*3 box infographic -- maybe change this infographic to talk about the 3 schools involved?*/}
+        <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+          <div class="mx-auto max-w-lg text-center">
+            <h2 class="text-3xl font-bold sm:text-4xl">Learn about our services</h2>
 
-    <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-      <a
-        class="block rounded-xl border border-gray-800 p-8 shadow-md transition hover:border-lighterBlue hover:shadow-lighterBlue no-underline"
-        href="https://www.cdm.depaul.edu/Pages/default.aspx"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="size-10 text-lighterBlue"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          
-          <path 
-          stroke-linecap="round" 
-          stroke-linejoin="round" 
-          stroke-width = "2"
-          d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25" 
-          />
-        </svg>
+            <p class="mt-4 text-gray-300">
+              Students perform needed professional services to under-resourced external clients. In exchange, students gain a transformative educational experience
+              from working on real-world projects in their area of study, while providing a public good.
+            </p>
+          </div>
 
-        <h2 class="mt-4 text-xl font-bold text-white">General Security Risk</h2>
+          <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <a
+              class="block rounded-xl border border-gray-800 p-8 shadow-md transition hover:border-lighterBlue hover:shadow-lighterBlue no-underline"
+              href="https://www.cdm.depaul.edu/Pages/default.aspx"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="size-10 text-lighterBlue"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
 
-        <p class="mt-1 text-sm text-gray-300">
-        Our team will meet with clients to take a benchmark cybersecurity test.
-        </p>
-      </a>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25"
+                />
+              </svg>
 
-      <a
-        class="block rounded-xl border border-gray-800 p-8 shadow-md transition hover:border-lighterBlue hover:shadow-lighterBlue no-underline"
-        href="https://business.depaul.edu/Pages/default.aspx"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="size-10 text-lighterBlue"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-         
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" 
-          />
-        </svg>
+              <h2 class="mt-4 text-xl font-bold text-white">General Security Risk</h2>
 
-        <h2 class="mt-4 text-xl font-bold text-white">Audit</h2>
+              <p class="mt-1 text-sm text-gray-300">
+                Our team will meet with clients to take a benchmark cybersecurity test.
+              </p>
+            </a>
 
-        <p class="mt-1 text-sm text-gray-300">
-        Students will assist clients with tasks relating to accounting, record-keeping, etc.
-        </p>
-      </a>
+            <a
+              class="block rounded-xl border border-gray-800 p-8 shadow-md transition hover:border-lighterBlue hover:shadow-lighterBlue no-underline"
+              href="https://business.depaul.edu/Pages/default.aspx"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="size-10 text-lighterBlue"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
 
-      <a
-        class="block rounded-xl border border-gray-800 p-8 shadow-md transition hover:border-lighterBlue hover:shadow-lighterBlue no-underline"
-        href="https://law.depaul.edu/Pages/default.aspx"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="size-10 text-lighterBlue"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" 
-          />
-        </svg>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                />
+              </svg>
 
-        <h2 class="mt-4 text-xl font-bold text-white">Policy Review</h2>
+              <h2 class="mt-4 text-xl font-bold text-white">Audit</h2>
 
-        <p class="mt-1 text-sm text-gray-300">
-          Commited law students will help clients with basic legal review.
-        </p>
-      </a>
-      
-    </div>
+              <p class="mt-1 text-sm text-gray-300">
+                Students will assist clients with tasks relating to accounting, record-keeping, etc.
+              </p>
+            </a>
 
-    <div class="mt-12 text-center">
-      <a
-        onClick={openModal}
-        class="inline-block rounded bg-Blue px-12 py-3 text-xl font-medium text-white transition hover:bg-darkBlue focus:outline-none focus:ring focus:ring-lightBlue no-underline"
-      >
-        Get Started 
-      </a>
-    </div>
-  </div>
-</section>
+            <a
+              class="block rounded-xl border border-gray-800 p-8 shadow-md transition hover:border-lighterBlue hover:shadow-lighterBlue no-underline"
+              href="https://law.depaul.edu/Pages/default.aspx"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="size-10 text-lighterBlue"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"
+                />
+              </svg>
+
+              <h2 class="mt-4 text-xl font-bold text-white">Policy Review</h2>
+
+              <p class="mt-1 text-sm text-gray-300">
+                Commited law students will help clients with basic legal review.
+              </p>
+            </a>
+
+          </div>
+
+          <div class="mt-12 text-center">
+            <a
+              onClick={openModal}
+              class="inline-block rounded bg-Blue px-12 py-3 text-xl font-medium text-white transition hover:bg-darkBlue focus:outline-none focus:ring focus:ring-lightBlue no-underline"
+            >
+              Get Started
+            </a>
+          </div>
+        </div>
+      </section>
 
 
       <section class="container mx-auto px-8 py-8 lg:py-40">       {/*image grid */}
@@ -234,12 +234,12 @@ export const Home = () => {
         </div>
       </section>
 
-  
-<CustomModal isOpen={isModalOpen} onRequestClose={closeModal} />
-</div>
-  
+
+      <CustomModal isOpen={isModalOpen} onRequestClose={closeModal} />
+    </div>
+
   );
 };
 
-   
+
 

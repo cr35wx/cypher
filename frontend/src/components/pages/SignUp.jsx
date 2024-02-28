@@ -1,21 +1,24 @@
-// SHOULD HAVE PROBABLY CALLED THIS SignUp.jsx
-
-import { useRef, useState, useEffect } from "react";
-import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import React, { useRef, useState, useEffect } from 'react';
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { loginImg } from '../../images';
+import { Link } from 'react-router-dom';
+// dont need to use axios, doesnt matter
 import axios from '../../api/axios';
 
-// SET USERNAME AND PASSWORD RULES
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+// SET PASSWORD RULES
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const REGISTER_URL = '/login';
+const REGISTER_URL = '/signup';
 
 const SignUp = () => {
-    const userRef = useRef();
+    const emailRef = useRef();
     const errRef = useRef();
 
-    const [user, setUser] = useState('');
-    const [validName, setValidName] = useState(false);
+    const [role, setRole] = useState('');
+
+    const [email, setEmail] = useState('');
+    const [validEmail, setValidEmail] = useState(false);
 
     const [pwd, setPwd] = useState('');
     const [validPwd, setValidPwd] = useState(false);
@@ -29,88 +32,85 @@ const SignUp = () => {
     const [success, setSuccess] = useState(false);
 
     useEffect(() => {
-        userRef.current.focus();
-    }, [])
+        emailRef.current.focus();
+    }, []);
 
     useEffect(() => {
-        setValidName(USER_REGEX.test(user));
-    }, [user])
+        setValidEmail(EMAIL_REGEX.test(email));
+    }, [email]);
 
     useEffect(() => {
         setValidPwd(PWD_REGEX.test(pwd));
         setValidMatch(pwd === matchPwd);
-    }, [pwd, matchPwd])
+    }, [pwd, matchPwd]);
 
     useEffect(() => {
         setErrMsg('');
-    }, [user, pwd, matchPwd])
+    }, [email, pwd, matchPwd]);
 
-    // NOT FULLY CONNECTED YET TO BACKEND
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            //console.log(user);
+            const response = await axios.post(REGISTER_URL, JSON.stringify({ email, pwd, role }), {
+                headers: { 'Content-Type': 'application/json' },
+                withCredentials: true
+            });
+            //console.log(email);
             //console.log(pwd);
-            const response = await axios.post(REGISTER_URL,
-                JSON.stringify({ user, pwd }),
-                {
-                    headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true
-                }
-            );
-            console.log(response?.data);
-            console.log(response?.accessToken);
-            console.log(JSON.stringify(response))
             setSuccess(true);
-
-            setUser('');
+            setEmail('');
             setPwd('');
             setMatchPwd('');
         } catch (err) {
-            if (!err?.response) {
+            if (!err.response) {
                 setErrMsg('No Server Response');
-            } else if (err.response?.status === 409) {
-                setErrMsg('Username Taken');
+            } else if (err.response.status === 409) {
+                setErrMsg('Email already in use');
             } else {
-                setErrMsg('Registration Failed')
+                setErrMsg('Registration Failed');
             }
             errRef.current.focus();
         }
-    }
+    };
 
     return (
         <>
             {success ? (
                 <section className="flex flex-col items-center justify-center min-h-screen bg-dodgerblue">
-                    <h1 className="text-white">Success!</h1>
-                    <p>
-                        {/* SET UP ROUTING FOR SIGN IN PAGE */}
-                        <a href="#" className="text-white">Sign In</a>
-                    </p>
+                    <h1 className="text-blue">Welcome to Cypher.</h1>
                 </section>
             ) : (
-                <section className="flex flex-col items-center justify-center min-h-screen bg-dodgerblue">
-                    <p ref={errRef} className={`text-firebrick font-bold py-2 px-4 mb-2 ${errMsg ? '' : 'hidden'}`}>{errMsg}</p>
-                    <h1 className="text-3xl font-extrabold text-Blue sm:text-5xl mb-4">Register</h1>
+                <section className="flex flex-col items-center justify-center min-h-screen bg-dodgerblue"
+                    style={{ backgroundImage: `url(${loginImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+                >
+                    <p ref={errRef} className={`text-white font-bold py-2 px-4 mb-2 ${errMsg ? '' : 'hidden'}`}>{errMsg}</p>
                     <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-96">
-                        {/* Username Input Field */}
-                        <label htmlFor="email" className="text-gray-700">Email:</label>
+                        <h1 className="text-center text-3xl font-extrabold text-blue-700 mb-2">Register</h1>
+
+                        {/* Email Input Field */}
+                        <label htmlFor="email" className="text-gray-700">
+                            Email:
+                        </label>
                         <input
                             type="email"
                             id="email"
-                            ref={userRef}
+                            ref={emailRef}
                             autoComplete="off"
-                            onChange={(e) => setUser(e.target.value)}
-                            value={user}
+                            onChange={(e) => setEmail(e.target.value)}
+                            value={email}
                             required
-                            className="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500"
+                            className="mt-1 p-2 w-full border rounded focus:outline-none"
                         />
+                        {/* Descriptive text */}
+                        <p className={`text-gray-700 text-xs ${!validEmail && email ? 'block' : 'hidden'}`}>
+                            <FontAwesomeIcon icon={faInfoCircle} className="mr-1" />
+                            Please enter a valid email address.
+                        </p>
 
                         {/* Password Input Field */}
                         <label className="py-2 text-gray-700">
                             Password:
-                            <FontAwesomeIcon icon={faCheck} className={validPwd ? "text-limegreen" : "hidden"} />
-                            <FontAwesomeIcon icon={faTimes} className={validPwd || !pwd ? "hidden" : "text-red"} />
                         </label>
                         <input
                             type="password"
@@ -118,7 +118,7 @@ const SignUp = () => {
                             onChange={(e) => setPwd(e.target.value)}
                             value={pwd}
                             required
-                            className="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500"
+                            className="mt-1 p-2 w-full border rounded focus:outline-none"
                             onFocus={() => setPwdFocus(true)}
                             onBlur={() => setPwdFocus(false)}
                         />
@@ -132,8 +132,6 @@ const SignUp = () => {
                         {/* Confirm Password Input Field */}
                         <label className="py-2 text-gray-700">
                             Confirm Password:
-                            <FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "text-limegreen" : "hidden"} />
-                            <FontAwesomeIcon icon={faTimes} className={validMatch || !matchPwd ? "hidden" : "text-red"} />
                         </label>
                         <input
                             type="password"
@@ -141,7 +139,7 @@ const SignUp = () => {
                             onChange={(e) => setMatchPwd(e.target.value)}
                             value={matchPwd}
                             required
-                            className="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500"
+                            className="mt-1 p-2 mb-2 w-full border rounded focus:outline-none focus:border-blue-500"
                             onFocus={() => setMatchFocus(true)}
                             onBlur={() => setMatchFocus(false)}
                         />
@@ -150,14 +148,30 @@ const SignUp = () => {
                             Must match the first password input field.
                         </p>
 
-                        {/* Submit Button */}
-                        <button disabled={!validName || !validPwd || !validMatch} className={`bg-blue-500 ${(!validName || !validPwd || !validMatch) ? 'bg-gray-400' : 'hover:bg-blue-600'} text-white py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300`}>Sign Up</button>
+                        {/* SELECT RBAC ROLE */}
+                        <select
+                            id="role"
+                            name="role"
+                            onChange={(e) => setRole(e.target.value)}
+                            value={role}
+                            required
+                            className="mt-1 p-2 w-full border rounded focus:outline-none"
+                        >
+                            <option value="">Select Role</option>
+                            <option value="student">Student</option>
+                            <option value="student_leader">Student Leader</option>
+                            <option value="admin_assistant">Admin Assistant</option>
+                            <option value="clinic_director">Clinic Director</option>
+                            <option value="board_of_directors">Board of Directors</option>
+                        </select>
 
-                        <p className="text-gray-700">
+                        <div className="flex justify-center">
+                            <button disabled={!validEmail || !validPwd || !validMatch || !role} className={`bg-blue-500 ${(!validEmail || !validPwd || !validMatch || !role) ? 'bg-gray-400' : 'hover:bg-blue-600'} text-white py-2 px-4 mt-4 rounded focus:outline-none focus:ring focus:border-blue-300`}>Sign Up</button>
+                        </div>
+                        <p className="text-gray-700 mt-3 text-center">
                             Have an account?<br />
                             <span className="line">
-                                {/* WILL SET UP ROUTING FOR SIGN IN PAGE */}
-                                <a href="#" className="text-gray-700">Sign In</a>
+                                <Link to="/login" className="text-gray-700">Sign In</Link>
                             </span>
                         </p>
                     </form>
@@ -165,6 +179,6 @@ const SignUp = () => {
             )}
         </>
     );
-}
+};
 
 export default SignUp;

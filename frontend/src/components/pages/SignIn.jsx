@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
-import CustomModal from '../Modal';
 import { loginImg } from '../../images';
+import { Link } from 'react-router-dom';
 
 const SignIn = () => {
     const userRef = useRef();
@@ -10,7 +10,6 @@ const SignIn = () => {
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
-    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         userRef.current.focus();
@@ -19,14 +18,6 @@ const SignIn = () => {
     useEffect(() => {
         setErrMsg('');
     }, [email, pwd])
-
-    const openModal = () => {
-        setIsModalOpen(true);
-    }
-
-    const closeModal = () => {
-        setIsModalOpen(false);
-    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -44,7 +35,6 @@ const SignIn = () => {
                     setErrMsg(data.error);
                     userRef.current.focus();
                 } else {
-                    setSuccess(true);
                     setEmail('');
                     setPwd('');
                     setSuccess(true);
@@ -62,17 +52,16 @@ const SignIn = () => {
                     <h1 className="text-blue">Welcome to Cypher.</h1>
                     <br />
                     <p>
-                        {/*put router link here*/}
-                        <a href="/home" className="text-blue">Go to Home</a>
+                        <Link to="/home" className="text-blue">Go to Home</Link>
                     </p>
                 </section>
             ) : (
                 <section className="flex flex-col items-center justify-center min-h-screen bg-dodgerblue"
                     style={{ backgroundImage: `url(${loginImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
                 >
-                    <p ref={errRef} className={`text-firebrick font-bold py-2 px-4 mb-2 ${errMsg ? '' : 'hidden'}`}>{errMsg}</p>
-                    <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-96">
-                        <h1 className="text-center text-3xl font-extrabold text-blue-700 sm:text-4xl mb-4">Log In</h1>
+                    <p ref={errRef} className={` text-white font-bold py-2 px-4 mb-2 ${errMsg ? '' : 'hidden'}`}>{errMsg}</p>
+                    <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-96">
+                        <h1 className="text-center text-3xl font-extrabold text-blue-700 mb-2">Log In</h1>
                         <label htmlFor="email" className="text-gray-700">Email:</label>
                         <input
                             type="email"
@@ -82,29 +71,30 @@ const SignIn = () => {
                             onChange={(e) => setEmail(e.target.value)}
                             value={email}
                             required
-                            className="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500"
+                            className="mt-1 p-2 w-full border rounded focus:outline-none"
                         />
 
-                        <label htmlFor="password" className="py-2 my-auto text-gray-700">Password:</label>
+                        <label htmlFor="password" className="py-2 text-gray-700">Password:</label>
                         <input
                             type="password"
                             id="password"
                             onChange={(e) => setPwd(e.target.value)}
                             value={pwd}
                             required
-                            className="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500"
+                            className="mt-1 p-2 w-full border rounded focus:outline-none"
                         />
-                        <button className="bg-blue-500  hover:bg-blue-600 text-white py-2 px-4 my-auto rounded object-center focus:outline-none focus:ring focus:border-blue-300">Sign In</button>
-                        <p className="text-gray-700 my-auto">
+                        <div className="flex justify-center">
+                            <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 mt-4 rounded focus:outline-none focus:ring focus:border-blue-300">Sign In</button>
+                        </div>
+                        <p className="text-gray-700 mt-3 text-center">
                             Need an Account?<br />
                             <span className="line">
-                                <a href="#" className="text-gray-700 my-auto" onClick={openModal}>Fill Out Application</a>
+                                <Link to="/signup" className="text-gray-700">Sign Up</Link>
                             </span>
                         </p>
                     </form>
                 </section>
             )}
-            <CustomModal isOpen={isModalOpen} onRequestClose={closeModal} />
         </>
     );
 };

@@ -1,38 +1,37 @@
-
 .btn-blue {
     display: inline-block;
-    background-color: #1d4ed8; 
+    background-color: #1d4ed8;
     color: #fff;
-    font-size: 1rem; 
+    font-size: 1rem;
     font-weight: bold;
     text-decoration: none;
     padding: 10px 20px;
     border-radius: 5px;
     transition: background-color 0.3s ease;
-  }
-  
-  .btn-blue:hover {
-    background-color: #0e3a8a; 
-  }
-  
-  .btn-white {
+}
+
+.btn-blue:hover {
+    background-color: #0e3a8a;
+}
+
+.btn-white {
     display: inline-block;
-    background-color: #fff; 
-    color: #1d4ed8; 
+    background-color: #fff;
+    color: #1d4ed8;
     font-size: 1rem;
     font-weight: bold;
     text-decoration: none;
     padding: 10px 20px;
-    border: 2px solid #1d4ed8; 
+    border: 2px solid #1d4ed8;
     border-radius: 5px;
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-  }
-  
-  .btn-white:hover {
-    background-color: #1d4ed8; 
-    color: #fff;
-  }
+}
 
-  .faculty-section {
-    color: #fff; 
-  }
+.btn-white:hover {
+    background-color: #1d4ed8;
+    color: #fff;
+}
+
+.faculty-section {
+    color: #fff;
+}
