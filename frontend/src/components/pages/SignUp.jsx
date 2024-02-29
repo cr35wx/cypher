@@ -51,13 +51,15 @@ const SignUp = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         try {
             const response = await axios.post(REGISTER_URL, JSON.stringify({ email, pwd, role }), {
                 headers: { 'Content-Type': 'application/json' },
                 withCredentials: true
             });
-            //console.log(email);
-            //console.log(pwd);
+            console.log(email);
+            console.log(pwd);
+            console.log(role);
             setSuccess(true);
             setEmail('');
             setPwd('');
@@ -77,8 +79,13 @@ const SignUp = () => {
     return (
         <>
             {success ? (
-                <section className="flex flex-col items-center justify-center min-h-screen bg-dodgerblue">
-                    <h1 className="text-blue">Welcome to Cypher.</h1>
+                <section className="flex flex-col items-center justify-center min-h-screen bg-dodgerblue"
+                    style={{ backgroundImage: `url(${loginImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+                >
+                    <div className="bg-white p-8 rounded shadow-md w-96">
+                        <h1 className="text-bold text-blue-700 text-center">Welcome to Cypher.</h1>
+                        <p>You are a {role}</p>
+                    </div>
                 </section>
             ) : (
                 <section className="flex flex-col items-center justify-center min-h-screen bg-dodgerblue"
