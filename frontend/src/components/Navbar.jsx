@@ -13,7 +13,7 @@ export const Navbar = () => {
   return (
     <nav>
       <Link to="/" className="logo">
-        <img src={logo} alt="Logo" />
+        <img src={logo} alt="Logo" style={{ width: '75px', height: '75px' }} />
       </Link>
       <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
         <span></span>
