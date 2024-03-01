@@ -40,7 +40,7 @@ const SignIn = () => {
                     setEmail('');
                     setPwd('');
                     setSuccess(true);
-                    // Fetch user's role after successful sign-in, jwt token should store this
+                    // Fetch user's role after successful sign-in, jwt token should store this ?
                     fetch('/get-role', {
                         method: 'GET',
                         headers: {

@@ -411,3 +411,4 @@ def get_degree_majors_all():
     #     .distinct(DegreeMajor.degree_name)
     #     .order_by(DegreeMajor.degree_id)
     #     .all())
+
