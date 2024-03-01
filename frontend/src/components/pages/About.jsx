@@ -35,7 +35,7 @@ const About = () => {
     <div>
       <section className="top-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <div className="md:justify-center lg:col-span-1 flex items-center justify-center"> {/* Updated class */}
+          <div className="md:justify-center lg:col-span-1 flex items-center justify-center">
             <img
               className="h-full w-full object-cover lg:h-auto"
               src={missionImg}

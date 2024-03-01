@@ -28,13 +28,6 @@ export const Navbar = () => {
           <NavLink to="/about">About</NavLink>
         </li>
         <li>
-          <NavLink to="/student">Student Application</NavLink>
-        </li>
-        <li>
-          {/* TODO: Client Form is not showing fully because of CSS */}
-          <NavLink to="/client">Client Application</NavLink>
-        </li>
-        <li>
           <NavLink to="/login">Login</NavLink>
         </li>
       </ul>
