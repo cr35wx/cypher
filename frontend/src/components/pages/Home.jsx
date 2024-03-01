@@ -29,7 +29,7 @@ export const Home = () => {
                 href="/signup" // URL of the register page
                 className="block w-full rounded bg-blue-700 px-12 py-3 text-xl font-medium text-white shadow no-underline hover:bg-blue-700 focus:outline-none focus:ring active:bg-blue-400 sm:w-auto"
               >
-                Register
+                Apply
               </a>
 
               <a
@@ -60,7 +60,7 @@ export const Home = () => {
         <div class="max-w-screen-lg mx-0 my-4 bg-gray-200 p-8 rounded-lg shadow-md">               {/* text box description*/}
           <h1 class="text-4xl font-bold mb-6 text-Blue">Cypher's Cybersecurity Clinic</h1>
 
-          <p class="text-xl text-gray-700">
+          <p class="text-2xl text-gray-700">
             Cypher's Cybersecurity Clinic ("Clinic") is an interdisciplinary collaboration between the
             <a href="https://www.cdm.depaul.edu/Pages/default.aspx"> School of Computing</a>, the
             <a href="https://business.depaul.edu/Pages/default.aspx"> Driehaus College of Business</a>, and the
@@ -177,7 +177,7 @@ export const Home = () => {
               href='/signup'
               class="inline-block rounded bg-Blue px-12 py-3 text-xl font-medium text-white transition hover:bg-darkBlue focus:outline-none focus:ring focus:ring-lightBlue no-underline"
             >
-              Register
+              Apply
             </a>
           </div>
         </div>
