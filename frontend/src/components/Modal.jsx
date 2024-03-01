@@ -15,8 +15,8 @@ function CustomModal({ isOpen, onRequestClose, email, pwd }) {
         headers: { 'Content-Type': 'application/json' },
         withCredentials: true
       });
-      console.log(pwd);
       console.log(response.data)
+      console.log(role)
     } catch (err) {
       console.error('Error submitting student application:', err);
       setErrMsg('Failed to submit student application. Please try again later.');

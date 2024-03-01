@@ -128,7 +128,7 @@ def student_application():
     pprint.pprint(form_data)
 
     email = form_data.get("studentEmail")
-    register_details = temp_users.get(email)
+    register_details = student_temp_users.get(email)
     # looking at register email and application email to see if they match
     if not register_details:
         return jsonify({"errors": "User cant be found"}), 400
@@ -270,6 +270,15 @@ def client_application():
 
     pprint.pprint(form_data)
 
+    email = form_data.get("contactPersonEmail")
+    register_details = client_temp_users.get(email)
+    # looking at registered email and application email to see if they match
+    if not register_details:
+        return jsonify({"errors": "User cant be found"}), 400
+    
+    password = register_details.get("password")
+    role = register_details.get("role")
+
     contact_fname, *contact_lnames = form_data.get("contactPersonName").split()
     org_type_id = (
         db.session.query(ClientOrgnizationType.org_type_id)
@@ -282,7 +291,8 @@ def client_application():
         org_type_id=org_type_id[0],
         org_contact_fname=contact_fname,
         org_contact_lname=" ".join(contact_lnames),
-        org_contact_email=form_data.get("contactPersonEmail"),
+        org_contact_email=email,
+        password=password,
         org_contact_phone=form_data.get("contactPersonPhone"),
         org_website=form_data.get("orgWebsite"),
         org_annual_revenue=form_data.get("annualRevenue"),
@@ -293,6 +303,7 @@ def client_application():
         other_description=form_data.get("otherDescription"),
         how_did_you_hear=form_data.get("howDidYouHear"),
         requests_or_comments=form_data.get("requestsOrComments"),
+        role=role
     )
 
     try:
@@ -330,7 +341,8 @@ def login():
 
 # server will remember email, pwd, role once application is 
 # submitted StudentParticpant can be populated and account page will be made
-temp_users = {}
+student_temp_users = {}
+client_temp_users = {}
 
 @api.route('/signup', methods=['POST'])
 def signup():
@@ -340,7 +352,10 @@ def signup():
     hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
 
     # Store the email, password, and role temporarily
-    temp_users[email] = {"email": email, "password": hashed_password, "role": role}
+    if role == "student":
+        student_temp_users[email] = {"email": email, "password": hashed_password, "role": role}
+    elif role == "client":
+        client_temp_users[email] = {"email": email, "password": hashed_password, "role": role}
 
     # Return a success message
     return jsonify({"message": "User data stored successfully"}), 201
@@ -349,8 +364,9 @@ def signup():
 def check_email_for_dupes():
     email = request.headers.get('email')
 
-    # only checking for students dupes 
-    existing_user = StudentParticipant.query.filter_by(email=email).first()
+    # only checking for students or client dupes 
+    existing_user = (StudentParticipant.query.filter_by(email=email).first() or 
+            ClientOrganization.query.filter_by(org_contact_email=email).first())
 
     if existing_user:
         return jsonify({"error": "Email already in use"}), 409
@@ -362,7 +378,8 @@ def get_role():
     email = request.headers.get('email')
 
     # Query the database for the role associated with the email
-    user = StudentParticipant.query.filter_by(email=email).first()
+    user = (StudentParticipant.query.filter_by(email=email).first() or 
+            ClientOrganization.query.filter_by(org_contact_email=email).first())
 
     if user:
         role = user.role

@@ -67,7 +67,7 @@ class ClientOrganization(db.Model):
     org_contact_lname = mapped_column(String(30))
     org_contact_email = mapped_column(String(30), unique=True)
     org_contact_phone = mapped_column(String(12))
-    pasword = mapped_column(String(200))  # Will be NULL until application is accepted and a registration email is sent
+    password = mapped_column(String(200))  # Will be NULL until application is accepted and a registration email is sent
     org_website = mapped_column(String(60))
     org_annual_revenue = mapped_column(Integer)
     it_employee_count = mapped_column(Integer)
@@ -84,6 +84,8 @@ class ClientOrganization(db.Model):
     clinic_participant_status = mapped_column(Enum("In review", "Accepted", "Denied"))
 
     projects = db.relationship("ClientProject", backref="client_organization")
+
+    role = mapped_column(String(20))
 
     @validates('org_contact_email')
     def validate_email(self, key, email):
