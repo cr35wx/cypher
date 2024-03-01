@@ -64,16 +64,11 @@ const SignUp = () => {
                     'email': email
                 }
             });
-
+            const data = await response.json();
             if (response.ok) {
-                const data = await response.json();
-                if (data.message === 'Email available') {
-                    setSuccess(true);
-                } else {
-                    setErrMsg('Email already in use');
-                }
+                setSuccess(true);
             } else {
-                setErrMsg('Failed to check email availability');
+                setErrMsg(data.error);
             }
         } catch (error) {
             console.error('Error:', error);
@@ -165,7 +160,7 @@ const SignUp = () => {
                         />
                         <p className={`text-gray-700 text-xs ${matchFocus && !validMatch ? 'block' : 'hidden'}`}>
                             <FontAwesomeIcon icon={faInfoCircle} className="mr-1" />
-                            Must match the first password input field.
+                            Must match the password input field.
                         </p>
 
 
