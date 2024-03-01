@@ -45,7 +45,7 @@ const About = () => {
           <div className="bg-white md:max-w-2xl md:z-10 md:shadow-lg md:flex md:justify-center md:mx-auto lg:w-full lg:mt-0 lg:py-8">
             <div className="flex flex-col p-4 md:px-16 md:pb-1 lg:mt-12">
               <h2 className="text-2xl text-center font-bold uppercase lg:text-4xl">Our Mission</h2>
-              <p className="mt-4 p-2 lg:p-0 text-center text-xl">
+              <p className="mt-4 p-2 lg:p-0 text-center text-2xl">
                 Raise organizational awareness of information security and privacy risks discovered from a student-led risk assessment so that incremental improvements are made in the client's security policies and practices while students in turn gain real-world experience that contributes to a cybersecurity workforce.
               </p>
             </div>
