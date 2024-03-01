@@ -357,6 +357,19 @@ def check_email_for_dupes():
     
     return jsonify({"message": "Email available"}), 200
 
+@api.route('/get-role', methods=['GET'])
+def get_role():
+    email = request.headers.get('email')
+
+    # Query the database for the role associated with the email
+    user = StudentParticipant.query.filter_by(email=email).first()
+
+    if user:
+        role = user.role
+        return jsonify({"role": role}), 200
+    else:
+        return jsonify({"error": "User not found"}), 404
+
 # Also known as "Project Type" on the application forms...
 @api.route('/api/clinic-service-areas')
 def get_service_areas_all():

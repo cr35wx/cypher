@@ -37,7 +37,7 @@ function CustomModal({ isOpen, onRequestClose, email, pwd }) {
         >
           &times;
         </button>
-        <h2 className="text-2xl font-bold mb-4">Register Now!</h2>
+        <h2 className="text-2xl text-center font-bold mb-4">Finish Registration</h2>
         <p className="text-lg">Would you like to register as a client or student?</p>
         <div className="mt-4 flex space-x-6 justify-center ">
           <Link

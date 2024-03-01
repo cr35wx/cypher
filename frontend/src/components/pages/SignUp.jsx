@@ -88,7 +88,7 @@ const SignUp = () => {
                     style={{ backgroundImage: `url(${loginImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
                 >
                     <div className="bg-white p-8 rounded shadow-md w-96">
-                        <h1 className="text-bold text-blue-700 text-center">Please fill out our application to create an account.</h1>
+                        <p className="text-bold text-2xl text-gray-500 text-center">Please fill out our application to create an account.</p>
                         <div className="flex justify-center">
                             <button
                                 onClick={openModal}

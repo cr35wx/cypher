@@ -418,6 +418,8 @@ export function StudentForm() {
   const [gender, setGender] = useState("");
   const [ethnicity, setEthnicity] = useState("");
 
+  const [success, setSuccess] = useState(false);
+
   //  useEffect(() => {
   //    fetch("/student")
   //      .then((response) => response.json())
@@ -477,61 +479,74 @@ export function StudentForm() {
           setHeardAboutYear(new Date().getFullYear());
           setGender("");
           setEthnicity("");
+          setSuccess(true);
         }
       });
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-cover bg-center"
-      style={{ backgroundImage: `url(${studentFormImg})` }}
-    >
-      <div className="form-container my-auto mt-32 px-4 bg-white shadow-md rounded w-full max-w-md">
-        <form onSubmit={handleSubmit} className="my-auto w-full px-8 pt-6 pb-8 mb-4">
-          <Name name={name} setName={setName} />
-          <StudentID studentID={studentID} setStudentID={setStudentID} />
-          <StudentEmail
-            studentEmail={studentEmail}
-            setStudentEmail={setStudentEmail}
-          />
-          <School college={college} setCollege={setCollege} />
-          <YearStanding
-            yearStanding={yearStanding}
-            setYearStanding={setYearStanding}
-          />
-          <GraduationDate
-            graduationDate={graduationDate}
-            setGraduationState={setGraduationState}
-          />
-          <PrerequisiteCourses
-            prerequisiteCourses={prerequisiteCourses}
-            setPrerequesiteCourses={setPrerequesiteCourses}
-          />
-          <ProjectType
-            projectType={projectType}
-            setProjectType={setProjectType}
-            otherDescription={otherDescription}
-            setOtherDescription={setOtherDescription}
-          />
-          <ClinicOutreach
-            howDidYouHear={howDidYouHear}
-            setHowDidYouHear={setHowDidYouHear}
-          />
-          <ClinicOutreachDate
-            heardAboutMonth={heardAboutMonth}
-            setHeardAboutMonth={setHeardAboutMonth}
-            heardAboutYear={heardAboutYear}
-            setHeardAboutYear={setHeardAboutYear}
-          />
-          <Gender gender={gender} setGender={setGender} />
-          <Ethnicity ethnicity={ethnicity} setEthnicity={setEthnicity} />
-          <button
-            className="submit-button shadow w-full hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-            type="submit"
-          >
-            Submit
-          </button>
-        </form>
-      </div>
-    </div>
+    <>
+      {success ? (
+        <section className="flex flex-col items-center justify-center min-h-screen bg-dodgerblue"
+          style={{ backgroundImage: `url(${studentFormImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+        >
+          <div className="bg-white p-8 rounded shadow-md w-96">
+            <p className="text-bold text-2xl text-blue-700 text-center">Welcome to Cypher.</p>
+          </div>
+        </section >
+      ) : (
+        <div className="flex justify-center items-center min-h-screen bg-cover bg-center"
+          style={{ backgroundImage: `url(${studentFormImg})` }}
+        >
+          <div className="form-container my-auto mt-32 px-4 bg-white shadow-md rounded w-full max-w-md">
+            <form onSubmit={handleSubmit} className="my-auto w-full px-8 pt-6 pb-8 mb-4">
+              <Name name={name} setName={setName} />
+              <StudentID studentID={studentID} setStudentID={setStudentID} />
+              <StudentEmail
+                studentEmail={studentEmail}
+                setStudentEmail={setStudentEmail}
+              />
+              <School college={college} setCollege={setCollege} />
+              <YearStanding
+                yearStanding={yearStanding}
+                setYearStanding={setYearStanding}
+              />
+              <GraduationDate
+                graduationDate={graduationDate}
+                setGraduationState={setGraduationState}
+              />
+              <PrerequisiteCourses
+                prerequisiteCourses={prerequisiteCourses}
+                setPrerequesiteCourses={setPrerequesiteCourses}
+              />
+              <ProjectType
+                projectType={projectType}
+                setProjectType={setProjectType}
+                otherDescription={otherDescription}
+                setOtherDescription={setOtherDescription}
+              />
+              <ClinicOutreach
+                howDidYouHear={howDidYouHear}
+                setHowDidYouHear={setHowDidYouHear}
+              />
+              <ClinicOutreachDate
+                heardAboutMonth={heardAboutMonth}
+                setHeardAboutMonth={setHeardAboutMonth}
+                heardAboutYear={heardAboutYear}
+                setHeardAboutYear={setHeardAboutYear}
+              />
+              <Gender gender={gender} setGender={setGender} />
+              <Ethnicity ethnicity={ethnicity} setEthnicity={setEthnicity} />
+              <button
+                className="submit-button shadow w-full hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                type="submit"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

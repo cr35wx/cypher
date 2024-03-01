@@ -71,7 +71,7 @@ const SignIn = () => {
                 >
                     <div className="bg-white p-8 rounded shadow-md w-96">
                         <h1 className="text-bold text-blue-700 text-center">Welcome to Cypher.</h1>
-                        <p>You are a {role}</p>
+                        <p className="text-center">You are a {role}</p>
                     </div>
                 </section>
             ) : (

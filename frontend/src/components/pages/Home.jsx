@@ -56,7 +56,7 @@ export const Home = () => {
 
 
 
-      <div className="max-w-screen-xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="max-w-screen-xl flex-col lg:flex-row mx-auto grid grid-cols-1 lg:grid-cols-2 items-center justify-center gap-8">
         <div class="max-w-screen-lg mx-0 my-4 bg-gray-200 p-8 rounded-lg shadow-md">               {/* text box description*/}
           <h1 class="text-4xl font-bold mb-6 text-Blue">Cypher's Cybersecurity Clinic</h1>
 
@@ -177,7 +177,7 @@ export const Home = () => {
               href='/signup'
               class="inline-block rounded bg-Blue px-12 py-3 text-xl font-medium text-white transition hover:bg-darkBlue focus:outline-none focus:ring focus:ring-lightBlue no-underline"
             >
-              Get Started
+              Register
             </a>
           </div>
         </div>
