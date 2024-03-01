@@ -1,7 +1,5 @@
 import React from "react";
 import './Home.css';
-import { useState } from 'react';
-import CustomModal from "../Modal";
 import Fade from "../Carousel"
 
 /*Homepage that includes two react libraries react-modal and react-slick. Modal is a pop-up that appears when the user hits the register or get started button. 
@@ -9,25 +7,12 @@ It prompts the user to fill out the student form or the client form.
 React-slick allows us to import the carousel which cycles thorugh 3 stock images of the clinic 
 */
 
-
-
 export const Home = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
 
   return (
     <div>
-
-
-      <section class="bg-white">                                  {/* Landing */}
+      {/* Landing */}
+      <section class="bg-white">
         <div class="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center">
           <div class="mx-auto max-w-50 text-center">
             <h1 class="text-3xl font-extrabold sm:text-5xl">
@@ -40,15 +25,15 @@ export const Home = () => {
             </p>
 
             <div class="mt-8 flex flex-wrap justify-center gap-4">
-              <button
-                onClick={openModal}
-                class="block w-full rounded bg-Blue px-12 py-3 text-xl font-medium text-white shadow hover:bg-darkBlue focus:outline-none focus:ring active:bg-lightBlue sm:w-auto"
+              <a
+                href="/signup" // URL of the register page
+                className="block w-full rounded bg-blue-700 px-12 py-3 text-xl font-medium text-white shadow no-underline hover:bg-blue-700 focus:outline-none focus:ring active:bg-blue-400 sm:w-auto"
               >
                 Register
-              </button>
+              </a>
 
               <a
-                class="block w-full rounded px-12 py-3 text-xl font-medium text-lightBlue shadow hover:text-darkBlue focus:outline-none focus:ring active:text-lightBlue sm:w-auto"
+                class="block w-full rounded px-12 py-3 text-xl font-medium text-lightBlue shadow no-underline hover:text-darkBlue focus:outline-none focus:ring active:text-lightBlue sm:w-auto"
                 href="#divider"
               >
                 Learn More
@@ -60,8 +45,8 @@ export const Home = () => {
 
 
 
-
-      <div id="divider">                                            {/*services divider*/}
+      {/*services divider*/}
+      <div id="divider">
         <span class="flex items-center mt-28 mb-8">
           <span class="h-px flex-1 bg-black"></span>
           <span class="shrink-0 px-6 text-2xl font-bold">Who we are</span>
@@ -91,8 +76,8 @@ export const Home = () => {
 
 
 
-
-      <section class="bg-gray-900 text-white">                    {/*3 box infographic -- maybe change this infographic to talk about the 3 schools involved?*/}
+      {/*3 box infographic -- maybe change this infographic to talk about the 3 schools involved?*/}
+      <section class="bg-gray-900 text-white">
         <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
           <div class="mx-auto max-w-lg text-center">
             <h2 class="text-3xl font-bold sm:text-4xl">Learn about our services</h2>
@@ -189,7 +174,7 @@ export const Home = () => {
 
           <div class="mt-12 text-center">
             <a
-              onClick={openModal}
+              href='/signup'
               class="inline-block rounded bg-Blue px-12 py-3 text-xl font-medium text-white transition hover:bg-darkBlue focus:outline-none focus:ring focus:ring-lightBlue no-underline"
             >
               Get Started
@@ -234,8 +219,6 @@ export const Home = () => {
         </div>
       </section>
 
-
-      <CustomModal isOpen={isModalOpen} onRequestClose={closeModal} />
     </div>
 
   );

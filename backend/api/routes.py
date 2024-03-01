@@ -3,7 +3,7 @@ from datetime import datetime
 from flask import Blueprint, request, jsonify
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import check_password_hash, generate_password_hash
-from faker import Faker
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
 from .models import (
     DegreeMajor,
@@ -127,6 +127,15 @@ def student_application():
 
     pprint.pprint(form_data)
 
+    email = form_data.get("studentEmail")
+    register_details = temp_users.get(email)
+    # looking at register email and application email to see if they match
+    if not register_details:
+        return jsonify({"errors": "User cant be found"}), 400
+    
+    password = register_details.get("password")
+    role = register_details.get("role")
+
     first_name, *last_names = form_data.get("name").split()
     ug_or_grad = "Graduate" if form_data.get("yearStanding") == "Graduate" else "Undergraduate"
 
@@ -140,8 +149,8 @@ def student_application():
         student_id=form_data.get("studentID"),
         first_name=first_name,
         last_name=" ".join(last_names),
-        email=form_data.get("studentEmail"),
-        password=None,
+        email=email,
+        password=password,
         college_school=form_data.get("college").get("school"),
         degree_id=student_degree_id[0],
         year_standing=form_data.get("yearStanding"),
@@ -157,6 +166,7 @@ def student_application():
         gender=form_data.get("gender"),
         ethnicity=form_data.get("ethnicity"),
         clinic_participant_status="In review",
+        role=role
     )
 
     try:
@@ -318,58 +328,34 @@ def login():
     # some type of jwt token stuff happens on success
     return jsonify({"message": "Login successful."}), 200
 
+# server will remember email, pwd, role once application is 
+# submitted StudentParticpant can be populated and account page will be made
+temp_users = {}
+
 @api.route('/signup', methods=['POST'])
 def signup():
     signup_data = request.json
     email, password, role = signup_data.get("email", ""), signup_data.get("pwd", ""), signup_data.get("role", "")
 
-    user = StudentParticipant.query.filter_by(email=email).first() or \
-           ClientOrganization.query.filter_by(org_contact_email=email).first()
-
-    # Check if the email is already in use
-    if user:
-        return jsonify({"error": "Email already in use"}), 409
-
-    # Hash the password
     hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
 
-    fake = Faker()
-
-    # Create a new user account and add it to the database, this is just testing rn 100% wouldnt do this way
-    if role == "student":
-        new_user = StudentParticipant(
-            student_id=fake.unique.random_int(min=1000000, max=9999999),
-            first_name=fake.first_name(),
-            last_name=fake.last_name(),
-            email=email,
-            password=hashed_password,
-            college_school="School of Computing",
-            degree_id=1,
-            clinic_application_date="2021-01-01",
-            pre_req_id=1,
-            expected_graduation_qtr="Spring",
-            expected_graduation_year=2022,
-            role=role
-        )
-    
-    db.session.add(new_user)
-    db.session.commit()
+    # Store the email, password, and role temporarily
+    temp_users[email] = {"email": email, "password": hashed_password, "role": role}
 
     # Return a success message
-    return jsonify({"message": "User account created successfully"}), 201
+    return jsonify({"message": "User data stored successfully"}), 201
 
-@api.route('/get-role', methods=['GET'])
-def get_role():
+@api.route('/check-email', methods=['GET'])
+def check_email_for_dupes():
     email = request.headers.get('email')
 
-    # Query the database for the role associated with the email
-    user = StudentParticipant.query.filter_by(email=email).first()
+    # only checking for students dupes 
+    existing_user = StudentParticipant.query.filter_by(email=email).first()
 
-    if user:
-        role = user.role
-        return jsonify({"role": role}), 200
-    else:
-        return jsonify({"error": "User not found"}), 404
+    if existing_user:
+        return jsonify({"error": "Email already in use"}), 409
+    
+    return jsonify({"message": "Email available"}), 200
 
 # Also known as "Project Type" on the application forms...
 @api.route('/api/clinic-service-areas')

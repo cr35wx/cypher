@@ -40,7 +40,7 @@ const SignIn = () => {
                     setEmail('');
                     setPwd('');
                     setSuccess(true);
-                    // Fetch user's role after successful sign-in
+                    // Fetch user's role after successful sign-in, jwt token should store this
                     fetch('/get-role', {
                         method: 'GET',
                         headers: {
@@ -71,11 +71,7 @@ const SignIn = () => {
                 >
                     <div className="bg-white p-8 rounded shadow-md w-96">
                         <h1 className="text-bold text-blue-700 text-center">Welcome to Cypher.</h1>
-                        {role ? (
-                            <p>You are a {role}</p>
-                        ) : (
-                            <p>Loading...</p>
-                        )}
+                        <p>You are a {role}</p>
                     </div>
                 </section>
             ) : (

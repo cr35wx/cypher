@@ -3,19 +3,15 @@ import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { loginImg } from '../../images';
 import { Link } from 'react-router-dom';
-// dont need to use axios, doesnt matter
-import axios from '../../api/axios';
+import CustomModal from "../Modal";
 
-// SET PASSWORD RULES
+// SET EMAIL AND PASSWORD REGEX
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const REGISTER_URL = '/signup';
 
 const SignUp = () => {
     const emailRef = useRef();
     const errRef = useRef();
-
-    const [role, setRole] = useState('');
 
     const [email, setEmail] = useState('');
     const [validEmail, setValidEmail] = useState(false);
@@ -30,6 +26,8 @@ const SignUp = () => {
 
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         emailRef.current.focus();
@@ -48,31 +46,38 @@ const SignUp = () => {
         setErrMsg('');
     }, [email, pwd, matchPwd]);
 
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
 
-    const handleSubmit = async (e) => {
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
+    const handleSignUp = async (e) => {
         e.preventDefault();
-
         try {
-            const response = await axios.post(REGISTER_URL, JSON.stringify({ email, pwd, role }), {
-                headers: { 'Content-Type': 'application/json' },
-                withCredentials: true
+            const response = await fetch('/check-email', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'email': email
+                }
             });
-            console.log(email);
-            console.log(pwd);
-            console.log(role);
-            setSuccess(true);
-            setEmail('');
-            setPwd('');
-            setMatchPwd('');
-        } catch (err) {
-            if (!err.response) {
-                setErrMsg('No Server Response');
-            } else if (err.response.status === 409) {
-                setErrMsg('Email already in use');
+
+            if (response.ok) {
+                const data = await response.json();
+                if (data.message === 'Email available') {
+                    setSuccess(true);
+                } else {
+                    setErrMsg('Email already in use');
+                }
             } else {
-                setErrMsg('Registration Failed');
+                setErrMsg('Failed to check email availability');
             }
-            errRef.current.focus();
+        } catch (error) {
+            console.error('Error:', error);
+            setErrMsg('An unexpected error occurred');
         }
     };
 
@@ -83,16 +88,24 @@ const SignUp = () => {
                     style={{ backgroundImage: `url(${loginImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
                 >
                     <div className="bg-white p-8 rounded shadow-md w-96">
-                        <h1 className="text-bold text-blue-700 text-center">Welcome to Cypher.</h1>
-                        <p>You are a {role}</p>
+                        <h1 className="text-bold text-blue-700 text-center">Please fill out our application to create an account.</h1>
+                        <div className="flex justify-center">
+                            <button
+                                onClick={openModal}
+                                class="block w-full rounded bg-Blue px-12 py-3 text-xl font-medium text-white shadow hover:bg-darkBlue focus:outline-none focus:ring active:bg-lightBlue sm:w-auto"
+                            >
+                                Register
+                            </button>
+                        </div>
                     </div>
-                </section>
+                    <CustomModal isOpen={isModalOpen} onRequestClose={closeModal} email={email} pwd={pwd} />
+                </section >
             ) : (
                 <section className="flex flex-col items-center justify-center min-h-screen bg-dodgerblue"
                     style={{ backgroundImage: `url(${loginImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
                 >
                     <p ref={errRef} className={`text-white font-bold py-2 px-4 mb-2 ${errMsg ? '' : 'hidden'}`}>{errMsg}</p>
-                    <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-96">
+                    <form className="bg-white p-8 rounded shadow-md w-96">
                         <h1 className="text-center text-3xl font-extrabold text-blue-700 mb-2">Register</h1>
 
                         {/* Email Input Field */}
@@ -155,25 +168,9 @@ const SignUp = () => {
                             Must match the first password input field.
                         </p>
 
-                        {/* SELECT RBAC ROLE */}
-                        <select
-                            id="role"
-                            name="role"
-                            onChange={(e) => setRole(e.target.value)}
-                            value={role}
-                            required
-                            className="mt-1 p-2 w-full border rounded focus:outline-none"
-                        >
-                            <option value="">Select Role</option>
-                            <option value="student">Student</option>
-                            <option value="student_leader">Student Leader</option>
-                            <option value="admin_assistant">Admin Assistant</option>
-                            <option value="clinic_director">Clinic Director</option>
-                            <option value="board_of_directors">Board of Directors</option>
-                        </select>
 
                         <div className="flex justify-center">
-                            <button disabled={!validEmail || !validPwd || !validMatch || !role} className={`bg-blue-500 ${(!validEmail || !validPwd || !validMatch || !role) ? 'bg-gray-400' : 'hover:bg-blue-600'} text-white py-2 px-4 mt-4 rounded focus:outline-none focus:ring focus:border-blue-300`}>Sign Up</button>
+                            <button onClick={handleSignUp} disabled={!validEmail || !validPwd || !validMatch} className={`bg-blue-700 ${(!validEmail || !validPwd || !validMatch) ? 'bg-gray-400' : 'hover:bg-blue-600'} text-white py-2 px-4 mt-4 rounded focus:outline-none focus:ring focus:border-blue-300`}>Sign Up</button>
                         </div>
                         <p className="text-gray-700 mt-3 text-center">
                             Have an account?<br />

@@ -1,16 +1,28 @@
 // CustomModal.js
-import React from 'react';
+import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { Link } from 'react-router-dom';
-
-/*Modal is a pop-up that appears when the user hits the register or get started button. 
-It prompts the user to fill out the student form or the client form. 
-It is only present on the homePage
-*/
+import axios from '../api/axios';
 
 Modal.setAppElement('#root');
 
-function CustomModal({ isOpen, onRequestClose }) {
+function CustomModal({ isOpen, onRequestClose, email, pwd }) {
+  const [errMsg, setErrMsg] = useState('');
+
+  const handleSubmit = async (role) => {
+    try {
+      const response = await axios.post('/signup', JSON.stringify({ email, pwd, role }), {
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true
+      });
+      console.log(pwd);
+      console.log(response.data)
+    } catch (err) {
+      console.error('Error submitting student application:', err);
+      setErrMsg('Failed to submit student application. Please try again later.');
+    }
+  };
+
   return (
     <Modal
       isOpen={isOpen}
@@ -18,8 +30,7 @@ function CustomModal({ isOpen, onRequestClose }) {
       contentLabel="Example Modal"
       className="fixed inset-0 flex items-center justify-center"
     >
-
-    <div className="bg-gray-100 p-16 max-w-md w-full relative border-1 border-gray-500  rounded-md"> {/* Added border classes */}
+      <div className="bg-gray-100 p-16 max-w-md w-full relative border-1 border-gray-500  rounded-md">
         <button
           className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-4xl"
           onClick={onRequestClose}
@@ -31,18 +42,20 @@ function CustomModal({ isOpen, onRequestClose }) {
         <div className="mt-4 flex space-x-6 justify-center ">
           <Link
             to="/client"
-            className="bg-Blue text-white px-8 py-2 rounded hover:bg-darkBlue focus:outline-none focus:ring focus:border-lightBlue active:bg-lightBlue "
-            onClick={onRequestClose}
+            className="bg-Blue text-white px-8 py-2 rounded hover:bg-darkBlue focus:outline-none focus:ring focus:border-lightBlue active:bg-lightBlue"
+            onClick={() => handleSubmit('client')}
           >
             Client
           </Link>
           <Link
             to="/student"
             className="bg-Blue text-white px-4 py-2 rounded hover:bg-darkBlue focus:outline-none focus:ring focus:border-lightBlue active:bg-lightBlue"
+            onClick={() => handleSubmit('student')}
           >
             Student
           </Link>
         </div>
+        {errMsg && <p className="text-red-500 mt-2">{errMsg}</p>}
       </div>
     </Modal>
   );
