@@ -10,6 +10,7 @@ const SignIn = () => {
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
+    const [role, setRole] = useState('');
 
     useEffect(() => {
         userRef.current.focus();
@@ -29,7 +30,8 @@ const SignIn = () => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ email, pwd }),
-        }).then(response => response.json())
+        })
+            .then(response => response.json())
             .then(data => {
                 if (data.error) {
                     setErrMsg(data.error);
@@ -38,22 +40,43 @@ const SignIn = () => {
                     setEmail('');
                     setPwd('');
                     setSuccess(true);
+                    // Fetch user's role after successful sign-in
+                    fetch('/get-role', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'email': email,
+                        },
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data.role);
+                            setRole(data.role);
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        });
                 }
-            }).catch(err => {
+            })
+            .catch(err => {
                 console.log(err);
             });
-
-    }
+    };
 
     return (
         <>
             {success ? (
-                <section className="flex flex-col items-center justify-center min-h-screen bg-dodgerblue">
-                    <h1 className="text-blue">Welcome to Cypher.</h1>
-                    <br />
-                    <p>
-                        <Link to="/home" className="text-blue">Go to Home</Link>
-                    </p>
+                <section className="flex flex-col items-center justify-center min-h-screen bg-dodgerblue"
+                    style={{ backgroundImage: `url(${loginImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+                >
+                    <div className="bg-white p-8 rounded shadow-md w-96">
+                        <h1 className="text-bold text-blue-700 text-center">Welcome to Cypher.</h1>
+                        {role ? (
+                            <p>You are a {role}</p>
+                        ) : (
+                            <p>Loading...</p>
+                        )}
+                    </div>
                 </section>
             ) : (
                 <section className="flex flex-col items-center justify-center min-h-screen bg-dodgerblue"

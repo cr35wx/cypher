@@ -46,6 +46,8 @@ class StudentParticipant(db.Model):
     ethnicity = mapped_column(String(30))
     clinic_participant_status = mapped_column(Enum("In review", "Accepted", "Denied"))
 
+    role = mapped_column(String(20)) # i added a role columnn for testing, there is clinic job role that has system access ill work with that later
+
 
     @validates('email')
     def validate_email(self, key, email):
