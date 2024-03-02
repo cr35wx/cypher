@@ -268,6 +268,7 @@ export function ClientForm() {
   const [otherDescription, setOtherDescription] = useState("");
   const [howDidYouHear, setHowDidYouHear] = useState("");
   const [requestsOrComments, setRequestsOrComments] = useState("");
+  const [success, setSuccess] = useState("");
 
 
   const handleSubmit = (e) => {
@@ -322,70 +323,83 @@ export function ClientForm() {
           setOtherDescription("");
           setHowDidYouHear("");
           setRequestsOrComments("");
+          setSuccess(true);
         }
       })
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: `url(${clientFormImg})` }}
-    >
-      <div className="form-container my-auto mt-32 px-4">
-        <form onSubmit={handleSubmit} className="max-w-md w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-          <OrgName orgName={orgName} setOrgName={setOrgName} />
-          <OrgType orgType={orgType} setOrgType={setOrgType} />
-          <ContactPersonName
-            contactPersonName={contactPersonName}
-            setContactPersonName={setContactPersonName}
-          />
-          <ContactPersonEmail
-            contactPersonEmail={contactPersonEmail}
-            setContactPersonEmail={setContactPersonEmail}
-          />
-          <ContactPersonPhone
-            contactPersonPhone={contactPersonPhone}
-            setContactPersonPhone={setContactPersonPhone}
-          />
-          <OrgWebsite orgWebsite={orgWebsite} setOrgWebsite={setOrgWebsite} />
-          <AnnualRevenue
-            annualRevenue={annualRevenue}
-            setAnnualRevenue={setAnnualRevenue}
-          />
-          <ITEmployeeCount
-            ITemployeeCount={ITemployeeCount}
-            setITemployeeCount={setITemployeeCount}
-          />
-          <DataDescription
-            dataDescription={dataDescription}
-            setDataDescription={setDataDescription}
-          />
-          <RecentRiskAssessment
-            recentRiskAssessment={recentRiskAssessment}
-            setRecentRiskAssessment={setRecentRiskAssessment}
-          />
-          <ProjectType
-            projectType={projectType}
-            setProjectType={setProjectType}
-            otherDescription={otherDescription}
-            setOtherDescription={setOtherDescription}
-          />
-          <ClinicOutreach
-            howDidYouHear={howDidYouHear}
-            setHowDidYouHear={setHowDidYouHear}
-          />
-          <RequestsOrComments
-            requestsOrComments={requestsOrComments}
-            setRequestsOrComments={setRequestsOrComments}
-          />
+    <>
+      {success ? (
+        <section className="flex flex-col items-center justify-center min-h-screen bg-dodgerblue"
+          style={{ backgroundImage: `url(${clientFormImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+        >
+          <div className="bg-white p-8 rounded shadow-md w-96">
+            <p className="text-bold text-2xl text-blue-700 text-center">Welcome to Cypher.</p>
+          </div>
+        </section >
+      ) : (
+        <div className="flex justify-center items-center min-h-screen bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${clientFormImg})` }}
+        >
+          <div className="form-container my-auto mt-32 px-4">
+            <form onSubmit={handleSubmit} className="max-w-md w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+              <OrgName orgName={orgName} setOrgName={setOrgName} />
+              <OrgType orgType={orgType} setOrgType={setOrgType} />
+              <ContactPersonName
+                contactPersonName={contactPersonName}
+                setContactPersonName={setContactPersonName}
+              />
+              <ContactPersonEmail
+                contactPersonEmail={contactPersonEmail}
+                setContactPersonEmail={setContactPersonEmail}
+              />
+              <ContactPersonPhone
+                contactPersonPhone={contactPersonPhone}
+                setContactPersonPhone={setContactPersonPhone}
+              />
+              <OrgWebsite orgWebsite={orgWebsite} setOrgWebsite={setOrgWebsite} />
+              <AnnualRevenue
+                annualRevenue={annualRevenue}
+                setAnnualRevenue={setAnnualRevenue}
+              />
+              <ITEmployeeCount
+                ITemployeeCount={ITemployeeCount}
+                setITemployeeCount={setITemployeeCount}
+              />
+              <DataDescription
+                dataDescription={dataDescription}
+                setDataDescription={setDataDescription}
+              />
+              <RecentRiskAssessment
+                recentRiskAssessment={recentRiskAssessment}
+                setRecentRiskAssessment={setRecentRiskAssessment}
+              />
+              <ProjectType
+                projectType={projectType}
+                setProjectType={setProjectType}
+                otherDescription={otherDescription}
+                setOtherDescription={setOtherDescription}
+              />
+              <ClinicOutreach
+                howDidYouHear={howDidYouHear}
+                setHowDidYouHear={setHowDidYouHear}
+              />
+              <RequestsOrComments
+                requestsOrComments={requestsOrComments}
+                setRequestsOrComments={setRequestsOrComments}
+              />
 
-          <button
-            className="submit-button shadow w-full hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-            type="submit"
-          >
-            Submit
-          </button>
-        </form>
-      </div>
-    </div>
+              <button
+                className="submit-button shadow w-full hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                type="submit"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

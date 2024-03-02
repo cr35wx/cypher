@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { loginImg } from '../../images';
 import { Link } from 'react-router-dom';
 import CustomModal from "../Modal";
+import { motion } from 'framer-motion';
 
 // SET EMAIL AND PASSWORD REGEX
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -85,12 +86,13 @@ const SignUp = () => {
                     <div className="bg-white p-8 rounded shadow-md w-96">
                         <p className="text-bold text-2xl text-gray-500 text-center">Please fill out our application to create an account.</p>
                         <div className="flex justify-center">
-                            <button
+                            <motion.button
+                                whileTap={{ scale: 0.90 }}
                                 onClick={openModal}
-                                class="block w-full rounded bg-Blue px-12 py-3 text-xl font-medium text-white shadow hover:bg-darkBlue focus:outline-none focus:ring active:bg-lightBlue sm:w-auto"
+                                class="block w-full rounded bg-Blue px-12 py-3 text-xl font-medium text-white shadow hover:bg-darkBlue focus:outline-none focus:ring sm:w-auto"
                             >
                                 Register
-                            </button>
+                            </motion.button>
                         </div>
                     </div>
                     <CustomModal isOpen={isModalOpen} onRequestClose={closeModal} email={email} pwd={pwd} />
@@ -165,7 +167,7 @@ const SignUp = () => {
 
 
                         <div className="flex justify-center">
-                            <button onClick={handleSignUp} disabled={!validEmail || !validPwd || !validMatch} className={`bg-blue-700 ${(!validEmail || !validPwd || !validMatch) ? 'bg-gray-400' : 'hover:bg-blue-600'} text-white py-2 px-4 mt-4 rounded focus:outline-none focus:ring focus:border-blue-300`}>Sign Up</button>
+                            <button onClick={handleSignUp} disabled={!validEmail || !validPwd || !validMatch} className={` bg-blue-700 ${(!validEmail || !validPwd || !validMatch) ? 'bg-gray-400' : 'hover:bg-blue-600'} text-white py-2 px-4 mt-4 w-full rounded focus:outline-none focus:ring focus:border-blue-300`}>Sign Up</button>
                         </div>
                         <p className="text-gray-700 mt-3 text-center">
                             Have an account?<br />

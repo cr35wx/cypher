@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { loginImg } from '../../images';
 import { Link } from 'react-router-dom';
+import { motion } from "framer-motion";
 
 const SignIn = () => {
     const userRef = useRef();
@@ -103,7 +104,7 @@ const SignIn = () => {
                             className="mt-1 p-2 w-full border rounded focus:outline-none"
                         />
                         <div className="flex justify-center">
-                            <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 mt-4 rounded focus:outline-none focus:ring focus:border-blue-300">Sign In</button>
+                            <motion.button whileTap={{ scale: 0.95 }} className="bg-blue-500 hover:bg-blue-600 text-white py-2 w-full px-4 mt-4 rounded focus:outline-none focus:ring focus:border-blue-300">Sign In</motion.button>
                         </div>
                         <p className="text-gray-700 mt-3 text-center">
                             Need an Account?<br />
