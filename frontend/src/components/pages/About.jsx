@@ -45,7 +45,7 @@ const About = () => {
           </div>
           <div className="bg-white md:max-w-2xl md:z-10 md:shadow-lg md:flex md:justify-center md:mx-auto lg:w-full lg:mt-0 lg:py-8">
             <div className="flex flex-col p-4 md:px-16 md:pb-1 lg:mt-12">
-              <h2 className="text-2xl text-center text-blue-800 font-bold uppercase lg:text-4xl">Our Mission</h2>
+              <h2 className="text-4xl font-graduate text-center text-blue-800 font-black uppercase lg:text-4xl">Our Mission</h2>
               <p className="mt-4 p-2 lg:p-0 text-center text-2xl">
                 Raise organizational awareness of information security and privacy risks discovered from a student-led risk assessment so that incremental improvements are made in the client's security policies and practices while students in turn gain real-world experience that contributes to a cybersecurity workforce.
               </p>
@@ -57,7 +57,7 @@ const About = () => {
       {/* Risk Assessment Form */}
       <section className="bg-gray-900 py-20">
         <div className="max-w-screen-xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4 text-white">Risk Assessment Form</h2>
+          <h2 className="text-3xl font-graduate font-bold mb-4 text-white">Risk Assessment Form</h2>
           <p className="text-lg mb-4 text-gray-300">
             Download our blank general security risk assessment form for your use.
           </p>
@@ -74,7 +74,7 @@ const About = () => {
       {/* Cybersecurity Resources */}
       <section className="bg-white py-20">
         <div className="max-w-screen-xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Cybersecurity Resources</h2>
+          <h2 className="text-3xl font-graduate text-blue-800 font-bold mb-4">Cybersecurity Resources</h2>
           <p className="text-lg mb-4 text-gray-700">
             Links to valuable cybersecurity resources used during risk
             assessments.
@@ -83,31 +83,31 @@ const About = () => {
             <motion.a
               whileTap={{ scale: 0.85 }}
               href="#"
-              className="resource bg-gray-200 rounded-lg p-8 shadow-md hover:shadow-lg transition duration-300 block"
+              className="resource bg-gray-200 rounded-lg p-8 no-underline shadow-md hover:shadow-lg transition duration-300 block"
             >
-              <h3 className="text-xl font-bold mb-2 text-Blue">Resource 1</h3>
+              <h3 className="text-xl font-bold mb-2 text-gray-700">Resource 1</h3>
               <p className="text-base text-gray-700">
-                Description of Resource 1
+                Description
               </p>
             </motion.a>
             <motion.a
               whileTap={{ scale: 0.85 }}
               href="#"
-              className="resource bg-gray-200 rounded-lg p-8 shadow-md hover:shadow-lg transition duration-300 block"
+              className="resource bg-gray-200 no-underline rounded-lg p-8 shadow-md hover:shadow-lg transition duration-300 block"
             >
-              <h3 className="text-xl font-bold mb-2 text-Blue">Resource 2</h3>
+              <h3 className="text-xl font-bold mb-2 text-gray-700">Resource 2</h3>
               <p className="text-base text-gray-700">
-                Description of Resource 2
+                Description
               </p>
             </motion.a>
             <motion.a
               whileTap={{ scale: 0.90 }}
               href="#"
-              className="resource bg-gray-200 rounded-lg p-8 shadow-md hover:shadow-lg transition duration-300 block"
+              className="resource bg-gray-200 no-underline rounded-lg p-8 shadow-md hover:shadow-lg transition duration-300 block"
             >
-              <h3 className="text-xl font-bold mb-2 text-Blue">Resource 3</h3>
+              <h3 className="text-xl font-bold mb-2 text-gray-700">Resource 3</h3>
               <p className="text-base text-gray-700">
-                Description of Resource 3
+                Description
               </p>
             </motion.a>
           </div>
@@ -117,7 +117,7 @@ const About = () => {
       {/* Faculty Section */}
       <section className="bg-gray-900 py-20 faculty-section">
         <div className="max-w-screen-xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4 text-white">
+          <h2 className="text-4xl font-graduate font-bold mb-4 text-white">
             Participating Faculty
           </h2>
           <div className="flex flex-row justify-center mb-8 space-x-4 flex-wrap">
@@ -176,7 +176,7 @@ const About = () => {
       {/* Contact Information */}
       <section className="bg-white py-20">
         <div className="max-w-screen-xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Contact Information</h2>
+          <h2 className="text-3xl font-graduate text-blue-800 font-bold mb-4">Contact Information</h2>
           <p className="text-lg mb-4 text-gray-700">
             Have questions or need more information about our program? Reach
             out to us!
