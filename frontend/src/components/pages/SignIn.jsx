@@ -81,7 +81,7 @@ const SignIn = () => {
                 >
                     <p ref={errRef} className={` text-white font-bold py-2 px-4 mb-2 ${errMsg ? '' : 'hidden'}`}>{errMsg}</p>
                     <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-96">
-                        <h1 className="text-center text-3xl font-extrabold text-blue-700 mb-2">Log In</h1>
+                        <h1 className="text-center text-2xl font-graduate font-extrabold text-blue-700 mb-2">Log In</h1>
                         <label htmlFor="email" className="text-gray-700">Email:</label>
                         <input
                             type="email"
@@ -104,7 +104,7 @@ const SignIn = () => {
                             className="mt-1 p-2 w-full border rounded focus:outline-none"
                         />
                         <div className="flex justify-center">
-                            <motion.button whileTap={{ scale: 0.95 }} className="bg-blue-500 hover:bg-blue-600 text-white py-2 w-full px-4 mt-4 rounded focus:outline-none focus:ring focus:border-blue-300">Sign In</motion.button>
+                            <motion.button whileTap={{ scale: 0.95 }} className="bg-blue-800 hover:bg-blue-600 text-white py-2 w-full px-4 mt-4 rounded focus:outline-none focus:ring focus:border-blue-300">Sign In</motion.button>
                         </div>
                         <p className="text-gray-700 mt-3 text-center">
                             Need an Account?<br />

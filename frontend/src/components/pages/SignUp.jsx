@@ -84,7 +84,7 @@ const SignUp = () => {
                     style={{ backgroundImage: `url(${loginImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
                 >
                     <div className="bg-white p-8 rounded shadow-md w-96">
-                        <p className="text-bold text-2xl text-gray-500 text-center">Please fill out our application to create an account.</p>
+                        <h1 className="text-bold text-2xl text-blue-800 text-center">Please fill out our application to create an account.</h1>
                         <div className="flex justify-center">
                             <motion.button
                                 whileTap={{ scale: 0.90 }}
@@ -103,7 +103,7 @@ const SignUp = () => {
                 >
                     <p ref={errRef} className={`text-white font-bold py-2 px-4 mb-2 ${errMsg ? '' : 'hidden'}`}>{errMsg}</p>
                     <form className="bg-white p-8 rounded shadow-md w-96">
-                        <h1 className="text-center text-3xl font-extrabold text-blue-700 mb-2">Register</h1>
+                        <h1 className="text-center text-2xl font-graduate font-extrabold text-blue-700 mb-2">Registration</h1>
 
                         {/* Email Input Field */}
                         <label htmlFor="email" className="text-gray-700">
@@ -167,7 +167,13 @@ const SignUp = () => {
 
 
                         <div className="flex justify-center">
-                            <button onClick={handleSignUp} disabled={!validEmail || !validPwd || !validMatch} className={` bg-blue-700 ${(!validEmail || !validPwd || !validMatch) ? 'bg-gray-400' : 'hover:bg-blue-600'} text-white py-2 px-4 mt-4 w-full rounded focus:outline-none focus:ring focus:border-blue-300`}>Sign Up</button>
+                            <button
+                                onClick={handleSignUp}
+                                disabled={!validEmail || !validPwd || !validMatch}
+                                className={` bg-blue-700 ${(!validEmail || !validPwd || !validMatch) ? 'bg-gray-400' : 'hover:bg-blue-800'} text-white py-2 px-4 mt-4 w-full rounded focus:outline-none focus:ring focus:border-blue-800`}
+                            >
+                                Sign Up
+                            </button>
                         </div>
                         <p className="text-gray-700 mt-3 text-center">
                             Have an account?<br />
