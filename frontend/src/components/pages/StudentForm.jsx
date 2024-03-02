@@ -64,7 +64,7 @@ const StudentEmail = ({ studentEmail, setStudentEmail }) => {
   );
 };
 
-const School = ({ college, setCollege }) => {
+const School = ({ college, setCollege, setYearStanding }) => {
   const schools = [
     {
       name: "School of Computing",
@@ -111,6 +111,15 @@ const School = ({ college, setCollege }) => {
     },
   ];
 
+  const handleSchoolChange = (e) => {
+    const selectedSchool = e.target.value;
+    setCollege({ school: selectedSchool, major: "" });
+
+    if (selectedSchool === "College of Law") {
+      setYearStanding("Graduate");
+    }
+  };
+
   return (
     <>
       <label htmlFor="schools" className="text-gray-700 text-sm font-bold">
@@ -120,7 +129,7 @@ const School = ({ college, setCollege }) => {
         id="schools"
         className="mb-2 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
         value={college.school}
-        onChange={(e) => setCollege({ school: e.target.value, major: "" })}
+        onChange={(e) => handleSchoolChange(e)}
       >
         <option value="">Select...</option>
         {schools.map((school) => (
@@ -506,7 +515,11 @@ export function StudentForm() {
                 studentEmail={studentEmail}
                 setStudentEmail={setStudentEmail}
               />
-              <School college={college} setCollege={setCollege} />
+              <School
+                college={college}
+                setCollege={setCollege}
+                setYearStanding={setYearStanding} 
+              />
               <YearStanding
                 yearStanding={yearStanding}
                 setYearStanding={setYearStanding}
