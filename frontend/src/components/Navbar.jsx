@@ -15,20 +15,32 @@ export const Navbar = () => {
       <Link to="/" className="logo">
         <img src={logo} alt="Logo" style={{ width: '75px', height: '75px' }} />
       </Link>
-      <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
+      <div className={`menu ${menuOpen ? 'bg-gray-700' : ''}`} onClick={() => setMenuOpen(!menuOpen)}>
         <span></span>
         <span></span>
         <span></span>
       </div>
       <ul className={menuOpen ? "open" : ""}>
         <li>
-          <NavLink to="/home">Home</NavLink>
+          <NavLink
+            className="font-graduate"
+            to="/home">
+            Home
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/about">About</NavLink>
+          <NavLink
+            className="font-graduate"
+            to="/about">
+            About
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/login">Login</NavLink>
+          <NavLink
+            className="font-graduate"
+            to="/login">
+            Login
+          </NavLink>
         </li>
       </ul>
     </nav>

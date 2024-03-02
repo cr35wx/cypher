@@ -17,9 +17,9 @@ export const Home = () => {
       <section class="bg-white">
         <div class="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center">
           <div class="mx-auto max-w-50 text-center">
-            <h1 class="font-graduate text-3xl font-extrabold sm:text-5xl">
+            <h1 class="font-graduate text-3xl text-gray-700 font-extrabold sm:text-5xl">
               Welcome to
-              <strong class="mt-2 mb-4 font-graduate font-extrabold text-Blue sm:block"> Cypher's Cybersecurity Clinic </strong>
+              <strong class="mt-2 mb-4 font-graduate font-extrabold text-Blue md:flex-auto sm:block"> Cypher's Cybersecurity Clinic </strong>
             </h1>
 
             <div className="mt-10 flex flex-col items-center">
@@ -41,14 +41,14 @@ export const Home = () => {
               <motion.a
                 whileTap={{ scale: 0.85 }}
                 href="/signup" // URL of the register page
-                className="block w-full rounded bg-blue-700 px-12 py-3 text-xl font-medium text-white shadow no-underline hover:bg-blue-700 focus:outline-none focus:ring active:bg-blue-600 sm:w-auto"
+                className="block w-full rounded bg-darkBlue px-12 py-3 text-xl font-graduate font-medium text-white shadow no-underline hover:bg-blue-800 focus:outline-none focus:ring active:bg-blue-600 sm:w-auto"
               >
                 Apply
               </motion.a>
 
               <motion.a
                 whileTap={{ scale: 0.85 }}
-                class="block w-full rounded px-12 py-3 text-xl font-medium text-lightBlue shadow no-underline hover:text-darkBlue focus:outline-none focus:ring active:text-lightBlue sm:w-auto"
+                class="block w-full rounded px-12 py-3 text-xl font-graduate font-medium text-Blue shadow no-underline hover:text-darkBlue focus:outline-none focus:ring active:text-lightBlue sm:w-auto"
                 href="#divider"
               >
                 Learn More
@@ -64,7 +64,7 @@ export const Home = () => {
       <div id="divider">
         <span class="flex items-center mt-28 mb-8">
           <span class="h-px flex-1 bg-black"></span>
-          <span class="shrink-0 px-6 text-2xl font-bold">Who we are</span>
+          <span class="shrink-0 px-6 font-graduate text-2xl font-bold">Who we are</span>
           <span class="h-px flex-1 bg-black"></span>
         </span>
       </div>
@@ -76,11 +76,11 @@ export const Home = () => {
 
           <p class="text-2xl text-gray-700">
             Cypher's Cybersecurity Clinic ("Clinic") is an interdisciplinary collaboration between the
-            <a className="no-underline" href="https://www.cdm.depaul.edu/Pages/default.aspx"> School of Computing</a>, the
-            <a className="no-underline" href="https://business.depaul.edu/Pages/default.aspx"> Driehaus College of Business</a>, and the
-            <a className="no-underline" href="https://law.depaul.edu/Pages/default.aspx"> College of Law</a>.
+            <a className="text-darkBlue font-bold no-underline" href="https://www.cdm.depaul.edu/Pages/default.aspx"> School of Computing</a>, the
+            <a className="text-darkBlue font-bold no-underline" href="https://business.depaul.edu/Pages/default.aspx"> Driehaus College of Business</a>, and the
+            <a className="text-darkBlue font-bold no-underline" href="https://law.depaul.edu/Pages/default.aspx"> College of Law</a>.
             The Clinic provides students with hands-on, real-world experience working on cybersecurity projects for organizational clients that helps prepare them for careers in the cybersecurity workforce. Participating DePaul students come from a variety of undergraduate and graduate degree majors across the three colleges. The Clinic partners with
-            <a className="no-underline" href="https://resources.depaul.edu/steans-center-community-based-service-learning/about/Pages/default.aspx"> DePaul's Steans Center</a> to serve community-based non-profit organizations that have limited resources yet have a need for cybersecurity assessment services. The Clinic also provides services to Chicago-area small businesses.
+            <a className="text-darkBlue font-bold no-underline" href="https://resources.depaul.edu/steans-center-community-based-service-learning/about/Pages/default.aspx"> DePaul's Steans Center</a> to serve community-based non-profit organizations that have limited resources yet have a need for cybersecurity assessment services. The Clinic also provides services to Chicago-area small businesses.
           </p>
         </div>
 
@@ -93,8 +93,8 @@ export const Home = () => {
       {/*3 box infographic -- maybe change this infographic to talk about the 3 schools involved?*/}
       <section class="bg-gray-900 text-white">
         <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
-          <div class="mx-auto max-w-lg text-center">
-            <h2 class="text-3xl font-bold sm:text-4xl">Learn about our services</h2>
+          <div class="mx-auto text-center max-w-screen-md">
+            <h2 class="text-3xl font-graduate font-black sm:text-4xl">OUR SERVICES</h2>
 
             <p class="mt-4 text-gray-300">
               Students perform needed professional services to under-resourced external clients. In exchange, students gain a transformative educational experience
@@ -190,46 +190,10 @@ export const Home = () => {
             <motion.a
               whileTap={{ scale: 0.85 }}
               href='/signup'
-              class="inline-block rounded bg-Blue px-12 py-3 text-xl font-medium text-white transition hover:bg-darkBlue focus:outline-none focus:ring no-underline"
+              class="inline-block rounded bg-darkBlue px-12 py-3 text-xl font-graduate font-medium text-white transition hover:bg-Blue focus:outline-none focus:ring no-underline"
             >
               Apply
             </motion.a>
-          </div>
-        </div>
-      </section>
-
-
-      <section class="container mx-auto px-8 py-8 lg:py-40">       {/*image grid */}
-        <h2 class="block antialiased tracking-normal font-sans text-4xl font-semibold leading-[1.3] text-blue-gray-900 !text-3xl !leading-snug lg:!text-4xl">Our clinic focuses on three main areas</h2>
-        <p class="block antialiased font-sans text-xl font-normal leading-relaxed text-inherit mt-2 w-full font-normal !text-gray-500 lg:w-5/12">Read about our latest achievements and milestones.</p>
-        {/*   <a href="https://www.material-tailwind.com/" target="_blank">Generated with <b>Magic AI Blocks</b> by Creative Tim</a>.   */}
-        <div class="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-3">
-
-
-          <div class="relative flex flex-col bg-clip-border rounded-xl bg-transparent text-gray-700 shadow-md relative grid min-h-[30rem] items-end overflow-hidden rounded-xl"><img src="https://s3.amazonaws.com/brt.org/lock-technology-cybersecurity-header.jpg" alt="bg" class="absolute inset-0 h-full w-full object-cover object-center" />
-            <div class="absolute inset-0 bg-black/70"></div>
-            <div class="p-6 relative flex flex-col justify-end">
-              <h4 class="block antialiased tracking-normal font-sans text-3xl font-semibold leading-snug text-white">General Security Risk</h4>
-              <p class="block antialiased font-sans text-base font-light leading-relaxed text-white my-2 font-normal">Our team will meet with clients to take a benchmark cybersecurity test.</p>
-            </div>
-          </div>
-
-
-          <div class="relative flex flex-col bg-clip-border rounded-xl bg-transparent text-gray-700 shadow-md relative grid min-h-[30rem] items-end overflow-hidden rounded-xl"><img src="https://khovjones.co.nz/wp-content/uploads/2018/05/Forensic-Investigations-1.jpg" alt="bg" class="absolute inset-0 h-full w-full object-cover object-center" />
-            <div class="absolute inset-0 bg-black/70"></div>
-            <div class="p-6 relative flex flex-col justify-end">
-              <h4 class="block antialiased tracking-normal font-sans text-3xl font-semibold leading-snug text-white">Audit</h4>
-              <p class="block antialiased font-sans text-base font-light leading-relaxed text-white my-2 font-normal">Students will assist clients with tasks relating to accounting, record-keeping, etc.</p>
-            </div>
-          </div>
-
-
-          <div class="relative flex flex-col bg-clip-border rounded-xl bg-transparent text-gray-700 shadow-md relative grid min-h-[30rem] items-end overflow-hidden rounded-xl"><img src="https://pics.craiyon.com/2023-09-12/ea6fe19dcbe14bbc8739d89610cd88b6.webp" alt="bg" class="absolute inset-0 h-full w-full object-cover object-center" />
-            <div class="absolute inset-0 bg-black/70"></div>
-            <div class="p-6 relative flex flex-col justify-end">
-              <h4 class="block antialiased tracking-normal font-sans text-3xl font-semibold leading-snug text-white">Policy Review</h4>
-              <p class="block antialiased font-sans text-base font-light leading-relaxed text-white my-2 font-normal">Commited law students will help clients with basic legal review.</p>
-            </div>
           </div>
         </div>
       </section>

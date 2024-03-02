@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { ProjectType, ClinicOutreach } from "./StudentForm";
 import { clientFormImg } from "../../images";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const OrgName = ({ orgName, setOrgName }) => {
   return (
@@ -269,7 +271,11 @@ export function ClientForm() {
   const [howDidYouHear, setHowDidYouHear] = useState("");
   const [requestsOrComments, setRequestsOrComments] = useState("");
   const [success, setSuccess] = useState("");
+  const navigate = useNavigate();
 
+  const handleClick = () => {
+    navigate('/login', { replace: true });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -331,11 +337,19 @@ export function ClientForm() {
   return (
     <>
       {success ? (
-        <section className="flex flex-col items-center justify-center min-h-screen bg-dodgerblue"
-          style={{ backgroundImage: `url(${clientFormImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+        <section className="flex flex-col items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${clientFormImg})` }}
         >
           <div className="bg-white p-8 rounded shadow-md w-96">
-            <p className="text-bold text-2xl text-blue-700 text-center">Welcome to Cypher.</p>
+            <p className="text-bold text-xl text-blue-800 text-center">Account Made!</p>
+            <div className="flex justify-center">
+              <motion.button
+                onClick={handleClick}
+                whileTap={{ scale: 0.95 }}
+                className="bg-blue-800 hover:bg-blue-600 text-white py-2 w-full px-4 mt-4 rounded focus:outline-none focus:ring focus:border-blue-300">
+                Log In
+              </motion.button>
+            </div>
           </div>
         </section >
       ) : (

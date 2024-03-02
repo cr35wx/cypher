@@ -133,9 +133,10 @@ def student_application():
 
     email = form_data.get("studentEmail")
     register_details = student_temp_users.get(email)
+
     # looking at register email and application email to see if they match
     if not register_details:
-        return jsonify({"errors": "User cant be found"}), 400
+        return jsonify({"errors": "Email doesn't match registration"}), 400
     
     password = register_details.get("password")
     role = register_details.get("role")
@@ -149,6 +150,7 @@ def student_application():
         .filter(DegreeMajor.ug_or_grad == ug_or_grad)
         .first()
     )
+
     student = StudentParticipant(  # man....
         student_id=form_data.get("studentID"),
         first_name=first_name,
@@ -276,9 +278,10 @@ def client_application():
 
     email = form_data.get("contactPersonEmail")
     register_details = client_temp_users.get(email)
+
     # looking at registered email and application email to see if they match
     if not register_details:
-        return jsonify({"errors": "User cant be found"}), 400
+        return jsonify({"errors": "Email doesn't match registration"}), 400
     
     password = register_details.get("password")
     role = register_details.get("role")
