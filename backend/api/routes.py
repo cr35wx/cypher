@@ -22,7 +22,7 @@ api = Blueprint("api", __name__)
 MAX_NAME_LENGTH = 30
 STUDENT_ID_LENGTH = 7
 MAX_TEXT_AREA_LENGTH = 300
-MAX_ACCEPTED_REVENUE = 10**10
+MAX_ACCEPTED_REVENUE = 2147483647
 
 
 ######################### STUDENT APPLICATION ###############################
@@ -60,9 +60,11 @@ def validate_college(college):
         return "Both school and major must be selected."
 
 
-def validate_year_standing(year_standing):
+def validate_year_standing(school, year_standing):
     if not year_standing:
         return "Year Standing must be selected."
+    if school == "College of Law" and year_standing != "Graduate":
+        return "Year Standing must be Graduate for College of Law students."
 
 
 def validate_graduation_qtr(graduation_qtr):
@@ -89,7 +91,9 @@ def validate_student_form(student_data):
     name_error = validate_name(student_data.get("name", ""))
     student_id_error = validate_student_id(student_data.get("studentID", ""))
     college_error = validate_college(student_data.get("college", {}))
-    year_standing_error = validate_year_standing(student_data.get("yearStanding", ""))
+    year_standing_error = validate_year_standing(
+        student_data.get("college").get("school"), student_data.get("yearStanding", "")
+     )
     graduation_qtr_error = validate_graduation_qtr(
         student_data.get("graduationDate", {}).get("quarter", "")
     )
@@ -205,7 +209,7 @@ def validate_revenue(revenue):
     elif not revenue.isdigit():
         return "Annual Revenue must be a number."
     elif int(revenue) > MAX_ACCEPTED_REVENUE:
-        return "Annual Revenue cannot exceed 10 digits. Contact faculty."
+        return "Annual Revenue cannot exceed the very specific dollar amount of $2,147,483,647. Contact faculty."
 
 
 def validate_data_description(data_description):
