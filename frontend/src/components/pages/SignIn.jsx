@@ -1,10 +1,14 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect } from 'react';
 import { loginImg } from '../../images';
 import { Link } from 'react-router-dom';
 import { motion } from "framer-motion";
+import { Icon } from 'react-icons-kit';
+import { eye } from 'react-icons-kit/icomoon/eye';
+import { eyeBlocked } from 'react-icons-kit/icomoon/eyeBlocked';
 
 const SignIn = () => {
     const userRef = useRef();
+    const pwdRef = useRef();
     const errRef = useRef();
 
     const [email, setEmail] = useState('');
@@ -12,6 +16,7 @@ const SignIn = () => {
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
     const [role, setRole] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
 
     useEffect(() => {
         userRef.current.focus();
@@ -64,6 +69,10 @@ const SignIn = () => {
             });
     };
 
+    const togglePasswordVisibility = () => {
+        setShowPassword(prevState => !prevState);
+    };
+
     return (
         <>
             {success ? (
@@ -95,14 +104,20 @@ const SignIn = () => {
                         />
 
                         <label htmlFor="password" className="py-2 text-gray-700">Password:</label>
-                        <input
-                            type="password"
-                            id="password"
-                            onChange={(e) => setPwd(e.target.value)}
-                            value={pwd}
-                            required
-                            className="mt-1 p-2 w-full border rounded focus:outline-none"
-                        />
+                        <div className="relative">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                id="password"
+                                onChange={(e) => setPwd(e.target.value)}
+                                value={pwd}
+                                required
+                                ref={pwdRef}
+                                className="mt-1 p-2 w-full border rounded focus:outline-none pr-10"
+                            />
+                            <span onClick={togglePasswordVisibility} className="absolute right-2 top-2 cursor-pointer">
+                                <Icon icon={showPassword ? eyeBlocked : eye} size={20} />
+                            </span>
+                        </div>
                         <div className="flex justify-center">
                             <motion.button whileTap={{ scale: 0.95 }} className="bg-blue-800 hover:bg-blue-600 text-white py-2 w-full px-4 mt-4 rounded focus:outline-none focus:ring focus:border-blue-300">Sign In</motion.button>
                         </div>
