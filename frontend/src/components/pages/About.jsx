@@ -5,6 +5,7 @@ import FacultyData from "./about/FacultyData";
 import { DownloadIcon } from "@heroicons/react/outline";
 import dummyForm from './about/dummy-form.txt';
 import { missionImg } from "../../images";
+import { motion } from "framer-motion";
 
 const About = () => {
 
@@ -44,7 +45,7 @@ const About = () => {
           </div>
           <div className="bg-white md:max-w-2xl md:z-10 md:shadow-lg md:flex md:justify-center md:mx-auto lg:w-full lg:mt-0 lg:py-8">
             <div className="flex flex-col p-4 md:px-16 md:pb-1 lg:mt-12">
-              <h2 className="text-2xl text-center font-bold uppercase lg:text-4xl">Our Mission</h2>
+              <h2 className="text-2xl text-center text-blue-800 font-bold uppercase lg:text-4xl">Our Mission</h2>
               <p className="mt-4 p-2 lg:p-0 text-center text-2xl">
                 Raise organizational awareness of information security and privacy risks discovered from a student-led risk assessment so that incremental improvements are made in the client's security policies and practices while students in turn gain real-world experience that contributes to a cybersecurity workforce.
               </p>
@@ -60,12 +61,13 @@ const About = () => {
           <p className="text-lg mb-4 text-gray-300">
             Download our blank general security risk assessment form for your use.
           </p>
-          <button
+          <motion.button
+            whileTap={{ scale: 0.85 }}
             onClick={handleDownload}
             className="btn-blue"
           >
             <DownloadIcon className="w-6 h-6 mr-2" /> Download Form
-          </button>
+          </motion.button>
         </div>
       </section>
 
@@ -78,7 +80,8 @@ const About = () => {
             assessments.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <a
+            <motion.a
+              whileTap={{ scale: 0.85 }}
               href="#"
               className="resource bg-gray-200 rounded-lg p-8 shadow-md hover:shadow-lg transition duration-300 block"
             >
@@ -86,8 +89,9 @@ const About = () => {
               <p className="text-base text-gray-700">
                 Description of Resource 1
               </p>
-            </a>
-            <a
+            </motion.a>
+            <motion.a
+              whileTap={{ scale: 0.85 }}
               href="#"
               className="resource bg-gray-200 rounded-lg p-8 shadow-md hover:shadow-lg transition duration-300 block"
             >
@@ -95,8 +99,9 @@ const About = () => {
               <p className="text-base text-gray-700">
                 Description of Resource 2
               </p>
-            </a>
-            <a
+            </motion.a>
+            <motion.a
+              whileTap={{ scale: 0.90 }}
               href="#"
               className="resource bg-gray-200 rounded-lg p-8 shadow-md hover:shadow-lg transition duration-300 block"
             >
@@ -104,7 +109,7 @@ const About = () => {
               <p className="text-base text-gray-700">
                 Description of Resource 3
               </p>
-            </a>
+            </motion.a>
           </div>
         </div>
       </section>
@@ -116,36 +121,41 @@ const About = () => {
             Participating Faculty
           </h2>
           <div className="flex flex-row justify-center mb-8 space-x-4 flex-wrap">
-            <button
+            <motion.button
+              whileTap={{ scale: 0.90 }}
               onClick={() => handleCategoryChange("all")}
               className={`${selectedCategory === "all" ? "btn-blue" : "btn-white"} mx-2 my-1`}
             >
               All
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              whileTap={{ scale: 0.90 }}
               onClick={() => handleCategoryChange("school of computing")}
               className={`${selectedCategory === "school of computing" ? "btn-blue" : "btn-white"} mx-2 my-1 mr-4`}
             >
               School of Computing
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              whileTap={{ scale: 0.90 }}
               onClick={() => handleCategoryChange("college of business")}
               className={`${selectedCategory === "college of business" ? "btn-blue" : "btn-white"} mx-2 my-1 mr-4`}
             >
               College of Business
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              whileTap={{ scale: 0.90 }}
               onClick={() => handleCategoryChange("law")}
               className={`${selectedCategory === "law" ? "btn-blue" : "btn-white"} mx-2 my-1 mr-4`}
             >
               Law
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              whileTap={{ scale: 0.90 }}
               onClick={() => handleCategoryChange("steans center")}
               className={`${selectedCategory === "steanscenter" ? "btn-blue" : "btn-white"} mx-2 my-1 mr-4`}
             >
               Steans Center
-            </button>
+            </motion.button>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredFacultyData.map((faculty) => (
@@ -171,12 +181,13 @@ const About = () => {
             Have questions or need more information about our program? Reach
             out to us!
           </p>
-          <button
+          <motion.button
+            whileTap={{ scale: 0.85 }}
             className="btn-white"
             onClick={handleContactClick}
           >
             Contact Us
-          </button>
+          </motion.button>
         </div>
       </section>
     </div>

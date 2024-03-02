@@ -1,6 +1,8 @@
 import React from "react";
 import './Home.css';
 import Fade from "../Carousel"
+import { ReactTyped } from 'react-typed';
+import { motion } from "framer-motion";
 
 /*Homepage that includes two react libraries react-modal and react-slick. Modal is a pop-up that appears when the user hits the register or get started button. 
 It prompts the user to fill out the student form or the client form. 
@@ -15,29 +17,42 @@ export const Home = () => {
       <section class="bg-white">
         <div class="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center">
           <div class="mx-auto max-w-50 text-center">
-            <h1 class="text-3xl font-extrabold sm:text-5xl">
+            <h1 class="font-graduate text-3xl font-extrabold sm:text-5xl">
               Welcome to
-              <strong class="mt-2 font-extrabold text-Blue sm:block"> Cypher's Cybersecurity Clinic </strong>
+              <strong class="mt-2 mb-4 font-graduate font-extrabold text-Blue sm:block"> Cypher's Cybersecurity Clinic </strong>
             </h1>
 
-            <p class="mt-4 sm:text-xl/relaxed">
-              The one-stop shop for student-performed professional services.
-            </p>
+            <div className="mt-10 flex flex-col items-center">
+              <p className="text-lg sm:text-xl font-medium text-gray-800">
+                The one-stop shop for student-performed professional services:
+              </p>
+              <ReactTyped
+                className='text-lg sm:text-xl font-bold text-Blue pl-2'
+                strings={['General Security Risk', 'Audit', 'Policy Review']}
+                typeSpeed={75}
+                backSpeed={110}
+                loop
+              />
+            </div>
+
+
 
             <div class="mt-8 flex flex-wrap justify-center gap-4">
-              <a
+              <motion.a
+                whileTap={{ scale: 0.85 }}
                 href="/signup" // URL of the register page
-                className="block w-full rounded bg-blue-700 px-12 py-3 text-xl font-medium text-white shadow no-underline hover:bg-blue-700 focus:outline-none focus:ring active:bg-blue-400 sm:w-auto"
+                className="block w-full rounded bg-blue-700 px-12 py-3 text-xl font-medium text-white shadow no-underline hover:bg-blue-700 focus:outline-none focus:ring active:bg-blue-600 sm:w-auto"
               >
                 Apply
-              </a>
+              </motion.a>
 
-              <a
+              <motion.a
+                whileTap={{ scale: 0.85 }}
                 class="block w-full rounded px-12 py-3 text-xl font-medium text-lightBlue shadow no-underline hover:text-darkBlue focus:outline-none focus:ring active:text-lightBlue sm:w-auto"
                 href="#divider"
               >
                 Learn More
-              </a>
+              </motion.a>
             </div>
           </div>
         </div>
@@ -58,15 +73,14 @@ export const Home = () => {
 
       <div className="max-w-screen-xl flex-col lg:flex-row mx-auto grid grid-cols-1 lg:grid-cols-2 items-center justify-center gap-8">
         <div class="max-w-screen-lg mx-0 my-4 bg-gray-200 p-8 rounded-lg shadow-md">               {/* text box description*/}
-          <h1 class="text-4xl font-bold mb-6 text-Blue">Cypher's Cybersecurity Clinic</h1>
 
           <p class="text-2xl text-gray-700">
             Cypher's Cybersecurity Clinic ("Clinic") is an interdisciplinary collaboration between the
-            <a href="https://www.cdm.depaul.edu/Pages/default.aspx"> School of Computing</a>, the
-            <a href="https://business.depaul.edu/Pages/default.aspx"> Driehaus College of Business</a>, and the
-            <a href="https://law.depaul.edu/Pages/default.aspx"> College of Law</a>.
+            <a className="no-underline" href="https://www.cdm.depaul.edu/Pages/default.aspx"> School of Computing</a>, the
+            <a className="no-underline" href="https://business.depaul.edu/Pages/default.aspx"> Driehaus College of Business</a>, and the
+            <a className="no-underline" href="https://law.depaul.edu/Pages/default.aspx"> College of Law</a>.
             The Clinic provides students with hands-on, real-world experience working on cybersecurity projects for organizational clients that helps prepare them for careers in the cybersecurity workforce. Participating DePaul students come from a variety of undergraduate and graduate degree majors across the three colleges. The Clinic partners with
-            <a href="https://resources.depaul.edu/steans-center-community-based-service-learning/about/Pages/default.aspx"> DePaul's Steans Center</a> to serve community-based non-profit organizations that have limited resources yet have a need for cybersecurity assessment services. The Clinic also provides services to Chicago-area small businesses.
+            <a className="no-underline" href="https://resources.depaul.edu/steans-center-community-based-service-learning/about/Pages/default.aspx"> DePaul's Steans Center</a> to serve community-based non-profit organizations that have limited resources yet have a need for cybersecurity assessment services. The Clinic also provides services to Chicago-area small businesses.
           </p>
         </div>
 
@@ -173,12 +187,13 @@ export const Home = () => {
           </div>
 
           <div class="mt-12 text-center">
-            <a
+            <motion.a
+              whileTap={{ scale: 0.85 }}
               href='/signup'
-              class="inline-block rounded bg-Blue px-12 py-3 text-xl font-medium text-white transition hover:bg-darkBlue focus:outline-none focus:ring focus:ring-lightBlue no-underline"
+              class="inline-block rounded bg-Blue px-12 py-3 text-xl font-medium text-white transition hover:bg-darkBlue focus:outline-none focus:ring no-underline"
             >
               Apply
-            </a>
+            </motion.a>
           </div>
         </div>
       </section>
