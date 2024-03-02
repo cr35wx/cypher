@@ -52,6 +52,10 @@ def validate_student_id(student_id):
     if not (student_id.isdigit() and len(student_id) == STUDENT_ID_LENGTH):
         return "Student ID must be a 7-digit number."
 
+def validate_email(email):
+    if "@depaul.edu" not in email:
+        return "Please use your DePaul email address. You may need to reregister if your registration email is not the same."
+
 
 def validate_college(college):
     school = college.get("school", "")
@@ -90,6 +94,7 @@ def validate_how_did_you_hear(how_did_you_hear):
 def validate_student_form(student_data):
     name_error = validate_name(student_data.get("name", ""))
     student_id_error = validate_student_id(student_data.get("studentID", ""))
+    email_error = validate_email(student_data.get("studentEmail", ""))
     college_error = validate_college(student_data.get("college", {}))
     year_standing_error = validate_year_standing(
         student_data.get("college").get("school"), student_data.get("yearStanding", "")
@@ -108,6 +113,7 @@ def validate_student_form(student_data):
         error
         for error in (
             name_error,
+            email_error,
             student_id_error,
             college_error,
             year_standing_error,
@@ -231,7 +237,7 @@ def validate_comments(requests_or_comments):
 
 def validate_client_form(client_data):
     org_name_error = validate_org_name(client_data.get("orgName", ""))
-    org_type_error = validate_org_name(client_data.get("orgType", ""))
+    org_type_error = validate_org_type(client_data.get("orgType", ""))
     org_contact_name_error = validate_name(client_data.get("contactPersonName", ""))
     org_revenue_error = validate_revenue(client_data.get("annualRevenue", ""))
     data_description_error = validate_data_description(

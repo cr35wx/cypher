@@ -448,7 +448,7 @@ export function StudentForm() {
     e.preventDefault();
 
     const formData = {
-      name,
+      name: name.trim(),
       studentID,
       studentEmail,
       college,
