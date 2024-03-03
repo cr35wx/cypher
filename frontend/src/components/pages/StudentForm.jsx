@@ -448,7 +448,7 @@ export function StudentForm() {
     e.preventDefault();
 
     const formData = {
-      name,
+      name: name.trim(),
       studentID,
       studentEmail,
       college,
@@ -534,7 +534,7 @@ export function StudentForm() {
               <School
                 college={college}
                 setCollege={setCollege}
-                setYearStanding={setYearStanding} 
+                setYearStanding={setYearStanding}
               />
               <YearStanding
                 yearStanding={yearStanding}
@@ -567,7 +567,7 @@ export function StudentForm() {
               <Gender gender={gender} setGender={setGender} />
               <Ethnicity ethnicity={ethnicity} setEthnicity={setEthnicity} />
               <button
-                className="submit-button shadow w-full hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                className="submit-button shadow w-full hover:bg-darkBlue focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
                 type="submit"
               >
                 Submit

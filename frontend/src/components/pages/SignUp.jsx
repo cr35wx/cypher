@@ -5,6 +5,9 @@ import { loginImg } from '../../images';
 import { Link } from 'react-router-dom';
 import CustomModal from "../Modal";
 import { motion } from 'framer-motion';
+import { Icon } from 'react-icons-kit';
+import { eye } from 'react-icons-kit/icomoon/eye';
+import { eyeBlocked } from 'react-icons-kit/icomoon/eyeBlocked';
 
 // SET EMAIL AND PASSWORD REGEX
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -77,6 +80,12 @@ const SignUp = () => {
         }
     };
 
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
     return (
         <>
             {success ? (
@@ -103,15 +112,13 @@ const SignUp = () => {
                 >
                     <p ref={errRef} className={`text-white font-bold py-2 px-4 mb-2 ${errMsg ? '' : 'hidden'}`}>{errMsg}</p>
                     <form className="bg-white p-8 rounded shadow-md w-96">
-                        <h1 className="text-center text-2xl font-graduate font-extrabold text-blue-700 mb-2">Registration</h1>
+                        <h1 className="text-center text-2xl font-graduate font-extrabold text-darkBlue mb-2">Registration</h1>
 
                         {/* Email Input Field */}
-                        <label htmlFor="email" className="text-gray-700">
-                            Email:
-                        </label>
                         <input
                             type="email"
                             id="email"
+                            placeholder='Email:'
                             ref={emailRef}
                             autoComplete="off"
                             onChange={(e) => setEmail(e.target.value)}
@@ -126,19 +133,23 @@ const SignUp = () => {
                         </p>
 
                         {/* Password Input Field */}
-                        <label className="py-2 text-gray-700">
-                            Password:
-                        </label>
-                        <input
-                            type="password"
-                            id="password"
-                            onChange={(e) => setPwd(e.target.value)}
-                            value={pwd}
-                            required
-                            className="mt-1 p-2 w-full border rounded focus:outline-none"
-                            onFocus={() => setPwdFocus(true)}
-                            onBlur={() => setPwdFocus(false)}
-                        />
+
+                        <div className="relative">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                id="password"
+                                placeholder='Password:'
+                                onChange={(e) => setPwd(e.target.value)}
+                                value={pwd}
+                                required
+                                className="mt-1 p-2 w-full border rounded focus:outline-none"
+                                onFocus={() => setPwdFocus(true)}
+                                onBlur={() => setPwdFocus(false)}
+                            />
+                            <span onClick={togglePasswordVisibility} className="absolute right-2 top-2 cursor-pointer">
+                                <Icon icon={showPassword ? eyeBlocked : eye} size={20} />
+                            </span>
+                        </div>
                         <p className={`text-gray-700 text-xs ${pwdFocus && !validPwd ? 'block' : 'hidden'}`}>
                             <FontAwesomeIcon icon={faInfoCircle} className="mr-1" />
                             8 to 24 characters.<br />
@@ -147,19 +158,23 @@ const SignUp = () => {
                         </p>
 
                         {/* Confirm Password Input Field */}
-                        <label className="py-2 text-gray-700">
-                            Confirm Password:
-                        </label>
-                        <input
-                            type="password"
-                            id="confirm_pwd"
-                            onChange={(e) => setMatchPwd(e.target.value)}
-                            value={matchPwd}
-                            required
-                            className="mt-1 p-2 mb-2 w-full border rounded focus:outline-none focus:border-blue-500"
-                            onFocus={() => setMatchFocus(true)}
-                            onBlur={() => setMatchFocus(false)}
-                        />
+                        <div className="relative">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                id="confirm_pwd"
+                                placeholder='Confirm Password:'
+                                onChange={(e) => setMatchPwd(e.target.value)}
+                                value={matchPwd}
+                                required
+                                className="mt-1 p-2 mb-2 w-full border rounded focus:outline-none focus:border-blue-500"
+                                onFocus={() => setMatchFocus(true)}
+                                onBlur={() => setMatchFocus(false)}
+                            />
+                            <span onClick={togglePasswordVisibility} className="absolute right-2 top-2 cursor-pointer">
+                                <Icon icon={showPassword ? eyeBlocked : eye} size={20} />
+                            </span>
+                        </div>
+
                         <p className={`text-gray-700 text-xs ${matchFocus && !validMatch ? 'block' : 'hidden'}`}>
                             <FontAwesomeIcon icon={faInfoCircle} className="mr-1" />
                             Must match the password input field.

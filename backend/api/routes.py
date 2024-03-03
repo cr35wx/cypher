@@ -52,6 +52,10 @@ def validate_student_id(student_id):
     if not (student_id.isdigit() and len(student_id) == STUDENT_ID_LENGTH):
         return "Student ID must be a 7-digit number."
 
+def validate_email(email):
+    if "@depaul.edu" not in email:
+        return "Please use your DePaul email address. You may need to reregister if your registration email is not the same."
+
 
 def validate_college(college):
     school = college.get("school", "")
@@ -90,6 +94,7 @@ def validate_how_did_you_hear(how_did_you_hear):
 def validate_student_form(student_data):
     name_error = validate_name(student_data.get("name", ""))
     student_id_error = validate_student_id(student_data.get("studentID", ""))
+    email_error = validate_email(student_data.get("studentEmail", ""))
     college_error = validate_college(student_data.get("college", {}))
     year_standing_error = validate_year_standing(
         student_data.get("college").get("school"), student_data.get("yearStanding", "")
@@ -108,6 +113,7 @@ def validate_student_form(student_data):
         error
         for error in (
             name_error,
+            email_error,
             student_id_error,
             college_error,
             year_standing_error,
@@ -140,6 +146,8 @@ def student_application():
     
     password = register_details.get("password")
     role = register_details.get("role")
+    # delete tmp to manage storage 
+    del student_temp_users[email]
 
     first_name, *last_names = form_data.get("name").split()
     ug_or_grad = "Graduate" if form_data.get("yearStanding") == "Graduate" else "Undergraduate"
@@ -231,7 +239,7 @@ def validate_comments(requests_or_comments):
 
 def validate_client_form(client_data):
     org_name_error = validate_org_name(client_data.get("orgName", ""))
-    org_type_error = validate_org_name(client_data.get("orgType", ""))
+    org_type_error = validate_org_type(client_data.get("orgType", ""))
     org_contact_name_error = validate_name(client_data.get("contactPersonName", ""))
     org_revenue_error = validate_revenue(client_data.get("annualRevenue", ""))
     data_description_error = validate_data_description(
@@ -285,6 +293,9 @@ def client_application():
     
     password = register_details.get("password")
     role = register_details.get("role")
+
+    # delete tmp to manage storage 
+    del client_temp_users[email]
 
     contact_fname, *contact_lnames = form_data.get("contactPersonName").split()
     org_type_id = (
@@ -344,10 +355,13 @@ def login():
         return {"error": "invalid password"} # placeholder
 
     # some type of jwt token stuff happens on success
-    return jsonify({"message": "Login successful."}), 200
+    access_token = create_access_token(identity=email)
+    return jsonify(access_token=access_token)
 
-# server will remember email, pwd, role once application is 
-# submitted StudentParticpant can be populated and account page will be made
+# server will remember email, pwd, role once application is submitted StudentParticpant/ClienOrg can be populated
+# (not scalale, in early development: possible solutions- new sql table called tmpRegistration to hold email, pwd, and role 
+# that would be called on in successful application submission to populate the actual tables i.e StudentParticpant or ClientOrganization)
+# this was a work around DB complaining about foreign key constraints that occur when trying to add email, pwd, and role to StudentParticpant/ClienOrg
 student_temp_users = {}
 client_temp_users = {}
 
@@ -379,20 +393,6 @@ def check_email_for_dupes():
         return jsonify({"error": "Email already in use"}), 409
     
     return jsonify({"message": "Email available"}), 200
-
-@api.route('/get-role', methods=['GET'])
-def get_role():
-    email = request.headers.get('email')
-
-    # Query the database for the role associated with the email
-    user = (StudentParticipant.query.filter_by(email=email).first() or 
-            ClientOrganization.query.filter_by(org_contact_email=email).first())
-
-    if user:
-        role = user.role
-        return jsonify({"role": role}), 200
-    else:
-        return jsonify({"error": "User not found"}), 404
 
 # Also known as "Project Type" on the application forms...
 @api.route('/api/clinic-service-areas')

@@ -46,7 +46,7 @@ const About = () => {
           </div>
           <div className="bg-white md:max-w-2xl md:z-10 md:shadow-lg md:flex md:justify-center md:mx-auto lg:w-full lg:mt-0 lg:py-8">
             <div className="flex flex-col p-4 md:px-16 md:pb-1 lg:mt-12">
-              <h2 className="text-4xl font-graduate text-center text-blue-800 font-black uppercase lg:text-4xl">Our Mission</h2>
+              <h2 className="text-4xl font-graduate text-center text-darkBlue font-black uppercase lg:text-4xl">Our Mission</h2>
               <p className="mt-4 p-2 lg:p-0 text-center text-2xl">
                 Raise organizational awareness of information security and privacy risks discovered from a student-led risk assessment so that incremental improvements are made in the client's security policies and practices while students in turn gain real-world experience that contributes to a cybersecurity workforce.
               </p>
@@ -75,7 +75,7 @@ const About = () => {
       {/* Cybersecurity Resources */}
       <section className="bg-white py-20">
         <div className="max-w-screen-xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-graduate text-blue-800 font-bold mb-4">Cybersecurity Resources</h2>
+          <h2 className="text-3xl font-graduate text-darkBlue font-bold mb-4">Cybersecurity Resources</h2>
           <p className="text-lg mb-4 text-gray-700">
             Links to valuable cybersecurity resources used during risk
             assessments.
@@ -177,7 +177,7 @@ const About = () => {
       {/* Contact Information */}
       <section className="bg-white py-20">
         <div className="max-w-screen-xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-graduate text-blue-800 font-bold mb-4">Contact Information</h2>
+          <h2 className="text-3xl font-graduate text-darkBlue font-bold mb-4">Contact Information</h2>
           <p className="text-lg mb-4 text-gray-700">
             Have questions or need more information about our program? Reach
             out to us!
