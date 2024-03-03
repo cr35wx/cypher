@@ -146,6 +146,8 @@ def student_application():
     
     password = register_details.get("password")
     role = register_details.get("role")
+    # delete tmp to manage storage 
+    del student_temp_users[email]
 
     first_name, *last_names = form_data.get("name").split()
     ug_or_grad = "Graduate" if form_data.get("yearStanding") == "Graduate" else "Undergraduate"
@@ -292,6 +294,9 @@ def client_application():
     password = register_details.get("password")
     role = register_details.get("role")
 
+    # delete tmp to manage storage 
+    del client_temp_users[email]
+
     contact_fname, *contact_lnames = form_data.get("contactPersonName").split()
     org_type_id = (
         db.session.query(ClientOrgnizationType.org_type_id)
@@ -350,10 +355,13 @@ def login():
         return {"error": "invalid password"} # placeholder
 
     # some type of jwt token stuff happens on success
-    return jsonify({"message": "Login successful."}), 200
+    access_token = create_access_token(identity=email)
+    return jsonify(access_token=access_token)
 
-# server will remember email, pwd, role once application is 
-# submitted StudentParticpant can be populated and account page will be made
+# server will remember email, pwd, role once application is submitted StudentParticpant/ClienOrg can be populated
+# (not scalale, in early development: possible solutions- new sql table called tmpRegistration to hold email, pwd, and role 
+# that would be called on in successful application submission to populate the actual tables i.e StudentParticpant or ClientOrganization)
+# this was a work around DB complaining about foreign key constraints that occur when trying to add email, pwd, and role to StudentParticpant/ClienOrg
 student_temp_users = {}
 client_temp_users = {}
 
@@ -385,20 +393,6 @@ def check_email_for_dupes():
         return jsonify({"error": "Email already in use"}), 409
     
     return jsonify({"message": "Email available"}), 200
-
-@api.route('/get-role', methods=['GET'])
-def get_role():
-    email = request.headers.get('email')
-
-    # Query the database for the role associated with the email
-    user = (StudentParticipant.query.filter_by(email=email).first() or 
-            ClientOrganization.query.filter_by(org_contact_email=email).first())
-
-    if user:
-        role = user.role
-        return jsonify({"role": role}), 200
-    else:
-        return jsonify({"error": "User not found"}), 404
 
 # Also known as "Project Type" on the application forms...
 @api.route('/api/clinic-service-areas')

@@ -14,12 +14,14 @@ const SignIn = () => {
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false);
-    const [role, setRole] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
+    const [token, setToken] = useState(sessionStorage.getItem("token"));
+
     useEffect(() => {
-        userRef.current.focus();
+        if (userRef.current) {
+            userRef.current.focus();
+        }
     }, [])
 
     useEffect(() => {
@@ -28,46 +30,40 @@ const SignIn = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(email);
-        console.log(pwd);
-        fetch('/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, pwd }),
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    setErrMsg(data.error);
-                    userRef.current.focus();
-                } else {
-                    setEmail('');
-                    setPwd('');
-                    setSuccess(true);
-                    // Fetch user's role after successful sign-in, jwt token should store this ?
-                    fetch('/get-role', {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'email': email,
-                        },
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            console.log(data.role);
-                            setRole(data.role);
-                        })
-                        .catch(err => {
-                            console.log(err);
-                        });
-                }
-            })
-            .catch(err => {
-                console.log(err);
+
+        try {
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, pwd }),
             });
+            const data = await response.json();
+
+            if (data.error) {
+                setErrMsg(data.error);
+                if (userRef.current) {
+                    userRef.current.focus();
+                }
+            } else {
+                setEmail('');
+                setPwd('');
+                sessionStorage.setItem("token", data.access_token);
+            }
+        } catch (error) {
+            console.log(error);
+        }
     };
+
+    const handleLogout = () => {
+        sessionStorage.removeItem('token');
+        setToken(null);
+    };
+
+    useEffect(() => {
+        setToken(sessionStorage.getItem("token"));
+    }, [sessionStorage.getItem("token")]);
 
     const togglePasswordVisibility = () => {
         setShowPassword(prevState => !prevState);
@@ -75,26 +71,30 @@ const SignIn = () => {
 
     return (
         <>
-            {success ? (
+            {(token && token !== "" && token != undefined) ? (
                 <section className="flex flex-col items-center justify-center min-h-screen bg-dodgerblue"
                     style={{ backgroundImage: `url(${loginImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
                 >
-                    <div className="bg-white p-8 rounded shadow-md w-96">
-                        <h1 className="text-bold text-blue-700 text-center">Welcome to Cypher.</h1>
-                        <p className="text-center">You are a {role}</p>
+                    <div className="flex bg-white p-8 rounded justify-center items-center shadow-md w-96 flex-col">
+                        <h1 className="text-center text-2xl font-graduate font-extrabold text-darkBlue mb-4">Welcome Back</h1>
+                        <div className="relative flex justify-center items-center">
+                            <button onClick={handleLogout} className="bg-red-800 hover:bg-red-900 text-white font-bold py-2 px-4 rounded">
+                                Logout
+                            </button>
+                        </div>
                     </div>
-                </section>
+                </section >
             ) : (
                 <section className="flex flex-col items-center justify-center min-h-screen bg-dodgerblue"
                     style={{ backgroundImage: `url(${loginImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
                 >
                     <p ref={errRef} className={` text-white font-bold py-2 px-4 mb-2 ${errMsg ? '' : 'hidden'}`}>{errMsg}</p>
                     <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-96">
-                        <h1 className="text-center text-2xl font-graduate font-extrabold text-blue-700 mb-2">Log In</h1>
-                        <label htmlFor="email" className="text-gray-700">Email:</label>
+                        <h1 className="text-center text-2xl font-graduate font-extrabold text-darkBlue mb-2">Log In</h1>
                         <input
                             type="email"
                             id="email"
+                            placeholder='Email:'
                             ref={userRef}
                             autoComplete="off"
                             onChange={(e) => setEmail(e.target.value)}
@@ -103,11 +103,12 @@ const SignIn = () => {
                             className="mt-1 p-2 w-full border rounded focus:outline-none"
                         />
 
-                        <label htmlFor="password" className="py-2 text-gray-700">Password:</label>
+
                         <div className="relative">
                             <input
                                 type={showPassword ? "text" : "password"}
                                 id="password"
+                                placeholder='Password:'
                                 onChange={(e) => setPwd(e.target.value)}
                                 value={pwd}
                                 required
