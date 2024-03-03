@@ -1,6 +1,7 @@
 import React from "react";
 import './Home.css';
 import Fade from "../Carousel"
+//import Basic from "../Calendar/calendarComponentStudent";
 import { ReactTyped } from 'react-typed';
 import { motion } from "framer-motion";
 
@@ -70,9 +71,9 @@ export const Home = () => {
       </div>
 
 
-
+      {/* text box description*/}
       <div className="max-w-screen-xl flex-col lg:flex-row mx-auto grid grid-cols-1 lg:grid-cols-2 items-center justify-center gap-8">
-        <div class="max-w-screen-lg mx-0 my-4 bg-gray-200 p-8 rounded-lg shadow-md">               {/* text box description*/}
+        <div class="max-w-screen-lg mx-0 my-4 bg-gray-200 p-8 rounded-lg shadow-md">               
 
           <p class="text-2xl text-gray-700">
             Cypher's Cybersecurity Clinic ("Clinic") is an interdisciplinary collaboration between the
@@ -84,7 +85,7 @@ export const Home = () => {
           </p>
         </div>
 
-        <Fade />
+        <Fade />    {/*<-- Carousel*/}
       </div>
 
 
@@ -197,6 +198,12 @@ export const Home = () => {
           </div>
         </div>
       </section>
+
+      {/*Calendar
+      
+      <Basic/>
+      */}
+
 
     </div>
 

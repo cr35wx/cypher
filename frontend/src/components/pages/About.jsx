@@ -7,6 +7,7 @@ import dummyForm from './about/dummy-form.txt';
 import { missionImg } from "../../images";
 import { motion } from "framer-motion";
 
+
 const About = () => {
 
   const handleContactClick = () => {
