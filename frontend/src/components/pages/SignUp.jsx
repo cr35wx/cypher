@@ -92,8 +92,8 @@ const SignUp = () => {
                 <section className="flex flex-col items-center justify-center min-h-screen bg-dodgerblue"
                     style={{ backgroundImage: `url(${loginImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
                 >
-                    <div className="bg-white p-8 rounded shadow-md w-96">
-                        <h1 className="text-bold text-2xl text-blue-800 text-center">Please fill out our application to create an account.</h1>
+                    <div className="bg-white p-8 rounded shadow-md w-4/6">
+                        <h1 className="text-bold text-2xl font-graduate text-blue-800 text-center">Please fill out our application to create an account.</h1>
                         <div className="flex justify-center">
                             <motion.button
                                 whileTap={{ scale: 0.90 }}
