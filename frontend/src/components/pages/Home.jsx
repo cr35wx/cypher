@@ -17,9 +17,9 @@ export const Home = () => {
       <section className="bg-white">
         <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center">
           <div className="mx-auto max-w-50 text-center">
-            <h1 className="font-graduate text-3xl text-gray-700 font-extrabold sm:text-5xl">
+            <h1 className="font-graduate text-3xl text-gray-800 font-extrabold sm:text-5xl">
               Welcome to
-              <strong className="mt-2 mb-4 font-graduate font-extrabold text-Blue md:flex-auto sm:block"> Cypher's Cybersecurity Clinic </strong>
+              <strong className="mt-2 mb-4 font-graduate font-extrabold text-darkBlue md:flex-auto sm:block"> Cypher Cybersecurity Clinic </strong>
             </h1>
 
             <div className="mt-10 flex flex-col items-center">
@@ -27,7 +27,7 @@ export const Home = () => {
                 The one-stop shop for student-performed professional services:
               </p>
               <ReactTyped
-                className='text-lg sm:text-xl font-bold text-Blue pl-2'
+                className='text-lg sm:text-xl font-bold text-darkBlue pl-2'
                 strings={['General Security Risk', 'Audit', 'Policy Review']}
                 typeSpeed={75}
                 backSpeed={110}
@@ -41,14 +41,14 @@ export const Home = () => {
               <motion.a
                 whileTap={{ scale: 0.85 }}
                 href="/signup" // URL of the register page
-                className="block w-full rounded bg-darkBlue px-12 py-3 text-xl font-graduate font-medium text-white shadow no-underline hover:bg-blue-800 focus:outline-none focus:ring active:bg-blue-600 sm:w-auto"
+                className="block w-full rounded bg-darkBlue px-12 py-3 text-xl font-graduate font-medium text-white shadow no-underline hover:bg-blue-800 focus:outline-none focus:ring active:bg-blue-900 sm:w-auto"
               >
                 Apply
               </motion.a>
 
               <motion.a
                 whileTap={{ scale: 0.85 }}
-                className="block w-full rounded px-12 py-3 text-xl font-graduate font-medium text-Blue shadow no-underline hover:text-darkBlue focus:outline-none focus:ring active:text-lightBlue sm:w-auto"
+                className="block w-full rounded px-12 py-3 text-xl font-graduate font-medium text-blue-800 shadow no-underline hover:text-darkBlue focus:outline-none focus:ring active:text-darkBlue sm:w-auto"
                 href="#divider"
               >
                 Learn More
@@ -98,7 +98,7 @@ export const Home = () => {
 
             <p className="mt-4 text-gray-300">
               Students perform needed professional services to under-resourced external clients. In exchange, students gain a transformative educational experience
-              from working on real-world projects in their area of study, while providing a public good.
+              from working on real-world projects in their area of study while providing a public good.
             </p>
           </div>
 
@@ -190,7 +190,7 @@ export const Home = () => {
             <motion.a
               whileTap={{ scale: 0.85 }}
               href='/signup'
-              className="inline-block rounded bg-darkBlue px-12 py-3 text-xl font-graduate font-medium text-white transition hover:bg-Blue focus:outline-none focus:ring no-underline"
+              className="inline-block rounded bg-darkBlue px-12 py-3 text-xl font-graduate font-medium text-white transition hover:bg-blue-900 focus:outline-none focus:ring no-underline"
             >
               Apply
             </motion.a>

@@ -112,7 +112,7 @@ const SignUp = () => {
                 >
                     <p ref={errRef} className={`text-white font-bold py-2 px-4 mb-2 ${errMsg ? '' : 'hidden'}`}>{errMsg}</p>
                     <form className="bg-white p-8 rounded shadow-md w-96">
-                        <h1 className="text-center text-2xl font-graduate font-extrabold text-blue-700 mb-2">Registration</h1>
+                        <h1 className="text-center text-2xl font-graduate font-extrabold text-darkBlue mb-2">Registration</h1>
 
                         {/* Email Input Field */}
                         <label htmlFor="email" className="text-gray-700">

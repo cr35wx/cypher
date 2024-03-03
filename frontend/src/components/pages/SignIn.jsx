@@ -90,7 +90,7 @@ const SignIn = () => {
                 >
                     <p ref={errRef} className={` text-white font-bold py-2 px-4 mb-2 ${errMsg ? '' : 'hidden'}`}>{errMsg}</p>
                     <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-96">
-                        <h1 className="text-center text-2xl font-graduate font-extrabold text-blue-700 mb-2">Log In</h1>
+                        <h1 className="text-center text-2xl font-graduate font-extrabold text-darkBlue mb-2">Log In</h1>
                         <label htmlFor="email" className="text-gray-700">Email:</label>
                         <input
                             type="email"

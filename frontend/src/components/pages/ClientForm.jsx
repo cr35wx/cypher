@@ -346,7 +346,7 @@ export function ClientForm() {
               <motion.button
                 onClick={handleClick}
                 whileTap={{ scale: 0.95 }}
-                className="bg-blue-800 hover:bg-blue-600 text-white py-2 w-full px-4 mt-4 rounded focus:outline-none focus:ring focus:border-blue-300">
+                className="bg-blue-800 hover:bg-darkBlue text-white py-2 w-full px-4 mt-4 rounded focus:outline-none focus:ring focus:border-blue-900">
                 Log In
               </motion.button>
             </div>
@@ -405,7 +405,7 @@ export function ClientForm() {
               />
 
               <button
-                className="submit-button shadow w-full hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                className="submit-button shadow w-full hover:bg-darkBlue focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
                 type="submit"
               >
                 Submit
