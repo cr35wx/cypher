@@ -115,12 +115,10 @@ const SignUp = () => {
                         <h1 className="text-center text-2xl font-graduate font-extrabold text-darkBlue mb-2">Registration</h1>
 
                         {/* Email Input Field */}
-                        <label htmlFor="email" className="text-gray-700">
-                            Email:
-                        </label>
                         <input
                             type="email"
                             id="email"
+                            placeholder='Email:'
                             ref={emailRef}
                             autoComplete="off"
                             onChange={(e) => setEmail(e.target.value)}
@@ -135,13 +133,12 @@ const SignUp = () => {
                         </p>
 
                         {/* Password Input Field */}
-                        <label className="py-2 text-gray-700">
-                            Password:
-                        </label>
+
                         <div className="relative">
                             <input
                                 type={showPassword ? "text" : "password"}
                                 id="password"
+                                placeholder='Password:'
                                 onChange={(e) => setPwd(e.target.value)}
                                 value={pwd}
                                 required
@@ -161,13 +158,11 @@ const SignUp = () => {
                         </p>
 
                         {/* Confirm Password Input Field */}
-                        <label className="py-2 text-gray-700">
-                            Confirm Password:
-                        </label>
                         <div className="relative">
                             <input
                                 type={showPassword ? "text" : "password"}
                                 id="confirm_pwd"
+                                placeholder='Confirm Password:'
                                 onChange={(e) => setMatchPwd(e.target.value)}
                                 value={matchPwd}
                                 required
