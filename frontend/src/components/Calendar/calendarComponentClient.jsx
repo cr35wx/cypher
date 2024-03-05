@@ -22,7 +22,7 @@ const ColoredDateCellWrapper = ({ children }) =>
   React.cloneElement(React.Children.only(children), {
     style: {
       backgroundColor: 'lightblue',
-      
+
     },
   })
 
@@ -40,10 +40,11 @@ export default function Basic({
       components: {
         timeSlotWrapper: ColoredDateCellWrapper,
       },
-      
+
       defaultDate: new Date(2024, 2, 1),
       max: dates.add(dates.endOf(new Date(2024, 4, 1), 'day'), -1, 'hours'),
-      views: ['month']        //Object.keys(Views).map((k) => Views[k]), <-- adds multiple viewing options (week, day, workweek) it causes errors)
+      //views: ['month']        
+      views: Object.keys(Views).map((k) => Views[k]), //<-- adds multiple viewing options (week, day, workweek) it causes errors)
     }),
     []
   )
