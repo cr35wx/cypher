@@ -4,6 +4,7 @@ import Fade from "../Carousel"
 import Basic from "../Calendar/calendarComponentClient";
 import { ReactTyped } from 'react-typed';
 import { motion } from "framer-motion";
+import Footer from "./footer/Footer";
 
 /*Homepage that includes two react libraries react-modal and react-slick. Modal is a pop-up that appears when the user hits the register or get started button. 
 It prompts the user to fill out the student form or the client form. 
@@ -201,7 +202,10 @@ export const Home = () => {
 
       {
 
+      <>
+        <Footer />
         <Basic />
+      </>
       }
 
 
