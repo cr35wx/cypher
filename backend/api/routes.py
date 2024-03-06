@@ -12,6 +12,7 @@ from .models import (
     AcademicUnit,
     StudentParticipant,
     ClientOrganization,
+    Course,
 )
 from .app import db
 
@@ -399,6 +400,11 @@ def check_email_for_dupes():
 def get_service_areas_all():
     service_areas = ClinicServiceArea.query.order_by(ClinicServiceArea.service_area_id).all()
     return jsonify([area.to_json() for area in service_areas])
+
+@api.route('/api/courses')
+def get_courses_all():
+    courses = Course.query.order_by(Course.course_id).all()
+    return jsonify([f"{course.course_department}-{course.course_number}" for course in courses])
 
 
 @api.route("/api/academic-units", methods=["GET"])

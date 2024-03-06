@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { studentFormImg } from "../../images";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -234,10 +234,73 @@ const GraduationDate = ({ graduationDate, setGraduationState }) => {
   );
 };
 
-const PrerequisiteCourses = () => {
-  // TODO
-  return <></>;
+const PrerequisiteCourses = ({ prerequisiteCourses, setPrerequesiteCourses }) => {
+  // This should ideally be connected to the selected school and major in some way,
+  // but for now the component only grabs all the courses from the database and displays them
+
+  // const courses = [
+  //   "CSEC_390", "CSEC_490", "CSEC_488", "IS_486", "IS_487", "ACC_374", 
+  //   "ACC_376", "ACC_378", "ACC_636", "ACC_638", "ACC_639", "FIN_362", "SEV_621"
+  // ];
+
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/courses')
+      .then(response => response.json())
+      .then(data => setCourses(data))
+       .catch(error => console.error('Error fetching course list:', error));
+  }, []);
+
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleCourseToggle = (course) => {
+    if (prerequisiteCourses.includes(course)) {
+      setPrerequesiteCourses(prerequisiteCourses.filter(item => item !== course));
+    } else {
+      setPrerequesiteCourses([...prerequisiteCourses, course]);
+    }
+  };
+
+  return (
+    <div className="relative">
+      <label htmlFor="prerequisiteCourses" className="text-gray-700 text-sm font-bold">
+        Select Prerequisite Courses:
+      </label>
+      <div className="relative">
+        <div
+          className="inline-block w-full bg-gray-200 appearance-none border border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight cursor-pointer"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <span style={{ fontStyle: 'italic' }}>{isOpen ? "Close" : "Open"} Courses</span>
+        </div>
+        {isOpen && (
+          <div className="absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded shadow-md py-1 px-3 text-gray-700 leading-tight">
+            {courses.map(course => (
+              <Fragment key={course}>
+                <div className="flex items-center mb-2">
+                  <input
+                    type="checkbox"
+                    id={course}
+                    value={course}
+                    checked={prerequisiteCourses.includes(course)}
+                    onChange={() => handleCourseToggle(course)}
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-offset-gray-200 focus:ring-2"
+                  />
+                  <label htmlFor={course} className="ml-2 text-sm font-medium text-gray-900">
+                    {course}
+                  </label>
+                </div>
+              </Fragment>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
+
 
 export const ProjectType = ({
   projectType,
