@@ -1,0 +1,39 @@
+.active {
+    background-color: #1d4ed8;
+    width: 100;
+}
+
+footer {
+    background-color: #1d4ed8;
+    height: 300px;
+    width: 100%;
+    position: sticky;
+}
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: large;
+}
+
+/* div div ul li a {
+    color: white;
+    text-align: center;
+    
+}
+
+div div ul li a:not(.active):hover {
+    color: red;
+    
+} */
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(35, 86, 177);
+    color: white;
+    position: sticky;
+    bottom: 0;
+}
