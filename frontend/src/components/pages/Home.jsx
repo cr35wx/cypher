@@ -1,7 +1,7 @@
 import React from "react";
 import './Home.css';
 import Fade from "../Carousel"
-//import Basic from "../Calendar/calendarComponentStudent";
+import Basic from "../Calendar/calendarComponentClient";
 import { ReactTyped } from 'react-typed';
 import { motion } from "framer-motion";
 
@@ -199,10 +199,10 @@ export const Home = () => {
         </div>
       </section>
 
-      {/*Calendar
-      
-      <Basic/>
-      */}
+      {
+
+        <Basic />
+      }
 
 
     </div>
