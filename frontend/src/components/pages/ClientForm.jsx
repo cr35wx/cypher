@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { ProjectType, ClinicOutreach } from "./StudentForm";
+import { clientFormImg } from "../../images";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const OrgName = ({ orgName, setOrgName }) => {
   return (
@@ -61,7 +64,7 @@ const ContactPersonName = ({ contactPersonName, setContactPersonName }) => {
         autoComplete="name"
         required
         min={2}
-        max={30}
+        max={61}
       />
     </>
   );
@@ -150,6 +153,8 @@ const AnnualRevenue = ({ annualRevenue, setAnnualRevenue }) => {
         type="text"
         placeholder="$"
         onChange={(e) => setAnnualRevenue(e.target.value)}
+        max={999999999999}
+        required
       />
     </>
   );
@@ -171,7 +176,9 @@ const ITEmployeeCount = ({ ITemployeeCount, setITemployeeCount }) => {
         placeholder="Number of IT Staff"
         onChange={(e) => setITemployeeCount(e.target.value)}
         min={0}
+        max={100000}
         step={1}
+        required
       />
     </>
   );
@@ -217,7 +224,7 @@ const RecentRiskAssessment = ({
         onChange={(e) => setRecentRiskAssessment(e.target.value)}
       >
         <option value="">Select...</option>
-        <option value="never">Never</option>
+        <option value="Never">Never</option>
         <option value="1-2 years ago">1-2 years ago</option>
         <option value="3-5 years ago">3-5 years ago</option>
         <option value="> 5 years ago">&gt; 5 years ago</option>
@@ -260,74 +267,153 @@ export function ClientForm() {
   const [dataDescription, setDataDescription] = useState("");
   const [recentRiskAssessment, setRecentRiskAssessment] = useState("");
   const [projectType, setProjectType] = useState("");
+  const [otherDescription, setOtherDescription] = useState("");
   const [howDidYouHear, setHowDidYouHear] = useState("");
   const [requestsOrComments, setRequestsOrComments] = useState("");
+  const [success, setSuccess] = useState("");
+  const navigate = useNavigate();
 
-  const validateForm = () => {
-
-  }
+  const handleClick = () => {
+    navigate('/login', { replace: true });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = {};
+
+    const formData = {
+      orgName,
+      orgType,
+      contactPersonName,
+      contactPersonEmail,
+      contactPersonPhone,
+      orgWebsite,
+      annualRevenue,
+      ITemployeeCount,
+      dataDescription,
+      recentRiskAssessment,
+      projectType,
+      otherDescription,
+      howDidYouHear,
+      requestsOrComments,
+    };
 
     console.log(formData);
+
+    fetch('/client-application', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        if (data.errors) {
+          console.log(data);
+          alert(data.errors);
+        } else {
+          console.log(data)
+          setOrgName("");
+          setOrgType("");
+          setContactPersonName("");
+          setContactPersonEmail("");
+          setContactPersonPhone("");
+          setOrgWebsite("");
+          setAnnualRevenue(0);
+          setITemployeeCount(0);
+          setDataDescription("");
+          setRecentRiskAssessment("");
+          setProjectType("");
+          setOtherDescription("");
+          setHowDidYouHear("");
+          setRequestsOrComments("");
+          setSuccess(true);
+        }
+      })
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <form onSubmit={handleSubmit} className="max-w-xl w-full">
-        <OrgName orgName={orgName} setOrgName={setOrgName} />
-        <OrgType orgType={orgType} setOrgType={setOrgType} />
-        <ContactPersonName
-          contactPersonName={contactPersonName}
-          setContactPersonName={setContactPersonName}
-        />
-        <ContactPersonEmail
-          contactPersonEmail={contactPersonEmail}
-          setContactPersonEmail={setContactPersonEmail}
-        />
-        <ContactPersonPhone
-          contactPersonPhone={contactPersonPhone}
-          setContactPersonPhone={setContactPersonPhone}
-        />
-        <OrgWebsite orgWebsite={orgWebsite} setOrgWebsite={setOrgWebsite} />
-        <AnnualRevenue
-          annualRevenue={annualRevenue}
-          setAnnualRevenue={setAnnualRevenue}
-        />
-        <ITEmployeeCount
-          ITemployeeCount={ITemployeeCount}
-          setITemployeeCount={setITemployeeCount}
-        />
-        <DataDescription
-          dataDescription={dataDescription}
-          setDataDescription={setDataDescription}
-        />
-        <RecentRiskAssessment
-          recentRiskAssessment={recentRiskAssessment}
-          setRecentRiskAssessment={setRecentRiskAssessment}
-        />
-        <ProjectType
-          projectType={projectType}
-          setProjectType={setProjectType}
-        />
-        <ClinicOutreach
-          howDidYouHear={howDidYouHear}
-          setHowDidYouHear={setHowDidYouHear}
-        />
-        <RequestsOrComments
-          requestsOrComments={requestsOrComments}
-          setRequestsOrComments={setRequestsOrComments}
-        />
-
-        <button
-          className="submit-button shadow w-full hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-          type="submit"
+    <>
+      {success ? (
+        <section className="flex flex-col items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${clientFormImg})` }}
         >
-          Submit
-        </button>
-      </form>
-    </div>
+          <div className="bg-white p-8 rounded shadow-md w-96">
+            <p className="text-bold text-xl text-blue-800 text-center">Account Made!</p>
+            <div className="flex justify-center">
+              <motion.button
+                onClick={handleClick}
+                whileTap={{ scale: 0.95 }}
+                className="bg-blue-800 hover:bg-darkBlue text-white py-2 w-full px-4 mt-4 rounded focus:outline-none focus:ring focus:border-blue-900">
+                Log In
+              </motion.button>
+            </div>
+          </div>
+        </section >
+      ) : (
+        <div className="flex justify-center items-center min-h-screen bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${clientFormImg})` }}
+        >
+          <div className="form-container my-auto mt-32 px-4">
+            <form onSubmit={handleSubmit} className="max-w-md w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+              <OrgName orgName={orgName} setOrgName={setOrgName} />
+              <OrgType orgType={orgType} setOrgType={setOrgType} />
+              <ContactPersonName
+                contactPersonName={contactPersonName}
+                setContactPersonName={setContactPersonName}
+              />
+              <ContactPersonEmail
+                contactPersonEmail={contactPersonEmail}
+                setContactPersonEmail={setContactPersonEmail}
+              />
+              <ContactPersonPhone
+                contactPersonPhone={contactPersonPhone}
+                setContactPersonPhone={setContactPersonPhone}
+              />
+              <OrgWebsite orgWebsite={orgWebsite} setOrgWebsite={setOrgWebsite} />
+              <AnnualRevenue
+                annualRevenue={annualRevenue}
+                setAnnualRevenue={setAnnualRevenue}
+              />
+              <ITEmployeeCount
+                ITemployeeCount={ITemployeeCount}
+                setITemployeeCount={setITemployeeCount}
+              />
+              <DataDescription
+                dataDescription={dataDescription}
+                setDataDescription={setDataDescription}
+              />
+              <RecentRiskAssessment
+                recentRiskAssessment={recentRiskAssessment}
+                setRecentRiskAssessment={setRecentRiskAssessment}
+              />
+              <ProjectType
+                projectType={projectType}
+                setProjectType={setProjectType}
+                otherDescription={otherDescription}
+                setOtherDescription={setOtherDescription}
+              />
+              <ClinicOutreach
+                howDidYouHear={howDidYouHear}
+                setHowDidYouHear={setHowDidYouHear}
+              />
+              <RequestsOrComments
+                requestsOrComments={requestsOrComments}
+                setRequestsOrComments={setRequestsOrComments}
+              />
+
+              <button
+                className="submit-button shadow w-full hover:bg-darkBlue focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                type="submit"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

@@ -8,6 +8,7 @@ load_dotenv()
 
 class DevelopmentConfig:
     SECRET_KEY = "dev"
+    SQLALCHEMY_ECHO = True
     SQLALCHEMY_DATABASE_URI = "mariadb+mariadbconnector://cypher:supersecretpassword@localhost:3306/cyberclinic"
 
 

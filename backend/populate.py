@@ -9,6 +9,7 @@ from api.models import (
     ClinicJobRole,
     AcademicUnit,
     DegreeMajor,
+    ClientOrgnizationType
 )
 
 # Schools
@@ -68,8 +69,8 @@ business_administration = DegreeMajor(degree_name="Business Administration", ug_
 business_administration_g = DegreeMajor(degree_name="Business Administration", ug_or_grad="Graduate", academic_unit_id=2)
 business_analytics = DegreeMajor(degree_name="Business Analytics", ug_or_grad="Undergraduate", academic_unit_id=2)
 business_analytics_g = DegreeMajor(degree_name="Business Analytics", ug_or_grad="Graduate", academic_unit_id=2)
-economics_cs = DegreeMajor(degree_name="Economics + Computer Science", ug_or_grad="Undergraduate", academic_unit_id=2)
-economics_cs_g = DegreeMajor(degree_name="Economics + Computer Science", ug_or_grad="Graduate", academic_unit_id=2)
+economics_cs = DegreeMajor(degree_name="Computer Science + Economics (DCOB)", ug_or_grad="Undergraduate", academic_unit_id=2)
+economics_cs_g = DegreeMajor(degree_name="Computer Science + Economics (DCOB)", ug_or_grad="Graduate", academic_unit_id=2)
 economic_data_analysis = DegreeMajor(degree_name="Economic Data Analysis", ug_or_grad="Undergraduate", academic_unit_id=2)
 economic_data_analysis_g = DegreeMajor(degree_name="Economic Data Analysis", ug_or_grad="Graduate", academic_unit_id=2)
 economics = DegreeMajor(degree_name="Economics", ug_or_grad="Undergraduate", academic_unit_id=2)
@@ -118,6 +119,7 @@ wicys = StudentGroup(group_name="Women in Cybersecurity")
 gen_risk_assessment = ClinicServiceArea(service_area_name="General Risk Assessment")
 policy_review = ClinicServiceArea(service_area_name="Policy Review")
 audit = ClinicServiceArea(service_area_name="Audit")
+other = ClinicServiceArea(service_area_name="Other")
 
 # Job Roles
 student_participant = ClinicJobRole(role_name="Student Participant")
@@ -130,6 +132,10 @@ public = ClinicJobRole(role_name="Public")
 
 # Participant status
 
+
+# Client Organization Types
+non_profit = ClientOrgnizationType(org_type_name="Non-Profit")
+for_profit = ClientOrgnizationType(org_type_name="For-Profit")
 
 
 
@@ -213,10 +219,13 @@ huge_gross_tuple = (
     gen_risk_assessment,
     policy_review,
     audit,
+    other,
     student_participant,
     student_leader,
     admin_assistant,
     clinic_director,
     board_of_directors,
     public,
+    non_profit,
+    for_profit
 )

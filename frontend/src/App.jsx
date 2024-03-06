@@ -2,7 +2,9 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Navbar } from "./components/Navbar";
 import About from "./components/pages/About";
-import { Contact, Home, StudentForm, ClientForm } from "./components/pages";
+import SignIn from "./components/pages/SignIn";
+import SignUp from "./components/pages/SignUp";
+import { Home, StudentForm, ClientForm } from "./components/pages";
 
 function App() {
   return (
@@ -10,12 +12,12 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home/>} />
+        <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/login" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/student" element={<StudentForm />} />
         <Route path="/client" element={<ClientForm />} />
-        
       </Routes>
     </div>
   );
