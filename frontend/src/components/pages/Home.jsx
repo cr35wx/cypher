@@ -201,12 +201,12 @@ export const Home = () => {
       </section>
 
       {
-
+        /*
       <>
         <Footer />
         <Basic />
       </>
-      }
+      */}
 
 
     </div>
