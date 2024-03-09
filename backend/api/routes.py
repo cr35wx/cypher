@@ -3,7 +3,11 @@ from datetime import datetime
 from flask import Blueprint, request, jsonify
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import check_password_hash, generate_password_hash
-from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from flask_jwt_extended import (create_access_token, 
+                                create_refresh_token, 
+                                jwt_required, get_jwt,
+                                current_user,
+                                get_jwt_identity)
 
 from .models import (
     DegreeMajor,
@@ -12,6 +16,7 @@ from .models import (
     AcademicUnit,
     StudentParticipant,
     ClientOrganization,
+    Course,
 )
 from .app import db
 
@@ -340,6 +345,26 @@ def client_application():
     return jsonify({"message": "Application submitted successfully."}), 201
 ######################### CLIENT APPLICATION ###############################
 
+@api.route('/refresh', methods=['GET'])
+@jwt_required(refresh=True)
+def refresh_access():
+    identity = get_jwt_identity()
+
+    new_access_token = create_access_token(identity=identity)
+
+    return jsonify({"access_token": new_access_token})
+
+@api.route("/whoami", methods=["GET"])
+@jwt_required()
+def whoami():
+    return jsonify({
+        "account_details": {
+            "email": current_user.email,
+            "password": current_user.password, 
+            "role": current_user.role 
+        }
+    })
+
 @api.route('/login', methods=['POST'])
 def login():
     login_data = request.json
@@ -349,14 +374,23 @@ def login():
             ClientOrganization.query.filter_by(org_contact_email=email).first())
 
     if not user:
-        return {"error": "invalid email"} # placeholder
+        return {"error": "invalid email"} 
 
     if not check_password_hash(user.password, password):
-        return {"error": "invalid password"} # placeholder
+        return {"error": "invalid password"}
 
     # some type of jwt token stuff happens on success
     access_token = create_access_token(identity=email)
-    return jsonify(access_token=access_token)
+    refresh_token = create_refresh_token(identity=email)
+    return jsonify(
+        {
+            "message" : "Logged In",
+            "tokens"  : {
+                "access_token": access_token, 
+                "refresh_token": refresh_token,
+            } 
+        }
+    ), 200
 
 # server will remember email, pwd, role once application is submitted StudentParticpant/ClienOrg can be populated
 # (not scalale, in early development: possible solutions- new sql table called tmpRegistration to hold email, pwd, and role 
@@ -399,6 +433,11 @@ def check_email_for_dupes():
 def get_service_areas_all():
     service_areas = ClinicServiceArea.query.order_by(ClinicServiceArea.service_area_id).all()
     return jsonify([area.to_json() for area in service_areas])
+
+@api.route('/api/courses')
+def get_courses_all():
+    courses = Course.query.order_by(Course.course_id).all()
+    return jsonify([f"{course.course_department}-{course.course_number}" for course in courses])
 
 
 @api.route("/api/academic-units", methods=["GET"])
