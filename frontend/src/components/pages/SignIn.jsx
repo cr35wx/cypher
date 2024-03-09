@@ -16,7 +16,7 @@ const SignIn = () => {
     const [errMsg, setErrMsg] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
-    const [token, setToken] = useState(sessionStorage.getItem("token"));
+    const [token, setToken] = useState(localStorage.getItem("token"));
 
     useEffect(() => {
         if (userRef.current) {
@@ -49,7 +49,7 @@ const SignIn = () => {
             } else {
                 setEmail('');
                 setPwd('');
-                sessionStorage.setItem("token", data.access_token);
+                localStorage.setItem("token", data.tokens.access_token);
             }
         } catch (error) {
             console.log(error);
@@ -57,13 +57,13 @@ const SignIn = () => {
     };
 
     const handleLogout = () => {
-        sessionStorage.removeItem('token');
+        localStorage.removeItem('token');
         setToken(null);
     };
 
     useEffect(() => {
-        setToken(sessionStorage.getItem("token"));
-    }, [sessionStorage.getItem("token")]);
+        setToken(localStorage.getItem("token"));
+    }, [localStorage.getItem("token")]);
 
     const togglePasswordVisibility = () => {
         setShowPassword(prevState => !prevState);
