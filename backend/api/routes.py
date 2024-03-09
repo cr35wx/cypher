@@ -1,6 +1,6 @@
 import pprint
 from datetime import datetime
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, session
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_jwt_extended import (create_access_token, 
@@ -378,6 +378,8 @@ def login():
 
     if not check_password_hash(user.password, password):
         return {"error": "invalid password"}
+    
+    session['email'] = email
 
     # some type of jwt token stuff happens on success
     access_token = create_access_token(identity=email)
@@ -391,6 +393,11 @@ def login():
             } 
         }
     ), 200
+
+@api.route('/logout')
+def logout():
+    session.pop('email', None)
+    return jsonify({"message": "Logged out successfully"}), 200
 
 # server will remember email, pwd, role once application is submitted StudentParticpant/ClienOrg can be populated
 # (not scalale, in early development: possible solutions- new sql table called tmpRegistration to hold email, pwd, and role 

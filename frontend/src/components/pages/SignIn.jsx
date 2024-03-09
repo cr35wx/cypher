@@ -56,9 +56,21 @@ const SignIn = () => {
         }
     };
 
-    const handleLogout = () => {
-        localStorage.removeItem('token');
-        setToken(null);
+    const handleLogout = async () => {
+        try {
+            const response = await fetch('/logout', {
+                method: 'GET',
+                credentials: 'include',
+            });
+            if (response.ok) {
+                localStorage.removeItem('token');
+                setToken();
+            } else {
+                console.error('Logout failed:', response.status);
+            }
+        } catch (error) {
+            console.error('Logout failed:', error.message);
+        }
     };
 
     useEffect(() => {
