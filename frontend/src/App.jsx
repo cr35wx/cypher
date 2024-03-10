@@ -5,10 +5,17 @@ import About from "./components/pages/About";
 import SignIn from "./components/pages/SignIn";
 import SignUp from "./components/pages/SignUp";
 import { Home, StudentForm, ClientForm } from "./components/pages";
+import { AuthProvider } from "./components/AuthContext";
+
+// awesome
+function AdminHack() {
+  window.location.replace("http://localhost:5000/admin");
+}
 
 function App() {
   return (
     <div className="App">
+    <AuthProvider>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -18,7 +25,9 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/student" element={<StudentForm />} />
         <Route path="/client" element={<ClientForm />} />
+        <Route path="/admin" element={<AdminHack />} />
       </Routes>
+    </AuthProvider>
     </div>
   );
 }

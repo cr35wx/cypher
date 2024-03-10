@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Icon } from 'react-icons-kit';
 import { eye } from 'react-icons-kit/icomoon/eye';
 import { eyeBlocked } from 'react-icons-kit/icomoon/eyeBlocked';
+import { useAuth } from '../AuthContext';
 
 const SignIn = () => {
     const userRef = useRef();
@@ -16,7 +17,8 @@ const SignIn = () => {
     const [errMsg, setErrMsg] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
-    const [token, setToken] = useState(sessionStorage.getItem("token"));
+    const { login, logout } = useAuth();
+    const [token, setToken] = useState(localStorage.getItem("token"));
 
     useEffect(() => {
         if (userRef.current) {
@@ -49,21 +51,32 @@ const SignIn = () => {
             } else {
                 setEmail('');
                 setPwd('');
-                sessionStorage.setItem("token", data.access_token);
+                login(data.tokens.access_token);
             }
         } catch (error) {
             console.log(error);
         }
     };
 
-    const handleLogout = () => {
-        sessionStorage.removeItem('token');
-        setToken(null);
+    const handleLogout = async () => {
+        try {
+            const response = await fetch('/logout', {
+                method: 'GET',
+                credentials: 'include',
+            });
+            if (response.ok) {
+                logout();
+            } else {
+                console.error('Logout failed:', response.status);
+            }
+        } catch (error) {
+            console.error('Logout failed:', error.message);
+        }
     };
 
     useEffect(() => {
-        setToken(sessionStorage.getItem("token"));
-    }, [sessionStorage.getItem("token")]);
+        setToken(localStorage.getItem("token"));
+    }, [localStorage.getItem("token")]);
 
     const togglePasswordVisibility = () => {
         setShowPassword(prevState => !prevState);

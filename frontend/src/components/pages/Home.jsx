@@ -204,12 +204,12 @@ export const Home = () => {
       </section>
 
       {
-
-        <>
-          <Footer />
-          <Basic />
-        </>
-      }
+        /*
+      <>
+        <Footer />
+        <Basic />
+      </>
+      */}
 
 
     </div>
