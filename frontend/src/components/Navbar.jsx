@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Navbar.css";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../images/logo.png";
+import { useAuth } from "./AuthContext";
 
 /* Static navBar which is at the top of all frontend pages It utilizes react-router
 
@@ -9,6 +10,25 @@ import logo from "../images/logo.png";
 
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { isLoggedIn, userEmail } = useAuth();
+  // const [loginText, setLoginText] = useState("Login");
+  // useEffect(() => {
+  //   fetch("/whoami", {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       if (data.error) {
+  //         console.log("ERROR", data.error);
+  //       }
+  //       if (data.account_details) setLoginText(data.account_details.email);
+  //
+  //     });
+  // }, []);
 
   return (
     <nav>
@@ -39,7 +59,7 @@ export const Navbar = () => {
           <NavLink
             className="font-graduate"
             to="/login">
-            Login
+            {isLoggedIn ? userEmail : "Login"}
           </NavLink>
         </li>
       </ul>

@@ -5,6 +5,7 @@ import About from "./components/pages/About";
 import SignIn from "./components/pages/SignIn";
 import SignUp from "./components/pages/SignUp";
 import { Home, StudentForm, ClientForm } from "./components/pages";
+import { AuthProvider } from "./components/AuthContext";
 
 // awesome
 function AdminHack() {
@@ -14,6 +15,7 @@ function AdminHack() {
 function App() {
   return (
     <div className="App">
+    <AuthProvider>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -25,6 +27,7 @@ function App() {
         <Route path="/client" element={<ClientForm />} />
         <Route path="/admin" element={<AdminHack />} />
       </Routes>
+    </AuthProvider>
     </div>
   );
 }
