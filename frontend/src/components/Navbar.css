@@ -1,19 +1,20 @@
 /*this is the css for the navBar, it was implemented prior to us using tailwind*/
 
 .active {
-    background-color: #11315d;
+    background-color: black !important;
 }
 
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(35, 86, 177);
+    background-color: #3b82f6;
     color: white;
     position: sticky;
     z-index: 50;
     top: 0;
 }
+
 
 /* i added z-index for the about page scroll so sections arent block */
 
