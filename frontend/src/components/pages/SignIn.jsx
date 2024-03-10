@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Icon } from 'react-icons-kit';
 import { eye } from 'react-icons-kit/icomoon/eye';
 import { eyeBlocked } from 'react-icons-kit/icomoon/eyeBlocked';
+import { useAuth } from '../AuthContext';
 
 const SignIn = () => {
     const userRef = useRef();
@@ -16,6 +17,7 @@ const SignIn = () => {
     const [errMsg, setErrMsg] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
+    const { login, logout } = useAuth();
     const [token, setToken] = useState(localStorage.getItem("token"));
 
     useEffect(() => {
@@ -49,7 +51,7 @@ const SignIn = () => {
             } else {
                 setEmail('');
                 setPwd('');
-                localStorage.setItem("token", data.tokens.access_token);
+                login(data.tokens.access_token);
             }
         } catch (error) {
             console.log(error);
@@ -63,8 +65,7 @@ const SignIn = () => {
                 credentials: 'include',
             });
             if (response.ok) {
-                localStorage.removeItem('token');
-                setToken();
+                logout();
             } else {
                 console.error('Logout failed:', response.status);
             }
