@@ -9,18 +9,39 @@ Modal.setAppElement('#root');
 function CustomModal({ isOpen, onRequestClose, email, pwd }) {
   const [errMsg, setErrMsg] = useState('');
 
-  const handleSubmit = async (role) => {
-    try {
-      const response = await axios.post('/api/signup', JSON.stringify({ email, pwd, role }), {
-        headers: { 'Content-Type': 'application/json' },
-        withCredentials: true
-      });
-      console.log(response.data)
-    } catch (err) {
-      console.error('Error submitting student application:', err);
-      setErrMsg('Failed to submit student application. Please try again later.');
-    }
-  };
+  // const handleSubmit = async (role) => {
+  //   try {
+  //     const response = await axios.post('/api/signup', JSON.stringify({ email, pwd, role }), {
+  //       headers: { 'Content-Type': 'application/json' },
+  //       withCredentials: true
+  //     });
+  //     console.log(response.data)
+  //   } catch (err) {
+  //     console.error('Error submitting student application:', err);
+  //     setErrMsg('Failed to submit student application. Please try again later.');
+  //   }
+  // };
+  //
+
+    const handleSubmit = async (role) => {
+      try {
+        const response = await fetch('/signup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, pwd, role }),
+          credentials: 'include' // Equivalent to axios's withCredentials: true
+        });
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        console.log(data);
+      } catch (err) {
+        console.error('Error submitting student application:', err);
+        setErrMsg('Failed to submit student application. Please try again later.');
+      }
+    };
+
 
   return (
     <Modal
