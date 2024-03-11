@@ -299,7 +299,7 @@ export function ClientForm() {
 
     console.log(formData);
 
-    fetch('/client-application', {
+    fetch('/api/client-application', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

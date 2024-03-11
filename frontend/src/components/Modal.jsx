@@ -11,7 +11,7 @@ function CustomModal({ isOpen, onRequestClose, email, pwd }) {
 
   const handleSubmit = async (role) => {
     try {
-      const response = await axios.post('/signup', JSON.stringify({ email, pwd, role }), {
+      const response = await axios.post('/api/signup', JSON.stringify({ email, pwd, role }), {
         headers: { 'Content-Type': 'application/json' },
         withCredentials: true
       });

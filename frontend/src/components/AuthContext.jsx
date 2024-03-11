@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const fetchUserEmail = () => {
-    fetch("/whoami", {
+    fetch("/api/whoami", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

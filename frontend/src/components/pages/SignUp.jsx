@@ -61,7 +61,7 @@ const SignUp = () => {
     const handleSignUp = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('/check-email', {
+            const response = await fetch('/api/check-email', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

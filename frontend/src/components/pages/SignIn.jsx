@@ -34,7 +34,7 @@ const SignIn = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch('/login', {
+            const response = await fetch('/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ const SignIn = () => {
 
     const handleLogout = async () => {
         try {
-            const response = await fetch('/logout', {
+            const response = await fetch('/api/logout', {
                 method: 'GET',
                 credentials: 'include',
             });

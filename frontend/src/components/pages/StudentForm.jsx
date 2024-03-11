@@ -529,7 +529,7 @@ export function StudentForm() {
       ethnicity,
     };
 
-    fetch("/student-application", {
+    fetch("/api/student-application", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
