@@ -27,13 +27,3 @@ div div ul li a:not(.active):hover {
     color: red;
     
 } */
-
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: rgb(35, 86, 177);
-    color: white;
-    position: sticky;
-    bottom: 0;
-}

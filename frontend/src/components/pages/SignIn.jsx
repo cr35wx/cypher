@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Icon } from 'react-icons-kit';
 import { eye } from 'react-icons-kit/icomoon/eye';
 import { eyeBlocked } from 'react-icons-kit/icomoon/eyeBlocked';
+import { useAuth } from '../AuthContext';
 
 const SignIn = () => {
     const userRef = useRef();
@@ -16,6 +17,7 @@ const SignIn = () => {
     const [errMsg, setErrMsg] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
+    const { login, logout } = useAuth();
     const [token, setToken] = useState(localStorage.getItem("token"));
 
     const togglePasswordVisibility = () => {
@@ -43,7 +45,7 @@ const SignIn = () => {
             } else {
                 setEmail('');
                 setPwd('');
-                localStorage.setItem("token", data.tokens.access_token);
+                login(data.tokens.access_token);
             }
         } catch (error) {
             console.log(error);
@@ -57,8 +59,7 @@ const SignIn = () => {
                 credentials: 'include',
             });
             if (response.ok) {
-                localStorage.removeItem('token');
-                setToken();
+                logout();
             } else {
                 console.error('Logout failed:', response.status);
             }
@@ -110,7 +111,6 @@ const SignIn = () => {
                 <section className="flex flex-col items-center justify-center min-h-screen bg-dodgerblue"
                     style={{ backgroundImage: `url(${loginImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
                 >
-                    <p ref={errRef} className={` text-white font-bold py-2 px-4 mb-2 ${errMsg ? '' : 'hidden'}`}>{errMsg}</p>
                     <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-96">
                         <h1 className="text-center text-2xl font-graduate font-extrabold text-darkBlue mb-2">Log In</h1>
                         <input
@@ -150,6 +150,9 @@ const SignIn = () => {
                                 <Link to="/signup" className="text-gray-700">Sign Up</Link>
                             </span>
                         </p>
+                        <div className="text-center">
+                            <p ref={errRef} className={` text-darkBlue font-graduate font-bold py-2 px-4 mb-2 ${errMsg ? '' : 'hidden'}`}>{errMsg}</p>
+                        </div>
                     </form>
                 </section>
             )}

@@ -16,20 +16,20 @@ export const Home = () => {
   return (
     <div>
       {/* Landing */}
-      <section className="bg-white">
+      <section className="bg-gray-900">
         <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center">
           <div className="mx-auto max-w-50 text-center">
-            <h1 className="font-graduate text-3xl text-gray-800 font-extrabold sm:text-5xl">
+            <h1 className="font-graduate text-3xl text-white font-extrabold sm:text-5xl">
               Welcome to
-              <strong className="mt-2 mb-4 font-graduate font-extrabold text-darkBlue md:flex-auto sm:block"> Cypher Cybersecurity Clinic </strong>
+              <strong className="mt-2 mb-4 font-graduate font-extrabold text-lightBlue md:flex-auto sm:block"> Cypher Cybersecurity Clinic </strong>
             </h1>
 
             <div className="mt-10 flex flex-col items-center">
-              <p className="text-lg sm:text-xl font-medium text-gray-800">
+              <p className="text-lg sm:text-xl font-medium text-white">
                 The one-stop shop for student-performed professional services:
               </p>
               <ReactTyped
-                className='text-lg sm:text-xl font-bold text-darkBlue pl-2'
+                className='text-lg sm:text-xl font-bold text-lightBlue pl-2'
                 strings={['General Security Risk', 'Audit', 'Policy Review']}
                 typeSpeed={75}
                 backSpeed={110}
@@ -43,14 +43,16 @@ export const Home = () => {
               <motion.a
                 whileTap={{ scale: 0.85 }}
                 href="/signup" // URL of the register page
-                className="block w-full rounded bg-darkBlue px-12 py-3 text-xl font-graduate font-medium text-white shadow no-underline hover:bg-blue-800 focus:outline-none focus:ring active:bg-blue-900 sm:w-auto"
+                className="button-style"
+              //className="block w-full rounded bg-darkBlue px-12 py-3 text-xl font-graduate font-medium text-white shadow no-underline hover:bg-blue-800 focus:outline-none focus:ring active:bg-blue-900 sm:w-auto"
               >
                 Apply
               </motion.a>
 
               <motion.a
                 whileTap={{ scale: 0.85 }}
-                className="block w-full rounded px-12 py-3 text-xl font-graduate font-medium text-blue-800 shadow no-underline hover:text-darkBlue focus:outline-none focus:ring active:text-darkBlue sm:w-auto"
+                className="button-style"
+                //className="block w-full rounded px-12 py-3 text-xl font-graduate font-medium text-blue-800 shadow no-underline hover:text-darkBlue focus:outline-none focus:ring active:text-darkBlue sm:w-auto"
                 href="#divider"
               >
                 Learn More
@@ -188,11 +190,12 @@ export const Home = () => {
 
           </div>
 
-          <div className="mt-12 text-center">
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
             <motion.a
               whileTap={{ scale: 0.85 }}
               href='/signup'
-              className="inline-block rounded bg-darkBlue px-12 py-3 text-xl font-graduate font-medium text-white transition hover:bg-blue-900 focus:outline-none focus:ring no-underline"
+              className="button-style"
+            //className="inline-block rounded bg-darkBlue px-12 py-3 text-xl font-graduate font-medium text-white transition hover:bg-blue-900 focus:outline-none focus:ring no-underline"
             >
               Apply
             </motion.a>
