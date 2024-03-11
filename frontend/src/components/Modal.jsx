@@ -24,11 +24,12 @@ function CustomModal({ isOpen, onRequestClose, email, pwd }) {
   //
 
     const handleSubmit = async (role) => {
+      const signUpData = { email, pwd, role };
       try {
-        const response = await fetch('/signup', {
+        const response = await fetch('/api/signup', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, pwd, role }),
+          body: JSON.stringify(signUpData),
           credentials: 'include' // Equivalent to axios's withCredentials: true
         });
         if (!response.ok) {
