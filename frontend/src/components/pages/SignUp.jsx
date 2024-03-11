@@ -110,7 +110,6 @@ const SignUp = () => {
                 <section className="flex flex-col items-center justify-center min-h-screen bg-dodgerblue"
                     style={{ backgroundImage: `url(${loginImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
                 >
-                    <p ref={errRef} className={`text-white font-bold py-2 px-4 mb-2 ${errMsg ? '' : 'hidden'}`}>{errMsg}</p>
                     <form className="bg-white p-8 rounded shadow-md w-96">
                         <h1 className="text-center text-2xl font-graduate font-extrabold text-darkBlue mb-2">Registration</h1>
 
@@ -196,6 +195,9 @@ const SignUp = () => {
                                 <Link to="/login" className="text-gray-700">Sign In</Link>
                             </span>
                         </p>
+                        <div className="text-center">
+                            <p ref={errRef} className={`text-darkBlue font-graduate font-bold py-2 px-4 mb-2 ${errMsg ? '' : 'hidden'}`}>{errMsg}</p>
+                        </div>
                     </form>
                 </section>
             )}

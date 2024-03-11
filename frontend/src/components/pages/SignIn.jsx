@@ -20,15 +20,9 @@ const SignIn = () => {
     const { login, logout } = useAuth();
     const [token, setToken] = useState(localStorage.getItem("token"));
 
-    useEffect(() => {
-        if (userRef.current) {
-            userRef.current.focus();
-        }
-    }, [])
-
-    useEffect(() => {
-        setErrMsg('');
-    }, [email, pwd])
+    const togglePasswordVisibility = () => {
+        setShowPassword(prevState => !prevState);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -78,9 +72,25 @@ const SignIn = () => {
         setToken(localStorage.getItem("token"));
     }, [localStorage.getItem("token")]);
 
-    const togglePasswordVisibility = () => {
-        setShowPassword(prevState => !prevState);
-    };
+    useEffect(() => {
+        if (userRef.current) {
+            userRef.current.focus();
+        }
+    }, [])
+
+    useEffect(() => {
+        setErrMsg('');
+    }, [email, pwd])
+
+    useEffect(() => {
+        if (userRef.current) {
+            userRef.current.focus();
+        }
+    }, [])
+
+    useEffect(() => {
+        setErrMsg('');
+    }, [email, pwd])
 
     return (
         <>
@@ -101,7 +111,6 @@ const SignIn = () => {
                 <section className="flex flex-col items-center justify-center min-h-screen bg-dodgerblue"
                     style={{ backgroundImage: `url(${loginImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
                 >
-                    <p ref={errRef} className={` text-white font-bold py-2 px-4 mb-2 ${errMsg ? '' : 'hidden'}`}>{errMsg}</p>
                     <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-96">
                         <h1 className="text-center text-2xl font-graduate font-extrabold text-darkBlue mb-2">Log In</h1>
                         <input
@@ -141,6 +150,9 @@ const SignIn = () => {
                                 <Link to="/signup" className="text-gray-700">Sign Up</Link>
                             </span>
                         </p>
+                        <div className="text-center">
+                            <p ref={errRef} className={` text-darkBlue font-graduate font-bold py-2 px-4 mb-2 ${errMsg ? '' : 'hidden'}`}>{errMsg}</p>
+                        </div>
                     </form>
                 </section>
             )}
