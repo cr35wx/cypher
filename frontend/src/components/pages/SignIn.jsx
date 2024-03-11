@@ -18,15 +18,9 @@ const SignIn = () => {
 
     const [token, setToken] = useState(localStorage.getItem("token"));
 
-    useEffect(() => {
-        if (userRef.current) {
-            userRef.current.focus();
-        }
-    }, [])
-
-    useEffect(() => {
-        setErrMsg('');
-    }, [email, pwd])
+    const togglePasswordVisibility = () => {
+        setShowPassword(prevState => !prevState);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -77,9 +71,25 @@ const SignIn = () => {
         setToken(localStorage.getItem("token"));
     }, [localStorage.getItem("token")]);
 
-    const togglePasswordVisibility = () => {
-        setShowPassword(prevState => !prevState);
-    };
+    useEffect(() => {
+        if (userRef.current) {
+            userRef.current.focus();
+        }
+    }, [])
+
+    useEffect(() => {
+        setErrMsg('');
+    }, [email, pwd])
+
+    useEffect(() => {
+        if (userRef.current) {
+            userRef.current.focus();
+        }
+    }, [])
+
+    useEffect(() => {
+        setErrMsg('');
+    }, [email, pwd])
 
     return (
         <>
