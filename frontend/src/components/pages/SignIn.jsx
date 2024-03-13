@@ -94,7 +94,7 @@ const SignIn = () => {
 
     return (
         <>
-            {(token && token !== "" && token != undefined) ? (
+            {(token && token !== "" && token !== undefined) ? (
                 <section className="flex flex-col items-center justify-center min-h-screen bg-dodgerblue"
                     style={{ backgroundImage: `url(${loginImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
                 >
