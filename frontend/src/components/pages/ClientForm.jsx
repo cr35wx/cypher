@@ -70,29 +70,29 @@ const ContactPersonName = ({ contactPersonName, setContactPersonName }) => {
   );
 };
 
-const ContactPersonEmail = ({ contactPersonEmail, setContactPersonEmail }) => {
-  return (
-    <>
-      <label
-        htmlFor="contactPersonEmail"
-        className="text-gray-700 text-sm font-bold"
-      >
-        Contact Person's Email:
-      </label>
-      <input
-        id="contactPersonEmail"
-        className="mb-2 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-        type="email"
-        placeholder="Email"
-        value={contactPersonEmail}
-        onChange={(e) => setContactPersonEmail(e.target.value)}
-        autoComplete="email"
-        required
-      />
-    </>
-  );
-};
-
+// const ContactPersonEmail = ({ contactPersonEmail, setContactPersonEmail }) => {
+//   return (
+//     <>
+//       <label
+//         htmlFor="contactPersonEmail"
+//         className="text-gray-700 text-sm font-bold"
+//       >
+//         Contact Person's Email:
+//       </label>
+//       <input
+//         id="contactPersonEmail"
+//         className="mb-2 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+//         type="email"
+//         placeholder="Email"
+//         value={contactPersonEmail}
+//         onChange={(e) => setContactPersonEmail(e.target.value)}
+//         autoComplete="email"
+//         required
+//       />
+//     </>
+//   );
+// };
+//
 const ContactPersonPhone = ({ contactPersonPhone, setContactPersonPhone }) => {
   return (
     <>
@@ -259,7 +259,6 @@ export function ClientForm() {
   const [orgName, setOrgName] = useState("");
   const [orgType, setOrgType] = useState("");
   const [contactPersonName, setContactPersonName] = useState("");
-  const [contactPersonEmail, setContactPersonEmail] = useState("");
   const [contactPersonPhone, setContactPersonPhone] = useState("");
   const [orgWebsite, setOrgWebsite] = useState("");
   const [annualRevenue, setAnnualRevenue] = useState(0);
@@ -284,7 +283,6 @@ export function ClientForm() {
       orgName,
       orgType,
       contactPersonName,
-      contactPersonEmail,
       contactPersonPhone,
       orgWebsite,
       annualRevenue,
@@ -318,7 +316,6 @@ export function ClientForm() {
           setOrgName("");
           setOrgType("");
           setContactPersonName("");
-          setContactPersonEmail("");
           setContactPersonPhone("");
           setOrgWebsite("");
           setAnnualRevenue(0);
@@ -363,10 +360,6 @@ export function ClientForm() {
               <ContactPersonName
                 contactPersonName={contactPersonName}
                 setContactPersonName={setContactPersonName}
-              />
-              <ContactPersonEmail
-                contactPersonEmail={contactPersonEmail}
-                setContactPersonEmail={setContactPersonEmail}
               />
               <ContactPersonPhone
                 contactPersonPhone={contactPersonPhone}

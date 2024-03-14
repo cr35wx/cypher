@@ -46,26 +46,26 @@ const StudentID = ({ studentID, setStudentID }) => {
   );
 };
 
-const StudentEmail = ({ studentEmail, setStudentEmail }) => {
-  return (
-    <>
-      <label htmlFor="studentEmail" className="text-gray-700 text-sm font-bold">
-        Student Email:
-      </label>
-      <input
-        id="studentEmail"
-        className="mb-2 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-        type="email"
-        placeholder="Email"
-        value={studentEmail}
-        onChange={(e) => setStudentEmail(e.target.value)}
-        autoComplete="email"
-        required
-      />
-    </>
-  );
-};
-
+// const StudentEmail = ({ studentEmail, setStudentEmail }) => {
+//   return (
+//     <>
+//       <label htmlFor="studentEmail" className="text-gray-700 text-sm font-bold">
+//         Student Email:
+//       </label>
+//       <input
+//         id="studentEmail"
+//         className="mb-2 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+//         type="email"
+//         placeholder="Email"
+//         value={studentEmail}
+//         onChange={(e) => setStudentEmail(e.target.value)}
+//         autoComplete="email"
+//         required
+//       />
+//     </>
+//   );
+// };
+//
 const School = ({ college, setCollege, setYearStanding }) => {
   const schools = [
     {
@@ -472,7 +472,6 @@ const Ethnicity = ({ ethnicity, setEthnicity }) => {
 export function StudentForm() {
   const [name, setName] = useState("");
   const [studentID, setStudentID] = useState("");
-  const [studentEmail, setStudentEmail] = useState("");
   const [college, setCollege] = useState({ school: "", major: "" });
   const [yearStanding, setYearStanding] = useState("");
   const [graduationDate, setGraduationState] = useState({
@@ -513,7 +512,6 @@ export function StudentForm() {
     const formData = {
       name: name.trim(),
       studentID,
-      studentEmail,
       college,
       yearStanding,
       graduationDate,
@@ -547,7 +545,6 @@ export function StudentForm() {
           console.log(data);
           setName("");
           setStudentID("");
-          setStudentEmail("");
           setCollege({ school: "", major: "" });
           setYearStanding("");
           setGraduationState({ quarter: "", year: new Date().getFullYear() });
@@ -590,10 +587,6 @@ export function StudentForm() {
             <form onSubmit={handleSubmit} className="my-auto w-full px-8 pt-6 pb-8 mb-4">
               <Name name={name} setName={setName} />
               <StudentID studentID={studentID} setStudentID={setStudentID} />
-              <StudentEmail
-                studentEmail={studentEmail}
-                setStudentEmail={setStudentEmail}
-              />
               <School
                 college={college}
                 setCollege={setCollege}

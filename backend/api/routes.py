@@ -99,7 +99,6 @@ def validate_how_did_you_hear(how_did_you_hear):
 def validate_student_form(student_data):
     name_error = validate_name(student_data.get("name", ""))
     student_id_error = validate_student_id(student_data.get("studentID", ""))
-    email_error = validate_email(student_data.get("studentEmail", ""))
     college_error = validate_college(student_data.get("college", {}))
     year_standing_error = validate_year_standing(
         student_data.get("college").get("school"), student_data.get("yearStanding", "")
@@ -118,7 +117,6 @@ def validate_student_form(student_data):
         error
         for error in (
             name_error,
-            email_error,
             student_id_error,
             college_error,
             year_standing_error,
@@ -134,25 +132,20 @@ def validate_student_form(student_data):
 
 @api.route("/student-application", methods=["POST"])
 def student_application():
+    email = session.get("email")
     form_data = request.json
-    errors = validate_student_form(form_data)
-    if errors:
+    email_errors = validate_email(email)
+    form_errors = validate_student_form(form_data)
+
+    if email_errors or form_errors:
+        errors = email_errors if email_errors else form_errors
         print(errors)
         return jsonify({"errors": errors}), 400
 
     pprint.pprint(form_data)
 
-    email = form_data.get("studentEmail")
-    register_details = student_temp_users.get(email)
-
-    # looking at register email and application email to see if they match
-    if not register_details:
-        return jsonify({"errors": "Email doesn't match registration"}), 400
-    
-    password = register_details.get("password")
-    role = register_details.get("role")
-    # delete tmp to manage storage 
-    del student_temp_users[email]
+    password = session.get("pass")
+    role = session.get("role")
 
     first_name, *last_names = form_data.get("name").split()
     ug_or_grad = "Graduate" if form_data.get("yearStanding") == "Graduate" else "Undergraduate"
@@ -199,8 +192,13 @@ def student_application():
                 }),
             409,
         )
+    
+    print(f"A student application from {email} has been submitted and added to the database.")
 
-    print(f"A student application has been submitted and added to the database.")
+    del session["email"]
+    del session["pass"]
+    del session["role"]
+
     return jsonify({"message": "Application submitted successfully."}), 201
 ######################### STUDENT APPLICATION ###############################
 
@@ -282,25 +280,17 @@ def validate_client_form(client_data):
 
 @api.route("/client-application", methods=["POST"])
 def client_application():
+    email = session.get("email")
     form_data = request.json
-    errors = validate_client_form(form_data)
-    if errors:
-        return jsonify({"errors": errors}), 400
+    form_errors = validate_client_form(form_data)
+
+    if form_errors:
+        return jsonify({"errors": form_errors}), 400
 
     pprint.pprint(form_data)
 
-    email = form_data.get("contactPersonEmail")
-    register_details = client_temp_users.get(email)
-
-    # looking at registered email and application email to see if they match
-    if not register_details:
-        return jsonify({"errors": "Email doesn't match registration"}), 400
-    
-    password = register_details.get("password")
-    role = register_details.get("role")
-
-    # delete tmp to manage storage 
-    del client_temp_users[email]
+    password = session.get("pass")
+    role = session.get("role")
 
     contact_fname, *contact_lnames = form_data.get("contactPersonName").split()
     org_type_id = (
@@ -341,7 +331,12 @@ def client_application():
             409,
         )
 
-    print(f"A client application has been submitted and added to the database.")
+    print(f"A client application from {email} has been submitted and added to the database.")
+
+    del session["email"]
+    del session["pass"]
+    del session["role"]
+
     return jsonify({"message": "Application submitted successfully."}), 201
 ######################### CLIENT APPLICATION ###############################
 
@@ -399,12 +394,6 @@ def logout():
     session.pop('email', None)
     return jsonify({"message": "Logged out successfully"}), 200
 
-# server will remember email, pwd, role once application is submitted StudentParticpant/ClienOrg can be populated
-# (not scalale, in early development: possible solutions- new sql table called tmpRegistration to hold email, pwd, and role 
-# that would be called on in successful application submission to populate the actual tables i.e StudentParticpant or ClientOrganization)
-# this was a work around DB complaining about foreign key constraints that occur when trying to add email, pwd, and role to StudentParticpant/ClienOrg
-student_temp_users = {}
-client_temp_users = {}
 
 @api.route('/signup', methods=['POST'])
 def signup():
@@ -415,9 +404,14 @@ def signup():
 
     # Store the email, password, and role temporarily
     if role == "student":
-        student_temp_users[email] = {"email": email, "password": hashed_password, "role": role}
+        session["email"] = email
+        session["pass"] = hashed_password
+        session["role"] = role
     elif role == "client":
-        client_temp_users[email] = {"email": email, "password": hashed_password, "role": role}
+        session["email"] = email
+        session["pass"] = hashed_password
+        session["role"] = role
+        
 
     # Return a success message
     return jsonify({"message": "User data stored successfully"}), 201
