@@ -19,6 +19,7 @@ const SignIn = () => {
 
     const { login, logout } = useAuth();
     const [token, setToken] = useState(localStorage.getItem("token"));
+    const [refreshToken, setRefreshToken] = useState(localStorage.getItem("refresh_token"));
 
     const togglePasswordVisibility = () => {
         setShowPassword(prevState => !prevState);
@@ -45,7 +46,7 @@ const SignIn = () => {
             } else {
                 setEmail('');
                 setPwd('');
-                login(data.tokens.access_token);
+                login(data.tokens.access_token, data.tokens.refresh_token);
             }
         } catch (error) {
             console.log(error);
