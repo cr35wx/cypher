@@ -98,7 +98,7 @@ const SignUp = () => {
                             <motion.button
                                 whileTap={{ scale: 0.90 }}
                                 onClick={openModal}
-                                class="block w-full rounded bg-Blue px-12 py-3 text-xl font-medium text-white shadow hover:bg-darkBlue focus:outline-none focus:ring sm:w-auto"
+                                className="block w-full rounded bg-Blue px-12 py-3 text-xl font-medium text-white shadow hover:bg-darkBlue focus:outline-none focus:ring sm:w-auto"
                             >
                                 Apply
                             </motion.button>
