@@ -352,9 +352,13 @@ def refresh_access():
 @api.route("/whoami", methods=["GET"])
 @jwt_required()
 def whoami():
+    email = (current_user.email
+             if current_user.role == "student"
+             else current_user.org_contact_email)
+
     return jsonify({
         "account_details": {
-            "email": current_user.email,
+            "email": email,
             "password": current_user.password, 
             "role": current_user.role 
         }
