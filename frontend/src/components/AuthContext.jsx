@@ -33,14 +33,16 @@ export const AuthProvider = ({ children }) => {
     .catch((error) => console.error("Error fetching user email:", error));
   };
 
-  const login = (token) => {
+  const login = (token, refreshToken) => {
     localStorage.setItem("token", token);
+    localStorage.setItem("refresh_token", refreshToken);
     setIsLoggedIn(true);
     fetchUserEmail(); // Fetch user email upon login
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
+    localStorage.removeItem("refresh_token");
     setIsLoggedIn(false);
     setUserEmail(""); // Clear user email upon logout
   };
