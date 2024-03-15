@@ -79,10 +79,10 @@ const SignUp = () => {
                 }
             } else if (response.status === 409) {
                 const errorData = await response.json();
-                setErrMsg(errorData.error || 'Email already in use. Please use a different email.');
+                setErrMsg(errorData.error);
             } else {
                 const errorData = await response.json();
-                setErrMsg(errorData.error || 'Failed to sign up. Please try again later.');
+                setErrMsg(errorData.error);
             }
         } catch (error) {
             console.error('Error:', error);
