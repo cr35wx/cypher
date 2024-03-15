@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { loginImg } from '../../images';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion";
 import { Icon } from 'react-icons-kit';
 import { eye } from 'react-icons-kit/icomoon/eye';
@@ -11,13 +11,14 @@ const SignIn = () => {
     const userRef = useRef();
     const pwdRef = useRef();
     const errRef = useRef();
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
-    const { login, logout } = useAuth();
+    const { login } = useAuth();
     const [token, setToken] = useState(localStorage.getItem("token"));
     const [refreshToken, setRefreshToken] = useState(localStorage.getItem("refresh_token"));
 
@@ -47,31 +48,17 @@ const SignIn = () => {
                 setEmail('');
                 setPwd('');
                 login(data.tokens.access_token, data.tokens.refresh_token);
+                navigate('/account');
             }
         } catch (error) {
             console.log(error);
         }
     };
 
-    const handleLogout = async () => {
-        try {
-            const response = await fetch('/logout', {
-                method: 'GET',
-                credentials: 'include',
-            });
-            if (response.ok) {
-                logout();
-            } else {
-                console.error('Logout failed:', response.status);
-            }
-        } catch (error) {
-            console.error('Logout failed:', error.message);
-        }
-    };
-
     useEffect(() => {
-        setToken(localStorage.getItem("token"));
-    }, [localStorage.getItem("token")]);
+        setToken();
+        setRefreshToken();
+    }, [token, refreshToken]);
 
     useEffect(() => {
         if (userRef.current) {
@@ -95,20 +82,6 @@ const SignIn = () => {
 
     return (
         <>
-            {(token && token !== "" && token !== undefined) ? (
-                <section className="flex flex-col items-center justify-center min-h-screen bg-dodgerblue"
-                    style={{ backgroundImage: `url(${loginImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
-                >
-                    <div className="flex bg-white p-8 rounded justify-center items-center shadow-md w-96 flex-col">
-                        <h1 className="text-center text-2xl font-graduate font-extrabold text-darkBlue mb-4">Welcome Back</h1>
-                        <div className="relative flex justify-center items-center">
-                            <button onClick={handleLogout} className="bg-red-800 hover:bg-red-900 text-white font-bold py-2 px-4 rounded">
-                                Logout
-                            </button>
-                        </div>
-                    </div>
-                </section >
-            ) : (
                 <section className="flex flex-col items-center justify-center min-h-screen bg-dodgerblue"
                     style={{ backgroundImage: `url(${loginImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
                 >
@@ -156,7 +129,6 @@ const SignIn = () => {
                         </div>
                     </form>
                 </section>
-            )}
         </>
     );
 };

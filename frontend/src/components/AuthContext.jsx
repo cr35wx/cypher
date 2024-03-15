@@ -10,6 +10,7 @@ export function useAuth() {
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState("");
+  const [userRole, setUserRole] = useState("");
   const TOKEN_EXPIRATION_CHECK_INTERVAL = 15 * 60 * 1000; // check every 15 minutes
   //const TOKEN_EXPIRATION_CHECK_INTERVAL = 15 * 1000; if u set access token to expire at 1 min, refresh occurs 15 secs (just for testing)
 
@@ -18,6 +19,7 @@ export const AuthProvider = ({ children }) => {
     setIsLoggedIn(!!token);
     if (token) {
       fetchUserEmail() // Fetch email if token exists
+      fetchUserRole();
       checkTokenExpiration();
     }; 
   }, []);
@@ -46,6 +48,14 @@ export const AuthProvider = ({ children }) => {
     .catch((error) => console.error("Error fetching user email:", error));
   };
 
+  const fetchUserRole = () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      setUserRole(decodedToken.is_student ? "student" : decodedToken.is_client ? "client" : "");
+    }
+  };
+
   const login = (token, refreshToken) => {
     localStorage.setItem("token", token);
     localStorage.setItem("refresh_token", refreshToken);
@@ -57,6 +67,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("refresh_token");
+    localStorage.removeItem("accountDetails");
     setIsLoggedIn(false);
     setUserEmail(""); // Clear user email upon logout
   };
@@ -93,7 +104,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout, userEmail }}>
+    <AuthContext.Provider value={{ isLoggedIn, login, logout, userEmail, userRole }}>
       {children}
     </AuthContext.Provider>
   );

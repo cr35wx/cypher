@@ -52,14 +52,6 @@ const SignUp = () => {
         setErrMsg('');
     }, [email, pwd, matchPwd]);
 
-    // const openModal = () => {
-    //     setIsModalOpen(true);
-    // };
-
-    // const closeModal = () => {
-    //     setIsModalOpen(false);
-    // };
-
     const handleSignUp = async (e) => {
         e.preventDefault();
         try {
