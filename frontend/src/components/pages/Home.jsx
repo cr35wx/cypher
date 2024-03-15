@@ -1,10 +1,11 @@
 import React from "react";
 import './Home.css';
 import Fade from "../Carousel"
-import Basic from "../Calendar/calendarComponentClient";
 import { ReactTyped } from 'react-typed';
 import { motion } from "framer-motion";
+import { useAuth } from "../AuthContext";
 import Footer from "./footer/Footer";
+import Basic from "../Calendar/calendarComponentClient";
 
 /*Homepage that includes two react libraries react-modal and react-slick. Modal is a pop-up that appears when the user hits the register or get started button. 
 It prompts the user to fill out the student form or the client form. 
@@ -12,6 +13,17 @@ React-slick allows us to import the carousel which cycles thorugh 3 stock images
 */
 
 export const Home = () => {
+  const { isLoggedIn } = useAuth();
+
+  const handleApplyClick = () => {
+    if (isLoggedIn) {
+      // If user is logged in, redirect to account page
+      window.location.href = "/account";
+    } else {
+      // If user is not logged in, redirect to signup page
+      window.location.href = "/signup";
+    }
+  };
 
   return (
     <div>
@@ -36,13 +48,11 @@ export const Home = () => {
                 loop
               />
             </div>
-
-
-
+          
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <motion.a
                 whileTap={{ scale: 0.85 }}
-                href="/signup" // URL of the register page
+                onClick={handleApplyClick}
                 className="button-style"
               //className="block w-full rounded bg-darkBlue px-12 py-3 text-xl font-graduate font-medium text-white shadow no-underline hover:bg-blue-800 focus:outline-none focus:ring active:bg-blue-900 sm:w-auto"
               >
@@ -193,7 +203,7 @@ export const Home = () => {
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <motion.a
               whileTap={{ scale: 0.85 }}
-              href='/signup'
+              onClick={handleApplyClick}
               className="button-style"
             //className="inline-block rounded bg-darkBlue px-12 py-3 text-xl font-graduate font-medium text-white transition hover:bg-blue-900 focus:outline-none focus:ring no-underline"
             >
