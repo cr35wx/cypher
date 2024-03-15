@@ -340,7 +340,7 @@ def client_application():
     return jsonify({"message": "Application submitted successfully."}), 201
 ######################### CLIENT APPLICATION ###############################
 
-@api.route('/refresh', methods=['GET'])
+@api.route('/refresh', methods=['POST'])
 @jwt_required(refresh=True)
 def refresh_access():
     identity = get_jwt_identity()
@@ -404,26 +404,6 @@ def signup():
     signup_data = request.json
     email, password, role = signup_data.get("email", ""), signup_data.get("pwd", ""), signup_data.get("role", "")
 
-    hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
-
-    # Store the email, password, and role temporarily
-    if role == "student":
-        session["email"] = email
-        session["pass"] = hashed_password
-        session["role"] = role
-    elif role == "client":
-        session["email"] = email
-        session["pass"] = hashed_password
-        session["role"] = role
-        
-
-    # Return a success message
-    return jsonify({"message": "User data stored successfully"}), 201
-
-@api.route('/check-email', methods=['GET'])
-def check_email_for_dupes():
-    email = request.headers.get('email')
-
     # only checking for students or client dupes 
     existing_user = (StudentParticipant.query.filter_by(email=email).first() or 
             ClientOrganization.query.filter_by(org_contact_email=email).first())
@@ -431,7 +411,16 @@ def check_email_for_dupes():
     if existing_user:
         return jsonify({"error": "Email already in use"}), 409
     
-    return jsonify({"message": "Email available"}), 200
+    hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
+    role = role.lower()
+
+    # Store the email, password, and role temporarily in session
+    session["email"] = email
+    session["pass"] = hashed_password
+    session["role"] = role
+        
+    # Return a success message
+    return jsonify({"message": "User data stored successfully"}), 201
 
 # Also known as "Project Type" on the application forms...
 @api.route('/api/clinic-service-areas')

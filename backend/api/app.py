@@ -4,6 +4,7 @@ from config import DevelopmentConfig, ProductionConfig
 from flask_jwt_extended import JWTManager
 
 import os
+from datetime import timedelta
 
 db = SQLAlchemy()
 
@@ -14,6 +15,8 @@ def create_app():
     app.config.from_object(DevelopmentConfig)
 
     app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET")
+    app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
+    app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=30)    
     jwt = JWTManager(app)
 
     db.init_app(app)

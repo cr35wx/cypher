@@ -2,8 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { loginImg } from '../../images';
-import { Link } from 'react-router-dom';
-import CustomModal from "../Modal";
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Icon } from 'react-icons-kit';
 import { eye } from 'react-icons-kit/icomoon/eye';
@@ -16,6 +15,7 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const SignUp = () => {
     const emailRef = useRef();
     const errRef = useRef();
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
     const [validEmail, setValidEmail] = useState(false);
@@ -23,15 +23,17 @@ const SignUp = () => {
     const [pwd, setPwd] = useState('');
     const [validPwd, setValidPwd] = useState(false);
     const [pwdFocus, setPwdFocus] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
     const [matchPwd, setMatchPwd] = useState('');
     const [validMatch, setValidMatch] = useState(false);
     const [matchFocus, setMatchFocus] = useState(false);
 
     const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false);
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
 
     useEffect(() => {
         emailRef.current.focus();
@@ -50,29 +52,37 @@ const SignUp = () => {
         setErrMsg('');
     }, [email, pwd, matchPwd]);
 
-    const openModal = () => {
-        setIsModalOpen(true);
-    };
+    // const openModal = () => {
+    //     setIsModalOpen(true);
+    // };
 
-    const closeModal = () => {
-        setIsModalOpen(false);
-    };
+    // const closeModal = () => {
+    //     setIsModalOpen(false);
+    // };
 
     const handleSignUp = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('/check-email', {
-                method: 'GET',
+            const role = email.endsWith('@depaul.edu') ? 'student' : 'client';
+            const response = await fetch('/signup', {
+                method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'email': email
-                }
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, pwd, role })
             });
-            const data = await response.json();
             if (response.ok) {
-                setSuccess(true);
+                if (role === 'student') {
+                    navigate('/student');
+                } else {
+                    navigate('/client');
+                }
+            } else if (response.status === 409) {
+                const errorData = await response.json();
+                setErrMsg(errorData.error || 'Email already in use. Please use a different email.');
             } else {
-                setErrMsg(data.error);
+                const errorData = await response.json();
+                setErrMsg(errorData.error || 'Failed to sign up. Please try again later.');
             }
         } catch (error) {
             console.error('Error:', error);
@@ -80,33 +90,9 @@ const SignUp = () => {
         }
     };
 
-    const [showPassword, setShowPassword] = useState(false);
-
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
-
     return (
         <>
-            {success ? (
-                <section className="flex flex-col items-center justify-center min-h-screen bg-dodgerblue"
-                    style={{ backgroundImage: `url(${loginImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
-                >
-                    <div className="bg-white p-8 rounded shadow-md w-4/6">
-                        <h1 className="text-bold text-2xl font-graduate text-blue-800 text-center">Please fill out our application to create an account.</h1>
-                        <div className="flex justify-center">
-                            <motion.button
-                                whileTap={{ scale: 0.90 }}
-                                onClick={openModal}
-                                className="block w-full rounded bg-Blue px-12 py-3 text-xl font-medium text-white shadow hover:bg-darkBlue focus:outline-none focus:ring sm:w-auto"
-                            >
-                                Apply
-                            </motion.button>
-                        </div>
-                    </div>
-                    <CustomModal isOpen={isModalOpen} onRequestClose={closeModal} email={email} pwd={pwd} />
-                </section >
-            ) : (
+
                 <section className="flex flex-col items-center justify-center min-h-screen bg-dodgerblue"
                     style={{ backgroundImage: `url(${loginImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
                 >
@@ -128,7 +114,9 @@ const SignUp = () => {
                         {/* Descriptive text */}
                         <p className={`text-gray-700 text-xs ${!validEmail && email ? 'block' : 'hidden'}`}>
                             <FontAwesomeIcon icon={faInfoCircle} className="mr-1" />
-                            Please enter a valid email address.
+                            Please enter a valid email address. <br/>
+                            If applying as a student, please use DePaul email.
+
                         </p>
 
                         {/* Password Input Field */}
@@ -181,13 +169,14 @@ const SignUp = () => {
 
 
                         <div className="flex justify-center">
-                            <button
+                            <motion.button
+                                whileTap={{ scale: 0.85 }}
                                 onClick={handleSignUp}
                                 disabled={!validEmail || !validPwd || !validMatch}
                                 className={` bg-blue-700 ${(!validEmail || !validPwd || !validMatch) ? 'bg-gray-400' : 'hover:bg-blue-800'} text-white py-2 px-4 mt-4 w-full rounded focus:outline-none focus:ring focus:border-blue-800`}
                             >
                                 Sign Up
-                            </button>
+                            </motion.button>
                         </div>
                         <p className="text-gray-700 mt-3 text-center">
                             Have an account?<br />
@@ -200,7 +189,7 @@ const SignUp = () => {
                         </div>
                     </form>
                 </section>
-            )}
+
         </>
     );
 };
