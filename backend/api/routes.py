@@ -412,13 +412,12 @@ def signup():
         return jsonify({"error": "Email already in use"}), 409
     
     hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
-    role = role.lower()
 
     # Store the email, password, and role temporarily in session
     session["email"] = email
     session["pass"] = hashed_password
     session["role"] = role
-        
+    
     # Return a success message
     return jsonify({"message": "User data stored successfully"}), 201
 
