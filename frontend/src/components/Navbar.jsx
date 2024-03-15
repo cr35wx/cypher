@@ -67,8 +67,8 @@ export const Navbar = () => {
           ) : (
             <NavLink 
               className="font-graduate" 
-              to="/login">
-                Login
+              to="/signup">
+                Apply
             </NavLink>
           )}
         </li>

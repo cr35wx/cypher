@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate, Outlet } from "react-router-dom";
 import "./App.css";
 import { Navbar } from "./components/Navbar";
 import About from "./components/pages/About";
@@ -6,12 +6,26 @@ import SignIn from "./components/pages/SignIn";
 import SignUp from "./components/pages/SignUp";
 import Account from "./components/pages/Account";
 import { Home, StudentForm, ClientForm } from "./components/pages";
-import { AuthProvider } from "./components/AuthContext";
+import { AuthProvider, useAuth } from "./components/AuthContext";
+
 
 // awesome
 function AdminHack() {
   window.location.replace("http://localhost:5000/admin");
 }
+
+
+const PrivateRoutes = () => {
+  const auth = useAuth();
+  return auth.isLoggedIn ? <Outlet /> : <Navigate to="/login" />;
+};
+
+const PrivateSignUp = () => {
+  const auth = useAuth();
+  return auth.isLoggedIn ? <Navigate to="/account" /> : <Outlet />;
+};
+
+
 
 function App() {
   return (
@@ -22,12 +36,16 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/login" element={<SignIn />} />
-        <Route path="/account" element={<Account />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/student" element={<StudentForm />} />
-        <Route path="/client" element={<ClientForm />} />
-        <Route path="/admin" element={<AdminHack />} />
+        <Route element={<PrivateSignUp/>}>
+          <Route path="/login" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/student" element={<StudentForm />} />
+          <Route path="/client" element={<ClientForm />} />
+        </Route>
+        <Route element={<PrivateRoutes/>}>
+          <Route path="/account" element={<Account />} />
+          <Route path="/admin" element={<AdminHack />} />
+        </Route>
       </Routes>
     </AuthProvider>
     </div>
