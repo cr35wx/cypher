@@ -10,7 +10,9 @@ import { useAuth } from "./AuthContext";
 
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { isLoggedIn, userEmail } = useAuth();
+  //const { isLoggedIn, userEmail } = useAuth();
+  const { isLoggedIn, userRole } = useAuth(); // we can either dynamically show the users role or email idc
+
   // const [loginText, setLoginText] = useState("Login");
   // useEffect(() => {
   //   fetch("/whoami", {
@@ -56,11 +58,19 @@ export const Navbar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink
-            className="font-graduate"
-            to="/login">
-            {isLoggedIn ? userEmail : "Login"}
-          </NavLink>
+          {isLoggedIn ? (
+            <NavLink 
+              className="font-graduate" 
+              to="/account">
+                {userRole}
+            </NavLink>
+          ) : (
+            <NavLink 
+              className="font-graduate" 
+              to="/login">
+                Login
+            </NavLink>
+          )}
         </li>
       </ul>
     </nav>

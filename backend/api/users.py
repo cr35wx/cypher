@@ -13,12 +13,13 @@ user_bp = Blueprint(
 
 # Defining routes to retrieve student and client users, with authentication required.
 # RBAC is utilized here, determining user access based on their role.
-@user_bp.route("/student-users", methods=["GET"])
+@user_bp.route("/user-details", methods=["GET"])
 @jwt_required()
-def get_student_users():
+def get_user_details():
     claims = get_jwt()
-
+    
     if claims.get("is_student") == True:
+
         page = request.args.get('page', default=1, type=int)
 
         per_page = request.args.get('per_page', default=3, type=int)
@@ -28,20 +29,13 @@ def get_student_users():
             per_page = per_page
         )
 
-        result = StudentUserSchema().dump(studentUsers, many=True)
-
+        result = StudentUserSchema().dump(studentUsers.items, many=True)
+        print(result)
         return jsonify({
             "StudentUser": result
         }), 200
-    
-    return jsonify({"message": "You are not authorized to access this"}), 401
-
-@user_bp.route("/client-users", methods=["GET"])
-@jwt_required()
-def get_client_users():
-    claims = get_jwt()
-
-    if claims.get("is_client") == True:
+        
+    elif claims.get("is_client") == True:
         page = request.args.get('page', default=1, type=int)
 
         per_page = request.args.get('per_page', default=3, type=int)
@@ -51,10 +45,10 @@ def get_client_users():
             per_page = per_page
         )
 
-        result = ClientUserSchema().dump(clientUsers, many=True)
+        result = ClientUserSchema().dump(clientUsers.items, many=True)
 
         return jsonify({
-            "ClientUsers": result
+            "ClientUser": result
         }), 200
     
     return jsonify({"message": "You are not authorized to access this"}), 401

@@ -4,6 +4,7 @@ import { Navbar } from "./components/Navbar";
 import About from "./components/pages/About";
 import SignIn from "./components/pages/SignIn";
 import SignUp from "./components/pages/SignUp";
+import Account from "./components/pages/Account";
 import { Home, StudentForm, ClientForm } from "./components/pages";
 import { AuthProvider } from "./components/AuthContext";
 
@@ -22,6 +23,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<SignIn />} />
+        <Route path="/account" element={<Account />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/student" element={<StudentForm />} />
         <Route path="/client" element={<ClientForm />} />
