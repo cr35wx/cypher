@@ -45,7 +45,7 @@ const Account = () => {
             });
             if (response.ok) {
                 logout();
-                navigate('/login');
+                navigate('/home');
             } else {
                 console.error('Logout failed:', response.status);
             }

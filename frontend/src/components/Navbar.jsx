@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Navbar.css";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../images/logo.png";
@@ -67,8 +67,8 @@ export const Navbar = () => {
           ) : (
             <NavLink 
               className="font-graduate" 
-              to="/login">
-                Login
+              to="/signup">
+                Apply
             </NavLink>
           )}
         </li>
