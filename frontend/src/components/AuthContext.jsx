@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { jwtDecode } from 'jwt-decode';
 
 const AuthContext = createContext();
 
@@ -9,12 +10,24 @@ export function useAuth() {
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState("");
+  const TOKEN_EXPIRATION_CHECK_INTERVAL = 15 * 60 * 1000; // check every 15 minutes
+  //const TOKEN_EXPIRATION_CHECK_INTERVAL = 15 * 1000; if u set access token to expire at 1 min, refresh occurs 15 secs (just for testing)
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     setIsLoggedIn(!!token);
-    if (token) fetchUserEmail(); // Fetch email if token exists
+    if (token) {
+      fetchUserEmail() // Fetch email if token exists
+      checkTokenExpiration();
+    }; 
   }, []);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      const interval = setInterval(checkTokenExpiration, TOKEN_EXPIRATION_CHECK_INTERVAL);
+      return () => clearInterval(interval);
+    }
+  }, [isLoggedIn]);
 
   const fetchUserEmail = () => {
     fetch("/whoami", {
@@ -38,6 +51,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("refresh_token", refreshToken);
     setIsLoggedIn(true);
     fetchUserEmail(); // Fetch user email upon login
+    checkTokenExpiration();
   };
 
   const logout = () => {
@@ -45,6 +59,37 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("refresh_token");
     setIsLoggedIn(false);
     setUserEmail(""); // Clear user email upon logout
+  };
+
+  const checkTokenExpiration = () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      const currentTime = Date.now() / 1000;
+      if (decodedToken.exp < currentTime) {
+        refreshToken();
+      }
+    }
+  };
+
+  const refreshToken = async () => {
+    try {
+      const response = await fetch('/refresh', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('refresh_token')}`,
+        },
+      });
+      const data = await response.json();
+      if (data.access_token) {
+        localStorage.setItem('token', data.access_token); 
+        fetchUserEmail();
+      }
+    } catch (error) {
+      console.error('Error refreshing token:', error);
+      logout();
+    } 
   };
 
   return (
