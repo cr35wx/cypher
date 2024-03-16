@@ -7,6 +7,8 @@ import { eye } from 'react-icons-kit/icomoon/eye';
 import { eyeBlocked } from 'react-icons-kit/icomoon/eyeBlocked';
 import { useAuth } from '../AuthContext';
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 const SignIn = () => {
     const userRef = useRef();
     const pwdRef = useRef();
@@ -80,6 +82,36 @@ const SignIn = () => {
         setErrMsg('');
     }, [email, pwd])
 
+    const handleForgotPassword = async (e) => {
+        e.preventDefault();
+        if (!EMAIL_REGEX.test(email)) {
+            setErrMsg("Please enter a valid email address to reset your password.");
+            return;
+        }
+        try {
+            await fetch('/reset-password-request', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email }),
+            })
+                .then(res => {
+                    if (!res.ok) {
+                        throw res;
+                    }
+                    return res.json();
+                })
+                .then(data => {
+                    console.log(data);
+                    navigate('/resettemp');
+                });
+        } catch (error) {
+            setErrMsg('This email is not valid.');
+        }
+    };
+
+
     return (
         <>
                 <section className="flex flex-col items-center justify-center min-h-screen bg-dodgerblue"
@@ -119,6 +151,8 @@ const SignIn = () => {
                             <motion.button whileTap={{ scale: 0.95 }} className="bg-blue-800 hover:bg-blue-600 text-white py-2 w-full px-4 mt-4 rounded focus:outline-none focus:ring focus:border-blue-300">Sign In</motion.button>
                         </div>
                         <p className="text-gray-700 mt-3 text-center">
+                        <button onClick={handleForgotPassword} className="text-gray-700 underline">Forgot Password</button>
+                        <br /><br />
                             Need an Account?<br />
                             <span className="line">
                                 <Link to="/signup" className="text-gray-700">Sign Up</Link>
