@@ -35,40 +35,35 @@ export const Navbar = () => {
   return (
     <nav>
       <Link to="/" className="logo">
-        <img src={logo} alt="Logo" style={{ width: '75px', height: '75px' }} />
+        <img src={logo} alt="Logo" style={{ width: "75px", height: "75px" }} />
       </Link>
-      <div className={`menu ${menuOpen ? 'bg-gray-700' : ''}`} onClick={() => setMenuOpen(!menuOpen)}>
+      <div
+        className={`menu ${menuOpen ? "bg-gray-700" : ""}`}
+        onClick={() => setMenuOpen(!menuOpen)}
+      >
         <span></span>
         <span></span>
         <span></span>
       </div>
       <ul className={menuOpen ? "open" : ""}>
         <li>
-          <NavLink
-            className="font-graduate"
-            to="/home">
+          <NavLink className="font-graduate" to="/home">
             Home
           </NavLink>
         </li>
         <li>
-          <NavLink
-            className="font-graduate"
-            to="/about">
+          <NavLink className="font-graduate" to="/about">
             About
           </NavLink>
         </li>
         <li>
           {isLoggedIn ? (
-            <NavLink 
-              className="font-graduate" 
-              to="/account">
-                {userRole}
+            <NavLink className="font-graduate" to="/account">
+              {userRole}
             </NavLink>
           ) : (
-            <NavLink 
-              className="font-graduate" 
-              to="/signup">
-                Apply
+            <NavLink className="font-graduate" to="/login">
+              Login
             </NavLink>
           )}
         </li>
