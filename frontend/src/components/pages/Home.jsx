@@ -1,11 +1,9 @@
 import React from "react";
-import './Home.css';
-import Fade from "../Carousel"
-import { ReactTyped } from 'react-typed';
+import "./Home.css";
+import Fade from "../Carousel";
+import { ReactTyped } from "react-typed";
 import { motion } from "framer-motion";
 import { useAuth } from "../AuthContext";
-import Footer from "./footer/Footer";
-import Basic from "../Calendar/calendarComponentClient";
 
 /*Homepage that includes two react libraries react-modal and react-slick. Modal is a pop-up that appears when the user hits the register or get started button. 
 It prompts the user to fill out the student form or the client form. 
@@ -33,7 +31,10 @@ export const Home = () => {
           <div className="mx-auto max-w-50 text-center">
             <h1 className="font-graduate text-3xl text-white font-extrabold sm:text-5xl">
               Welcome to
-              <strong className="mt-2 mb-4 font-graduate font-extrabold text-lightBlue md:flex-auto sm:block"> Cypher Cybersecurity Clinic </strong>
+              <strong className="mt-2 mb-4 font-graduate font-extrabold text-lightBlue md:flex-auto sm:block">
+                {" "}
+                Cypher Cybersecurity Clinic{" "}
+              </strong>
             </h1>
 
             <div className="mt-10 flex flex-col items-center">
@@ -41,20 +42,20 @@ export const Home = () => {
                 The one-stop shop for student-performed professional services:
               </p>
               <ReactTyped
-                className='text-lg sm:text-xl font-bold text-lightBlue pl-2'
-                strings={['General Security Risk', 'Audit', 'Policy Review']}
+                className="text-lg sm:text-xl font-bold text-lightBlue pl-2"
+                strings={["General Security Risk", "Audit", "Policy Review"]}
                 typeSpeed={75}
                 backSpeed={110}
                 loop
               />
             </div>
-          
+
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <motion.a
                 whileTap={{ scale: 0.85 }}
                 onClick={handleApplyClick}
                 className="button-style"
-              //className="block w-full rounded bg-darkBlue px-12 py-3 text-xl font-graduate font-medium text-white shadow no-underline hover:bg-blue-800 focus:outline-none focus:ring active:bg-blue-900 sm:w-auto"
+                //className="block w-full rounded bg-darkBlue px-12 py-3 text-xl font-graduate font-medium text-white shadow no-underline hover:bg-blue-800 focus:outline-none focus:ring active:bg-blue-900 sm:w-auto"
               >
                 Apply
               </motion.a>
@@ -72,47 +73,82 @@ export const Home = () => {
         </div>
       </section>
 
-
-
       {/*services divider*/}
       <div id="divider">
         <span className="flex items-center mt-28 mb-8">
           <span className="h-px flex-1 bg-black"></span>
-          <span className="shrink-0 px-6 font-graduate text-2xl font-bold">Who we are</span>
+          <span className="shrink-0 px-6 font-graduate text-2xl font-bold">
+            Who we are
+          </span>
           <span className="h-px flex-1 bg-black"></span>
         </span>
       </div>
 
-
       {/* text box description*/}
       <div className="max-w-screen-xl flex-col lg:flex-row mx-auto grid grid-cols-1 lg:grid-cols-2 items-center justify-center gap-8">
-        <div className="max-w-screen-lg mx-0 my-4 bg-gray-200 p-8 rounded-lg shadow-md">               {/* text box description*/}
-
+        <div className="max-w-screen-lg mx-0 my-4 bg-gray-200 p-8 rounded-lg shadow-md">
+          {" "}
+          {/* text box description*/}
           <p className="text-2xl text-gray-700">
-            Cypher's Cybersecurity Clinic ("Clinic") is an interdisciplinary collaboration between the
-            <a className="text-darkBlue font-bold no-underline" href="https://www.cdm.depaul.edu/Pages/default.aspx"> School of Computing</a>, the
-            <a className="text-darkBlue font-bold no-underline" href="https://business.depaul.edu/Pages/default.aspx"> Driehaus College of Business</a>, and the
-            <a className="text-darkBlue font-bold no-underline" href="https://law.depaul.edu/Pages/default.aspx"> College of Law</a>.
-            The Clinic provides students with hands-on, real-world experience working on cybersecurity projects for organizational clients that helps prepare them for careers in the cybersecurity workforce. Participating DePaul students come from a variety of undergraduate and graduate degree majors across the three colleges. The Clinic partners with
-            <a className="text-darkBlue font-bold no-underline" href="https://resources.depaul.edu/steans-center-community-based-service-learning/about/Pages/default.aspx"> DePaul's Steans Center</a> to serve community-based non-profit organizations that have limited resources yet have a need for cybersecurity assessment services. The Clinic also provides services to Chicago-area small businesses.
+            Cypher's Cybersecurity Clinic ("Clinic") is an interdisciplinary
+            collaboration between the
+            <a
+              className="text-darkBlue font-bold no-underline"
+              href="https://www.cdm.depaul.edu/Pages/default.aspx"
+            >
+              {" "}
+              School of Computing
+            </a>
+            , the
+            <a
+              className="text-darkBlue font-bold no-underline"
+              href="https://business.depaul.edu/Pages/default.aspx"
+            >
+              {" "}
+              Driehaus College of Business
+            </a>
+            , and the
+            <a
+              className="text-darkBlue font-bold no-underline"
+              href="https://law.depaul.edu/Pages/default.aspx"
+            >
+              {" "}
+              College of Law
+            </a>
+            . The Clinic provides students with hands-on, real-world experience
+            working on cybersecurity projects for organizational clients that
+            helps prepare them for careers in the cybersecurity workforce.
+            Participating DePaul students come from a variety of undergraduate
+            and graduate degree majors across the three colleges. The Clinic
+            partners with
+            <a
+              className="text-darkBlue font-bold no-underline"
+              href="https://resources.depaul.edu/steans-center-community-based-service-learning/about/Pages/default.aspx"
+            >
+              {" "}
+              DePaul's Steans Center
+            </a>{" "}
+            to serve community-based non-profit organizations that have limited
+            resources yet have a need for cybersecurity assessment services. The
+            Clinic also provides services to Chicago-area small businesses.
           </p>
         </div>
-
-        <Fade />    {/*<-- Carousel*/}
+        <Fade /> {/*<-- Carousel*/}
       </div>
-
-
-
 
       {/*3 box infographic -- maybe change this infographic to talk about the 3 schools involved?*/}
       <section className="bg-gray-900 text-white">
         <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
           <div className="mx-auto text-center max-w-screen-md">
-            <h2 className="text-3xl font-graduate font-black sm:text-4xl">OUR SERVICES</h2>
+            <h2 className="text-3xl font-graduate font-black sm:text-4xl">
+              OUR SERVICES
+            </h2>
 
             <p className="mt-4 text-gray-300">
-              Students perform needed professional services to under-resourced external clients. In exchange, students gain a transformative educational experience
-              from working on real-world projects in their area of study while providing a public good.
+              Students perform needed professional services to under-resourced
+              external clients. In exchange, students gain a transformative
+              educational experience from working on real-world projects in
+              their area of study while providing a public good.
             </p>
           </div>
 
@@ -128,7 +164,6 @@ export const Home = () => {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -137,10 +172,13 @@ export const Home = () => {
                 />
               </svg>
 
-              <h2 className="mt-4 text-xl font-bold text-white">General Security Risk</h2>
+              <h2 className="mt-4 text-xl font-bold text-white">
+                General Security Risk
+              </h2>
 
               <p className="mt-1 text-sm text-gray-300">
-                Our team will meet with clients to take a benchmark cybersecurity test.
+                Our team will meet with clients to take a benchmark
+                cybersecurity test.
               </p>
             </a>
 
@@ -155,7 +193,6 @@ export const Home = () => {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -167,7 +204,8 @@ export const Home = () => {
               <h2 className="mt-4 text-xl font-bold text-white">Audit</h2>
 
               <p className="mt-1 text-sm text-gray-300">
-                Students will assist clients with tasks relating to accounting, record-keeping, etc.
+                Students will assist clients with tasks relating to accounting,
+                record-keeping, etc.
               </p>
             </a>
 
@@ -182,7 +220,6 @@ export const Home = () => {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -191,13 +228,14 @@ export const Home = () => {
                 />
               </svg>
 
-              <h2 className="mt-4 text-xl font-bold text-white">Policy Review</h2>
+              <h2 className="mt-4 text-xl font-bold text-white">
+                Policy Review
+              </h2>
 
               <p className="mt-1 text-sm text-gray-300">
                 Commited law students will help clients with basic legal review.
               </p>
             </a>
-
           </div>
 
           <div className="mt-8 flex flex-wrap justify-center gap-4">
@@ -205,27 +243,13 @@ export const Home = () => {
               whileTap={{ scale: 0.85 }}
               onClick={handleApplyClick}
               className="button-style"
-            //className="inline-block rounded bg-darkBlue px-12 py-3 text-xl font-graduate font-medium text-white transition hover:bg-blue-900 focus:outline-none focus:ring no-underline"
+              //className="inline-block rounded bg-darkBlue px-12 py-3 text-xl font-graduate font-medium text-white transition hover:bg-blue-900 focus:outline-none focus:ring no-underline"
             >
               Apply
             </motion.a>
           </div>
         </div>
       </section>
-
-      {
-        /*
-      <>
-        <Footer />
-        <Basic />
-      </>
-      */}
-
-
     </div>
-
   );
 };
-
-
-

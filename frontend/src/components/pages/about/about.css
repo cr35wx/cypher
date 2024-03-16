@@ -22,16 +22,12 @@
     font-weight: bold;
     text-decoration: none;
     padding: 10px 20px;
-    border: 2px solid #1b4e95;
+    border: 2px solid #11315d;
     border-radius: 5px;
     transition: background-color 0.1s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .btn-white:hover {
     background-color: #11315d;
-    color: #fff;
-}
-
-.faculty-section {
     color: #fff;
 }
