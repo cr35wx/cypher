@@ -6,6 +6,7 @@ import { Icon } from "react-icons-kit";
 import { eye } from "react-icons-kit/icomoon/eye";
 import { eyeBlocked } from "react-icons-kit/icomoon/eyeBlocked";
 import { useAuth } from "../AuthContext";
+import ResetPassModal from "../ResetPassModal";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -25,6 +26,8 @@ const SignIn = () => {
   const [refreshToken, setRefreshToken] = useState(
     localStorage.getItem("refresh_token"),
   );
+
+const [isModalOpen, setIsModalOpen] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);
@@ -101,7 +104,8 @@ const SignIn = () => {
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
-          navigate("/resettemp");
+          setIsModalOpen(true);
+          // navigate("/resettemp");
         });
     } catch (error) {
       setErrMsg("This email is not valid.");
@@ -190,6 +194,7 @@ const SignIn = () => {
           </div>
         </form>
       </section>
+      <ResetPassModal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)} />
     </>
   );
 };

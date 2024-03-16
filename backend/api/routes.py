@@ -1,5 +1,9 @@
 import pprint
+import random
 from datetime import datetime
+from string import ascii_uppercase, digits
+from threading import Thread
+from emails import send_email
 from flask import Blueprint, request, jsonify, session
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -20,6 +24,7 @@ from .models import (
     StudentParticipant,
     ClientOrganization,
     Course,
+    ResetCode,
 )
 from .app import db
 
@@ -407,38 +412,83 @@ def signup():
     signup_data = request.json
     email, password, role = signup_data.get("email", ""), signup_data.get("pwd", ""), signup_data.get("role", "")
 
-    # only checking for students or client dupes 
+    # only checking for students or client dupes
     existing_user = (StudentParticipant.query.filter_by(email=email).first() or 
             ClientOrganization.query.filter_by(org_contact_email=email).first())
 
     if existing_user:
         return jsonify({"error": "Email already in use"}), 409
-    
+
     hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
 
     # Store the email, password, and role temporarily in session
     session["email"] = email
     session["pass"] = hashed_password
     session["role"] = role
-    
+
     # Return a success message
     return jsonify({"message": "User data stored successfully"}), 201
 
 
-@api.route('/reset-password-request', methods=['GET', 'POST'])
+@api.route("/reset-password-request", methods=["GET", "POST"])
 def reset_password_request():
     email = request.json.get("email")
     existing_user = (StudentParticipant.query.filter_by(email=email).first() or
-            ClientOrganization.query.filter_by(org_contact_email=email).first())
+                     ClientOrganization.query.filter_by(org_contact_email=email)
+                     .first())
 
     if not existing_user:
         return jsonify({"error": "This email is not valid"}), 204
-    
-    # jwt stuff
+
+    code = gen_reset_code()
+
+    subject = "Your Cypher Password Reset Code"
+    text = f"Your password reset code is: {code}"
+    html = f"""\
+    <html>
+      <body>
+        <p>Your password reset code is:<br>
+           <b>{code}</b>
+        </p>
+      </body>
+    </html>
+    """
+
+    # replace email with your own for testing
+    Thread(target=send_email, args=(email, subject, text, html)).start()
+
+    return jsonify({"message": "Check your email"}), 200
 
 
-    # might not need this
-    return jsonify({"placehol": "der"}), 200
+def gen_reset_code():
+    while 1:
+        code = "".join(random.choice(ascii_uppercase + digits) for _ in range(5))
+        code_in_db = (db.session.query(ResetCode)
+                      .filter(ResetCode.code == code).one_or_none())
+        if code_in_db:
+            print(f"{code} already exists in the db.")
+            continue
+        else:
+            c = ResetCode(code=code)
+            db.session.add(c)
+            db.session.commit()
+            return c.code
+
+
+@api.route("/verify-reset-code", methods=["GET", "POST"])
+def verify_reset_code():
+    code = request.json.get("code")
+    code_in_db = (db.session.query(ResetCode)
+                  .filter(ResetCode.code == code)
+                  .one_or_none())
+
+
+    if code_in_db:
+        return jsonify({"success": "placeholder"})
+    else:
+        return jsonify({"error": "This code is not valid."})
+
+    return jsonify({}) # i dont even know
 
 
 # Also known as "Project Type" on the application forms...
@@ -461,4 +511,3 @@ def get_academic_units_all():
 @api.route("/api/degree-majors", methods=["GET"])
 def get_degree_majors_all():
     pass
-

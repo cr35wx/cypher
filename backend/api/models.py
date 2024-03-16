@@ -197,6 +197,11 @@ class ClientProject(db.Model):
     )
     student_team_id = mapped_column(Integer)  # ????
 
+class ResetCode(db.Model):
+    __tablename__ = "reset_codes"
+    id = mapped_column(Integer, primary_key=True)
+    code = mapped_column(String(5), unique=True)
+
 
 # any model added to this tuple will be added to the admin interface
 admin_models = (
@@ -211,4 +216,5 @@ admin_models = (
     ClientOrganization,
     ClientOrgnizationType,
     ClientProject,
+    ResetCode,
 )
