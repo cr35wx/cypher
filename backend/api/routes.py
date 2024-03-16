@@ -432,7 +432,7 @@ def reset_password_request():
             ClientOrganization.query.filter_by(org_contact_email=email).first())
 
     if not existing_user:
-        return jsonify({"error": "This email is not valid"}), 400
+        return jsonify({"error": "This email is not valid"}), 204
     
     # jwt stuff
 
