@@ -3,11 +3,14 @@ from datetime import datetime
 from flask import Blueprint, request, jsonify, session
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import check_password_hash, generate_password_hash
-from flask_jwt_extended import (create_access_token, 
-                                create_refresh_token, 
-                                jwt_required, get_jwt,
-                                current_user,
-                                get_jwt_identity)
+from flask_jwt_extended import (
+    create_access_token,
+    create_refresh_token,
+    jwt_required,
+    get_jwt,
+    current_user,
+    get_jwt_identity,
+)
 
 from .models import (
     DegreeMajor,
@@ -421,6 +424,23 @@ def signup():
     # Return a success message
     return jsonify({"message": "User data stored successfully"}), 201
 
+
+@api.route('/reset-password-request', methods=['GET', 'POST'])
+def reset_password_request():
+    email = request.json.get("email")
+    existing_user = (StudentParticipant.query.filter_by(email=email).first() or
+            ClientOrganization.query.filter_by(org_contact_email=email).first())
+
+    if not existing_user:
+        return jsonify({"error": "This email is not valid"}), 204
+    
+    # jwt stuff
+
+
+    # might not need this
+    return jsonify({"placehol": "der"}), 200
+
+
 # Also known as "Project Type" on the application forms...
 @api.route('/api/clinic-service-areas')
 def get_service_areas_all():
@@ -441,30 +461,4 @@ def get_academic_units_all():
 @api.route("/api/degree-majors", methods=["GET"])
 def get_degree_majors_all():
     pass
-
-# @api.route("/api/degree-majors/<int:academic_unit_id>", methods=["GET"])
-# def degree_majors(academic_unit_id):
-#     distinct_degree_names = (
-#         db.session.query(distinct(DegreeMajor.degree_name))
-#         .filter(DegreeMajor.academic_unit_id == academic_unit_id)
-#         .subquery()
-#     )
-
-#     degree_majors = (
-#         DegreeMajor.query
-#         .filter(DegreeMajor.degree_name.in_(distinct_degree_names))
-#         .order_by(DegreeMajor.degree_id)
-#         .all()
-#     )
-
-#     return jsonify([major.to_json() for major in degree_majors])
-
-
-
-    # degree_majors = (
-    #     DegreeMajor.query
-    #     .filter(DegreeMajor.academic_unit_id == academic_unit_id)
-    #     .distinct(DegreeMajor.degree_name)
-    #     .order_by(DegreeMajor.degree_id)
-    #     .all())
 

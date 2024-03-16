@@ -7,6 +7,7 @@ import SignUp from "./components/pages/SignUp";
 import Account from "./components/pages/Account";
 import { Home, StudentForm, ClientForm } from "./components/pages";
 import { AuthProvider, useAuth } from "./components/AuthContext";
+import PasswordReset from "./components/pages/RESETTEMP";
 
 
 // awesome
@@ -36,6 +37,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/resettemp" element={<PasswordReset />} />
         <Route element={<PrivateSignUp/>}>
           <Route path="/login" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
