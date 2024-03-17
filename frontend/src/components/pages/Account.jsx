@@ -57,7 +57,7 @@ const Account = () => {
       });
       if (response.ok) {
         logout();
-        window.location.href = "/home";
+        window.location.href = "/login";
       } else {
         console.error("Logout failed:", response.status);
       }
