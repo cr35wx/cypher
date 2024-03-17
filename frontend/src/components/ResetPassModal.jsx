@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import Modal from 'react-modal';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import Modal from "react-modal";
+import { useNavigate } from "react-router-dom";
 
-Modal.setAppElement('#root');
+Modal.setAppElement("#root");
 
 function ResetPassModal({ isOpen, onRequestClose }) {
-  const [code, setCode] = useState('');
-  const [errMsg, setErrMsg] = useState('');
+  const [code, setCode] = useState("");
+  const [errMsg, setErrMsg] = useState("");
 
   const navigate = useNavigate();
 
@@ -17,20 +17,19 @@ function ResetPassModal({ isOpen, onRequestClose }) {
       return;
     }
     try {
-      const response = await fetch('/verify-reset-code', {
-        method: 'POST',
+      const response = await fetch("/verify-reset-code", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ code }),
       });
       const data = await response.json();
-      console.log(data)
+      console.log(data);
       if (data.success) {
-        console.log(data)
+        console.log(data);
         onRequestClose();
         navigate("/resettemp");
-
       } else {
         setErrMsg(data.error);
       }
@@ -53,7 +52,9 @@ function ResetPassModal({ isOpen, onRequestClose }) {
         >
           &times;
         </button>
-        <h3 className="text-xl text-center font-bold mb-4">A code has been sent to your email.</h3>
+        <h3 className="text-xl text-center font-bold mb-4">
+          A code has been sent to your email.
+        </h3>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -80,4 +81,3 @@ function ResetPassModal({ isOpen, onRequestClose }) {
 }
 
 export default ResetPassModal;
-
