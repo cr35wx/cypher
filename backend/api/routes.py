@@ -441,6 +441,8 @@ def reset_password_request():
         return jsonify({"error": "This email is not valid"}), 204
 
     code = gen_reset_code()
+    session["email"] = email
+    session["code"] = code
 
     subject = "Your Cypher Password Reset Code"
     text = f"Your password reset code is: {code}"
@@ -497,6 +499,41 @@ def verify_reset_code():
             return jsonify({"error": "This code has expired."}), 400
     else:
         return jsonify({"error": "This code is not valid."}), 400
+
+
+@api.route("/change-password", methods=["POST"])
+def change_password():
+    data = request.json
+    email = data.get("email")
+    new_password = data.get("password")
+    reset_code = data.get("code")
+
+    user = StudentParticipant.query.filter_by(email=email).first() or \
+           ClientOrganization.query.filter_by(org_contact_email=email).first()
+
+    code_in_db = (db.session.query(ResetCode)
+                      .filter(ResetCode.code == reset_code).one_or_none())
+
+
+    if user and code_in_db:
+        # Update the user's password. Ensure you are hashing the password before saving it!
+        user.password = generate_password_hash(new_password)
+        db.session.commit()
+        return jsonify({"message": "Password successfully changed."}), 200
+    else:
+        return jsonify({"error": "User not found or reset code is invalid."}), 204
+
+    
+
+# ahhhhhhhhhhhhhhhhhhh
+@api.route("/email-and-reset-code", methods=["GET"])
+def get_email_code():
+    email = session.get("email")
+    code = session.get("code")
+    if email:
+        return jsonify({"email": email, "code": code}), 200
+    else:
+        return jsonify({"error": "Email not found in session"}), 204
 
 
 # Also known as "Project Type" on the application forms...

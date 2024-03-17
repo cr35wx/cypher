@@ -5,10 +5,13 @@ import { eye, eyeBlocked } from "react-icons-kit/icomoon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 const PasswordReset = () => {
+  const [email, setEmail] = useState("");
+  const [code, setCode] = useState("");
   const [pwd, setPwd] = useState("");
   const [matchPwd, setMatchPwd] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -21,6 +24,26 @@ const PasswordReset = () => {
   const [matchFocus, setMatchFocus] = useState(false);
 
   const errRef = useRef();
+
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await fetch('/email-and-reset-code');
+        const data = await response.json();
+        if(data.email) {
+          setEmail(data.email);
+          setCode(data.code)
+        } else {
+          setErrMsg("Could not fetch email or your code may be invalid.");
+        }
+      } catch (error) {
+        setErrMsg("Failed to communicate with the server.");
+      }
+    })();
+  }, []);
 
   useEffect(() => {
     setValidPwd(PWD_REGEX.test(pwd));
@@ -37,9 +60,33 @@ const PasswordReset = () => {
 
   const handlePasswordReset = async (e) => {
     e.preventDefault();
-    setErrMsg(
-      "Password reset functionality is not implemented in this example."
-    );
+
+    try {
+      const response = await fetch("/change-password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password: pwd,
+          code,
+        }),
+      });
+
+      const data = await response.json();
+      if (data.error) {
+        setErrMsg(data.error);
+      } else {
+          setPwd("");
+          setMatchPwd("");
+          setErrMsg("Password successfully reset.");
+          navigate("/login");
+      }
+    } catch (error) {
+      console.error("Password reset error:", error);
+      setErrMsg("Failed to reset password.");
+    }
   };
 
   return (
