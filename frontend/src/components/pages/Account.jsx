@@ -87,9 +87,6 @@ const Account = () => {
     >
       <div className="mt-8 mb-8">
         <div className="flex bg-white p-8 rounded justify-center items-center shadow-md w-150 flex-col">
-          <h1 className="text-center text-2xl font-graduate font-extrabold text-darkBlue mb-4">
-            Welcome Back
-          </h1>
           {isLoading ? (
             <div className="text-center mb-4">
               <RotateLoader color="#000000" size={3} speed={2000} />
@@ -101,6 +98,9 @@ const Account = () => {
             <>
               {accountDetails && (
                 <div>
+                  <h1 className="text-center text-2xl font-graduate font-extrabold text-darkBlue mb-4">
+                    Welcome Back
+                  </h1>
                   {userRole === "student" && accountDetails.StudentUser && (
                     <div className="mt-2 items-center text-center justify-center">
                       <p className="text-left font-graduate font-extrabold mb-4">
