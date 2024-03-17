@@ -1,6 +1,6 @@
 import pprint
 import random
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from string import ascii_uppercase, digits
 from threading import Thread
 from emails import send_email
@@ -450,6 +450,7 @@ def reset_password_request():
         <p>Your password reset code is:<br>
            <b>{code}</b>
         </p>
+        <p>Code will expire in 15 minutes.</p>
       </body>
     </html>
     """
@@ -478,17 +479,24 @@ def gen_reset_code():
 @api.route("/verify-reset-code", methods=["GET", "POST"])
 def verify_reset_code():
     code = request.json.get("code")
-    code_in_db = (db.session.query(ResetCode)
-                  .filter(ResetCode.code == code)
-                  .one_or_none())
-
+    code_in_db = db.session.query(ResetCode).filter(ResetCode.code == code).one_or_none()
 
     if code_in_db:
-        return jsonify({"success": "placeholder"})
-    else:
-        return jsonify({"error": "This code is not valid."})
+        # Ensure current_time is timezone-aware (UTC)
+        current_time = datetime.now(timezone.utc)
 
-    return jsonify({}) # i dont even know
+        # code will expire after 15 minutes
+        code_expiration_time = code_in_db.created_at.astimezone(timezone.utc) + timedelta(minutes=15)
+
+        if current_time <= code_expiration_time:
+
+            db.session.delete(code_in_db)
+            db.session.commit()
+            return jsonify({"success": "Code verified successfully."}), 200
+        else:
+            return jsonify({"error": "This code has expired."}), 400
+    else:
+        return jsonify({"error": "This code is not valid."}), 400
 
 
 # Also known as "Project Type" on the application forms...
