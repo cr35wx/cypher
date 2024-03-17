@@ -5,8 +5,10 @@ from sqlalchemy import (
     UniqueConstraint,
     CheckConstraint,
     Enum,
+    func,
 )
 from sqlalchemy.orm import Mapped, mapped_column, validates
+from datetime import datetime
 
 from .app import db
 
@@ -201,6 +203,8 @@ class ResetCode(db.Model):
     __tablename__ = "reset_codes"
     id = mapped_column(Integer, primary_key=True)
     code = mapped_column(String(5), unique=True)
+    created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
+    
 
 
 # any model added to this tuple will be added to the admin interface
