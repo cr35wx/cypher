@@ -458,7 +458,7 @@ def reset_password_request():
     """
 
     # replace email with your own for testing
-    Thread(target=send_email, args=("rc350002@gmail.com", subject, text, html)).start()
+    Thread(target=send_email, args=(email, subject, text, html)).start()
 
     return jsonify({"message": "Check your email"}), 200
 
