@@ -1,6 +1,8 @@
-# Serializing objects to JSON format for better compatibility with JavaScript.
-# These schemas define the structure of JSON objects representing student and client users.
-# Each field corresponds to a property of the user object.
+"""
+Serializing objects to JSON format for better compatibility with JavaScript.
+These schemas define the structure of JSON objects representing student and client users.
+Each field corresponds to a property of the user object.
+"""
 from marshmallow import fields, Schema
 
 class StudentUserSchema(Schema):

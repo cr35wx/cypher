@@ -1,4 +1,6 @@
-# This file is used to insert fake data into the db based on our model classes.
+"""
+This file is used to insert fake data into the db based on our model classes.
+"""
 
 import click
 from flask import Blueprint
@@ -71,7 +73,7 @@ def students(num):
                 elements=("Winter", "Spring", "Summer", "Fall")
             ),
             expected_graduation_year=faker.random_int(min=2022, max=2026),
-            gender=faker.random_element(elements=("Male", "Female", "Other")),
+            gender=faker.random_element(elements=("Male", "Female", "Rather Not Say")),
             ethnicity=faker.random_element(("I don't know", "Prefer not to say")),
             clinic_participant_status=faker.random_element(elements=("In review", "Denied"))
         )

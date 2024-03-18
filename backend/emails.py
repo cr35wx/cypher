@@ -1,25 +1,18 @@
-import smtplib, ssl, os
-from email.mime.text import MIMEText
+"""
+Used to send emails to users, it currently uses a burner
+gmail account created for this project. Emailing will not
+work until a new email and password is set.
+"""
+
+import os
+import smtplib
+import ssl
 from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
-
-text = """\
-Hi,
-How are you?
-"""
-
-html = """\
-<html>
-  <body>
-    <p>Hi,<br>
-       <b>How are you?</b><br>
-       <a href="http://www.google.com">Hi</a>
-    </p>
-  </body>
-</html>
-"""
 
 def send_email(receiver_email, subject, text_body, html_body):
+    # email,password should be put in config.py
     sender_email = "cpher1761@gmail.com"
     password = os.environ.get("PASS")
     print(password)
@@ -47,4 +40,3 @@ def send_email(receiver_email, subject, text_body, html_body):
     except Exception as e:
         print(f"Failed to send email to {receiver_email}: {e}")
         return False
-
