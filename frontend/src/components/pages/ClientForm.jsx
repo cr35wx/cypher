@@ -1,3 +1,11 @@
+/*
+This React component defines a form for client submissions. 
+It includes various input fields such as organization name, type, contact person details, organization website, 
+annual revenue, IT employee count, data description, recent risk assessment, project type, clinic outreach, and requests or comments. 
+Upon submission, the form data is sent to the server for processing. 
+Success message is displayed upon successful submission, and the user is provided with an option to log in.
+*/
+
 import React, { useState } from "react";
 import { ProjectType, ClinicOutreach } from "./StudentForm";
 import { clientFormImg } from "../../images";
@@ -254,7 +262,6 @@ const RequestsOrComments = ({ requestsOrComments, setRequestsOrComments }) => {
   );
 };
 
-
 export function ClientForm() {
   const [orgName, setOrgName] = useState("");
   const [orgType, setOrgType] = useState("");
@@ -273,7 +280,7 @@ export function ClientForm() {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/login', { replace: true });
+    navigate("/login", { replace: true });
   };
 
   const handleSubmit = (e) => {
@@ -297,22 +304,22 @@ export function ClientForm() {
 
     console.log(formData);
 
-    fetch('/client-application', {
-      method: 'POST',
+    fetch("/client-application", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
     })
-      .then(response => {
+      .then((response) => {
         return response.json();
       })
-      .then(data => {
+      .then((data) => {
         if (data.errors) {
           console.log(data);
           alert(data.errors);
         } else {
-          console.log(data)
+          console.log(data);
           setOrgName("");
           setOrgType("");
           setContactPersonName("");
@@ -328,33 +335,41 @@ export function ClientForm() {
           setRequestsOrComments("");
           setSuccess(true);
         }
-      })
+      });
   };
 
   return (
     <>
       {success ? (
-        <section className="flex flex-col items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat"
+        <section
+          className="flex flex-col items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${clientFormImg})` }}
         >
           <div className="bg-white p-8 rounded shadow-md w-96">
-            <p className="text-bold text-xl text-blue-800 text-center">Account Made!</p>
+            <p className="text-bold text-xl text-blue-800 text-center">
+              Account Made!
+            </p>
             <div className="flex justify-center">
               <motion.button
                 onClick={handleClick}
                 whileTap={{ scale: 0.95 }}
-                className="bg-blue-800 hover:bg-darkBlue text-white py-2 w-full px-4 mt-4 rounded focus:outline-none focus:ring focus:border-blue-900">
+                className="bg-blue-800 hover:bg-darkBlue text-white py-2 w-full px-4 mt-4 rounded focus:outline-none focus:ring focus:border-blue-900"
+              >
                 Log In
               </motion.button>
             </div>
           </div>
-        </section >
+        </section>
       ) : (
-        <div className="flex justify-center items-center min-h-screen bg-cover bg-center bg-no-repeat"
+        <div
+          className="flex justify-center items-center min-h-screen bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${clientFormImg})` }}
         >
           <div className="form-container my-auto mt-32 px-4">
-            <form onSubmit={handleSubmit} className="max-w-md w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <form
+              onSubmit={handleSubmit}
+              className="max-w-md w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+            >
               <OrgName orgName={orgName} setOrgName={setOrgName} />
               <OrgType orgType={orgType} setOrgType={setOrgType} />
               <ContactPersonName
@@ -365,7 +380,10 @@ export function ClientForm() {
                 contactPersonPhone={contactPersonPhone}
                 setContactPersonPhone={setContactPersonPhone}
               />
-              <OrgWebsite orgWebsite={orgWebsite} setOrgWebsite={setOrgWebsite} />
+              <OrgWebsite
+                orgWebsite={orgWebsite}
+                setOrgWebsite={setOrgWebsite}
+              />
               <AnnualRevenue
                 annualRevenue={annualRevenue}
                 setAnnualRevenue={setAnnualRevenue}

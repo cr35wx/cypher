@@ -1,3 +1,11 @@
+/*
+This component represents a form for students to fill out their information for registration.
+It includes fields for student name, DePaul student ID, school and major selection, year standing,
+graduation date, prerequisite courses selection, project type of interest, how the student heard
+about the clinic, gender, and ethnicity. Upon successful submission, the form clears and displays
+a success message with an option to log in.
+*/
+
 import React, { useState, useEffect, Fragment } from "react";
 import { studentFormImg } from "../../images";
 import { useNavigate } from "react-router-dom";
@@ -234,30 +242,34 @@ const GraduationDate = ({ graduationDate, setGraduationState }) => {
   );
 };
 
-const PrerequisiteCourses = ({ prerequisiteCourses, setPrerequesiteCourses }) => {
+const PrerequisiteCourses = ({
+  prerequisiteCourses,
+  setPrerequesiteCourses,
+}) => {
   // This should ideally be connected to the selected school and major in some way,
   // but for now the component only grabs all the courses from the database and displays them
 
   // const courses = [
-  //   "CSEC_390", "CSEC_490", "CSEC_488", "IS_486", "IS_487", "ACC_374", 
+  //   "CSEC_390", "CSEC_490", "CSEC_488", "IS_486", "IS_487", "ACC_374",
   //   "ACC_376", "ACC_378", "ACC_636", "ACC_638", "ACC_639", "FIN_362", "SEV_621"
   // ];
 
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    fetch('/api/courses')
-      .then(response => response.json())
-      .then(data => setCourses(data))
-       .catch(error => console.error('Error fetching course list:', error));
+    fetch("/api/courses")
+      .then((response) => response.json())
+      .then((data) => setCourses(data))
+      .catch((error) => console.error("Error fetching course list:", error));
   }, []);
-
 
   const [isOpen, setIsOpen] = useState(false);
 
   const handleCourseToggle = (course) => {
     if (prerequisiteCourses.includes(course)) {
-      setPrerequesiteCourses(prerequisiteCourses.filter(item => item !== course));
+      setPrerequesiteCourses(
+        prerequisiteCourses.filter((item) => item !== course)
+      );
     } else {
       setPrerequesiteCourses([...prerequisiteCourses, course]);
     }
@@ -265,7 +277,10 @@ const PrerequisiteCourses = ({ prerequisiteCourses, setPrerequesiteCourses }) =>
 
   return (
     <div className="relative">
-      <label htmlFor="prerequisiteCourses" className="text-gray-700 text-sm font-bold">
+      <label
+        htmlFor="prerequisiteCourses"
+        className="text-gray-700 text-sm font-bold"
+      >
         Select Prerequisite Courses:
       </label>
       <div className="relative">
@@ -273,11 +288,13 @@ const PrerequisiteCourses = ({ prerequisiteCourses, setPrerequesiteCourses }) =>
           className="inline-block w-full bg-gray-200 appearance-none border border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight cursor-pointer"
           onClick={() => setIsOpen(!isOpen)}
         >
-          <span style={{ fontStyle: 'italic' }}>{isOpen ? "Close" : "Open"} Courses</span>
+          <span style={{ fontStyle: "italic" }}>
+            {isOpen ? "Close" : "Open"} Courses
+          </span>
         </div>
         {isOpen && (
           <div className="absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded shadow-md py-1 px-3 text-gray-700 leading-tight">
-            {courses.map(course => (
+            {courses.map((course) => (
               <Fragment key={course}>
                 <div className="flex items-center mb-2">
                   <input
@@ -288,7 +305,10 @@ const PrerequisiteCourses = ({ prerequisiteCourses, setPrerequesiteCourses }) =>
                     onChange={() => handleCourseToggle(course)}
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-offset-gray-200 focus:ring-2"
                   />
-                  <label htmlFor={course} className="ml-2 text-sm font-medium text-gray-900">
+                  <label
+                    htmlFor={course}
+                    className="ml-2 text-sm font-medium text-gray-900"
+                  >
                     {course}
                   </label>
                 </div>
@@ -300,7 +320,6 @@ const PrerequisiteCourses = ({ prerequisiteCourses, setPrerequesiteCourses }) =>
     </div>
   );
 };
-
 
 export const ProjectType = ({
   projectType,
@@ -483,10 +502,10 @@ export function StudentForm() {
   const [otherDescription, setOtherDescription] = useState("");
   const [howDidYouHear, setHowDidYouHear] = useState("");
   const [heardAboutMonth, setHeardAboutMonth] = useState(
-    new Date().getMonth() + 1,
+    new Date().getMonth() + 1
   );
   const [heardAboutYear, setHeardAboutYear] = useState(
-    new Date().getFullYear(),
+    new Date().getFullYear()
   );
   const [gender, setGender] = useState("");
   const [ethnicity, setEthnicity] = useState("");
@@ -496,7 +515,7 @@ export function StudentForm() {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/login', { replace: true });
+    navigate("/login", { replace: true });
   };
 
   //  useEffect(() => {
@@ -564,27 +583,35 @@ export function StudentForm() {
   return (
     <>
       {success ? (
-        <section className="flex flex-col items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat"
+        <section
+          className="flex flex-col items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${studentFormImg})` }}
         >
           <div className="bg-white p-8 rounded shadow-md w-96">
-            <p className="text-bold text-xl text-blue-800 text-center">Account Made!</p>
+            <p className="text-bold text-xl text-blue-800 text-center">
+              Account Made!
+            </p>
             <div className="flex justify-center">
               <motion.button
                 onClick={handleClick}
                 whileTap={{ scale: 0.95 }}
-                className="bg-blue-800 hover:bg-blue-600 text-white py-2 w-full px-4 mt-4 rounded focus:outline-none focus:ring focus:border-blue-300">
+                className="bg-blue-800 hover:bg-blue-600 text-white py-2 w-full px-4 mt-4 rounded focus:outline-none focus:ring focus:border-blue-300"
+              >
                 Log In
               </motion.button>
             </div>
           </div>
-        </section >
+        </section>
       ) : (
-        <div className="flex justify-center items-center min-h-screen bg-cover bg-center"
+        <div
+          className="flex justify-center items-center min-h-screen bg-cover bg-center"
           style={{ backgroundImage: `url(${studentFormImg})` }}
         >
           <div className="form-container my-auto mt-32 px-4 bg-white shadow-md rounded w-full max-w-md">
-            <form onSubmit={handleSubmit} className="my-auto w-full px-8 pt-6 pb-8 mb-4">
+            <form
+              onSubmit={handleSubmit}
+              className="my-auto w-full px-8 pt-6 pb-8 mb-4"
+            >
               <Name name={name} setName={setName} />
               <StudentID studentID={studentID} setStudentID={setStudentID} />
               <School

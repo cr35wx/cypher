@@ -1,3 +1,9 @@
+/*
+This component represents the main application layout and routing configuration.
+It includes routes for different pages such as Home, About, Sign In, Sign Up, Account, and Admin Dashboard.
+PrivateRoutes and PrivateSignUp components handle authentication for protected routes.
+*/
+
 import { Route, Routes, Navigate, Outlet } from "react-router-dom";
 import "./App.css";
 import { Navbar } from "./components/Navbar";

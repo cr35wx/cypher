@@ -10,27 +10,8 @@ import { useAuth } from "./AuthContext";
 
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  //const { isLoggedIn, userEmail } = useAuth();
-  const { isLoggedIn, userRole } = useAuth(); // we can either dynamically show the users role or email idc
-
-  // const [loginText, setLoginText] = useState("Login");
-  // useEffect(() => {
-  //   fetch("/whoami", {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       if (data.error) {
-  //         console.log("ERROR", data.error);
-  //       }
-  //       if (data.account_details) setLoginText(data.account_details.email);
-  //
-  //     });
-  // }, []);
+  //const { isLoggedIn, userEmail } = useAuth(); // we can either dynamically show the users role or email
+  const { isLoggedIn, userRole } = useAuth();
 
   return (
     <nav>

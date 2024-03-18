@@ -1,3 +1,9 @@
+/*
+These CSS styles define the appearance and behavior of buttons used for faculty categories. 
+There are different styles for buttons with white and blue backgrounds. 
+The buttons have transitions and hover effects to enhance user interaction.
+*/
+
 .button-faculty.white {
     background-color: #fff;
     color: #11315d;

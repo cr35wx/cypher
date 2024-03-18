@@ -1,3 +1,9 @@
+/*
+This functional component represents a single faculty member card. 
+It takes props such as photo, name, title, and facultyPage to display information about the faculty member. 
+The component renders an image of the faculty member along with their name, title, and a link to view their profile.
+*/
+
 import React from "react";
 
 function FacultyMember({ photo, name, title, facultyPage }) {

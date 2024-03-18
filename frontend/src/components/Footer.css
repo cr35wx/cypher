@@ -1,3 +1,8 @@
+/*
+This CSS file styles the footer of the webpage.
+It includes styles for the footer container, title, menu icon, navigation links, and responsive design.
+*/
+
 .active {
     background-color: black !important;
 }
@@ -91,14 +96,3 @@ footer .menu span {
         margin: 0.2rem 0.5rem;
     }
 }
-
-/* div div ul li a {
-    color: white;
-    text-align: center;
-    
-}
-
-div div ul li a:not(.active):hover {
-    color: red;
-    
-} */
