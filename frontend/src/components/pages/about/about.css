@@ -1,33 +1,52 @@
-.btn-blue {
-    display: inline-block;
-    background-color: #163b6f;
-    color: #fff;
-    font-size: 1rem;
-    font-weight: bold;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: background-color 0.1s ease;
-}
-
-.btn-blue:hover {
-    background-color: #0e3a8a;
-}
-
-.btn-white {
-    display: inline-block;
+.button-faculty.white {
     background-color: #fff;
     color: #11315d;
-    font-size: 1rem;
-    font-weight: bold;
-    text-decoration: none;
-    padding: 10px 20px;
-    border: 2px solid #11315d;
-    border-radius: 5px;
-    transition: background-color 0.1s ease, color 0.2s ease, border-color 0.2s ease;
+    box-shadow: 0px 0px 20px #1f4c65;
 }
 
-.btn-white:hover {
+.button-faculty.blue {
+    background: #0d2a53;
+    background: linear-gradient(270deg, rgba(2, 29, 78, 0.681) 0%, rgba(31, 215, 232, 0.873) 60%);
+    color: #fff;
+    box-shadow: 0px 0px 6px #1f4c65;
+}
+
+.button-faculty {
+    font-size: 1rem;
+    padding: 1rem 1rem;
+    border: none;
+    outline: none;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    background-color: rgb(14, 14, 26);
+    color: rgb(234, 234, 234);
+    font-weight: 700;
+    text-decoration: none;
+    font-family: 'Graduate';
+    transition: 0.6s;
+    box-shadow: 0px 0px 40px #1f4c65;
+}
+
+.button-faculty:active {
+    background: #0d2a53;
+    background: linear-gradient(270deg, rgba(2, 29, 78, 0.681) 0%, rgba(31, 215, 232, 0.873) 60%);
+    scale: 0.92;
+}
+
+.button-faculty:hover {
+    background: rgb(2, 29, 78);
+    background: linear-gradient(270deg, rgba(2, 29, 78, 0.681) 0%, rgba(31, 215, 232, 0.873) 60%);
+    color: rgb(4, 4, 38);
+}
+
+.button-faculty.white:hover {
     background-color: #11315d;
     color: #fff;
+}
+
+.button-faculty.blue:hover {
+    background: rgb(2, 29, 78);
+    background: linear-gradient(270deg, rgba(2, 29, 78, 0.681) 0%, rgba(31, 215, 232, 0.873) 60%);
+    color: #040426;
 }
