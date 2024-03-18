@@ -1,13 +1,14 @@
 .button-faculty.white {
     background-color: #fff;
     color: #11315d;
+    box-shadow: 0px 0px 20px #1f4c65;
 }
 
 .button-faculty.blue {
     background: #0d2a53;
     background: linear-gradient(270deg, rgba(2, 29, 78, 0.681) 0%, rgba(31, 215, 232, 0.873) 60%);
     color: #fff;
-    
+    box-shadow: 0px 0px 6px #1f4c65;
 }
 
 .button-faculty {
@@ -24,7 +25,7 @@
     text-decoration: none;
     font-family: 'Graduate';
     transition: 0.6s;
-    box-shadow: 0px 0px 60px #1f4c65;
+    box-shadow: 0px 0px 40px #1f4c65;
 }
 
 .button-faculty:active {
