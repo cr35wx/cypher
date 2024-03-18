@@ -1,3 +1,6 @@
 FLASK_APP=start.py
 FLASK_DEBUG=1
-JWT_SECRET=!%^&#!&*$y173rfhehdasjhr3qr2q897rqef
+
+# This file is separate from a production .env, and is simply used to
+# enable running the flask app with "flask run" from the backend directory
+# instead of having to type "flask --app start.py run"

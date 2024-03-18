@@ -11,11 +11,14 @@ user_bp = Blueprint(
     __name__
 )
 
-# Defining routes to retrieve student and client users, with authentication required.
-# RBAC is utilized here, determining user access based on their role.
 @user_bp.route("/user-details", methods=["GET"])
 @jwt_required()
 def get_user_details():
+    """
+    Defining routes to retrieve student and client users, with authentication required.
+    RBAC is utilized here, determining user access based on their role.
+    """
+
     claims = get_jwt()
     
     if claims.get("is_student") == True:

@@ -1,6 +1,8 @@
-# this is bad
-# the entire file is guessing what the auto generated and auto 
-# incremented ids of foreign keys will be but it works for now
+"""
+A big ugly data file
+The entire file is guessing what the auto generated and auto
+incremented ids of foreign keys will be but... it works for now
+"""
 
 from api.models import (
     Course,
@@ -138,9 +140,8 @@ non_profit = ClientOrgnizationType(org_type_name="Non-Profit")
 for_profit = ClientOrgnizationType(org_type_name="For-Profit")
 
 
-
-
-
+# huge_gross_tuple will be added to the database with the command
+# "flask manage-db populate" defined in start.py
 huge_gross_tuple = (
     soc,
     dcob,
