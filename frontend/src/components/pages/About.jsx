@@ -117,15 +117,17 @@ const About = () => {
       {/* Faculty Section */}
       <section className="bg-white py-20 faculty-section">
         <div className="max-w-screen-xl mx-auto px-4 text-center">
-          <h2 className="text-4xl font-graduate font-bold mb-4 text-darkBlue">
+          <h2 className="text-4xl font-graduate font-bold mb-8 text-darkBlue">
             Participating Faculty
           </h2>
-          <div className="flex flex-row justify-center mb-8 space-x-4 flex-wrap">
+          <div className="flex flex-row justify-center mb-20 mt-4 space-x-4 flex-wrap">
             <motion.button
               whileTap={{ scale: 0.9 }}
               onClick={() => handleCategoryChange("all")}
               className={`${
-                selectedCategory === "all" ? "btn-blue" : "btn-white"
+                selectedCategory === "all"
+                  ? "button-faculty blue"
+                  : "button-faculty white"
               } mx-2 my-1`}
             >
               All
@@ -135,8 +137,8 @@ const About = () => {
               onClick={() => handleCategoryChange("school of computing")}
               className={`${
                 selectedCategory === "school of computing"
-                  ? "btn-blue"
-                  : "btn-white"
+                  ? "button-faculty blue"
+                  : "button-faculty white"
               } mx-2 my-1 mr-4`}
             >
               School of Computing
@@ -146,8 +148,8 @@ const About = () => {
               onClick={() => handleCategoryChange("college of business")}
               className={`${
                 selectedCategory === "college of business"
-                  ? "btn-blue"
-                  : "btn-white"
+                  ? "button-faculty blue"
+                  : "button-faculty white"
               } mx-2 my-1 mr-4`}
             >
               College of Business
@@ -156,7 +158,9 @@ const About = () => {
               whileTap={{ scale: 0.9 }}
               onClick={() => handleCategoryChange("law")}
               className={`${
-                selectedCategory === "law" ? "btn-blue" : "btn-white"
+                selectedCategory === "law"
+                  ? "button-faculty blue"
+                  : "button-faculty white"
               } mx-2 my-1 mr-4`}
             >
               Law
@@ -165,7 +169,9 @@ const About = () => {
               whileTap={{ scale: 0.9 }}
               onClick={() => handleCategoryChange("steans center")}
               className={`${
-                selectedCategory === "steanscenter" ? "btn-blue" : "btn-white"
+                selectedCategory === "steanscenter"
+                  ? "button-faculty blue"
+                  : "button-faculty white"
               } mx-2 my-1 mr-4`}
             >
               Steans Center
@@ -198,7 +204,7 @@ const About = () => {
           </p>
           <motion.button
             whileTap={{ scale: 0.85 }}
-            className="btn-white"
+            className="button-faculty"
             onClick={handleContactClick}
           >
             Contact Us

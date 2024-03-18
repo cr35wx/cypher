@@ -240,7 +240,7 @@ export const Home = () => {
             </a>
           </div>
 
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
+          <div className="mt-8 mb-8 flex flex-wrap justify-center gap-4">
             <motion.a
               whileTap={{ scale: 0.85 }}
               onClick={handleApplyClick}

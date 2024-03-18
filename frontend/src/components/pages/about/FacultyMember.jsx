@@ -9,7 +9,9 @@ function FacultyMember({ photo, name, title, facultyPage }) {
         className="w-20 h-20 rounded-full mb-4 shadow-md hover:shadow-lg object-cover object-center"
       />
       <div className="text-center">
-        <p className="text-lg font-semibold text-gray-900 mb-1">{name}</p>
+        <p className="text-lg font-graduate font-semibold text-gray-900 mb-1">
+          {name}
+        </p>
         <p className="text-gray-900 mb-1">{title}</p>
         <a
           href={facultyPage}
