@@ -1,3 +1,10 @@
+/*
+This component represents a form for resetting a user's password. 
+It allows users to enter a new password and confirm it, fetching the user's email and reset code from the server. 
+The component provides real-time validation for password strength and match, 
+handles form submission, and displays error messages and visual indicators accordingly.
+*/
+
 import React, { useState, useEffect, useRef } from "react";
 import { loginImg } from "../../images";
 import { Icon } from "react-icons-kit";
@@ -27,15 +34,14 @@ const PasswordReset = () => {
 
   const navigate = useNavigate();
 
-
   useEffect(() => {
     (async () => {
       try {
-        const response = await fetch('/email-and-reset-code');
+        const response = await fetch("/email-and-reset-code");
         const data = await response.json();
-        if(data.email) {
+        if (data.email) {
           setEmail(data.email);
-          setCode(data.code)
+          setCode(data.code);
         } else {
           setErrMsg("Could not fetch email or your code may be invalid.");
         }
@@ -78,10 +84,10 @@ const PasswordReset = () => {
       if (data.error) {
         setErrMsg(data.error);
       } else {
-          setPwd("");
-          setMatchPwd("");
-          setErrMsg("Password successfully reset.");
-          navigate("/login");
+        setPwd("");
+        setMatchPwd("");
+        setErrMsg("Password successfully reset.");
+        navigate("/login");
       }
     } catch (error) {
       console.error("Password reset error:", error);

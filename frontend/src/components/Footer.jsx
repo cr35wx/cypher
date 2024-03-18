@@ -1,3 +1,9 @@
+/*
+Footer component representing the bottom section of the webpage.
+It includes the clinic name, navigation links, and contact information.
+The visibility of certain links depends on the user's authentication status.
+ */
+
 import React from "react";
 import { useAuth } from "./AuthContext";
 import "./Footer.css";

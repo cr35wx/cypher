@@ -1,5 +1,13 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { jwtDecode } from 'jwt-decode';
+/*
+This component provides authentication context for the application.
+It includes functions for logging in, logging out, fetching user email and role,
+checking token expiration, and refreshing tokens.
+The AuthProvider component wraps around the application to provide access to authentication context.
+The useAuth hook is provided for authentication context within components.
+*/
+
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { jwtDecode } from "jwt-decode";
 
 const AuthContext = createContext();
 
@@ -12,21 +20,23 @@ export const AuthProvider = ({ children }) => {
   const [userEmail, setUserEmail] = useState("");
   const [userRole, setUserRole] = useState("");
   const TOKEN_EXPIRATION_CHECK_INTERVAL = 15 * 60 * 1000; // check every 15 minutes
-  //const TOKEN_EXPIRATION_CHECK_INTERVAL = 15 * 1000; if u set access token to expire at 1 min, refresh occurs 15 secs (just for testing)
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     setIsLoggedIn(!!token);
     if (token) {
-      fetchUserEmail() // Fetch email if token exists
+      fetchUserEmail(); // Fetch email if token exists
       fetchUserRole();
       checkTokenExpiration();
-    }; 
+    }
   }, []);
 
   useEffect(() => {
     if (isLoggedIn) {
-      const interval = setInterval(checkTokenExpiration, TOKEN_EXPIRATION_CHECK_INTERVAL);
+      const interval = setInterval(
+        checkTokenExpiration,
+        TOKEN_EXPIRATION_CHECK_INTERVAL
+      );
       return () => clearInterval(interval);
     }
   }, [isLoggedIn]);
@@ -39,20 +49,26 @@ export const AuthProvider = ({ children }) => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     })
-    .then((res) => res.json())
-    .then((data) => {
-      if (!data.error && data.account_details.email) {
-        setUserEmail(data.account_details.email);
-      }
-    })
-    .catch((error) => console.error("Error fetching user email:", error));
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data.error && data.account_details.email) {
+          setUserEmail(data.account_details.email);
+        }
+      })
+      .catch((error) => console.error("Error fetching user email:", error));
   };
 
   const fetchUserRole = () => {
     const token = localStorage.getItem("token");
     if (token) {
       const decodedToken = jwtDecode(token);
-      setUserRole(decodedToken.is_student ? "student" : decodedToken.is_client ? "client" : "");
+      setUserRole(
+        decodedToken.is_student
+          ? "student"
+          : decodedToken.is_client
+          ? "client"
+          : ""
+      );
     }
   };
 
@@ -85,28 +101,29 @@ export const AuthProvider = ({ children }) => {
 
   const refreshToken = async () => {
     try {
-      const response = await fetch('/refresh', {
-        method: 'POST',
+      const response = await fetch("/refresh", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('refresh_token')}`,
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("refresh_token")}`,
         },
       });
       const data = await response.json();
       if (data.access_token) {
-        localStorage.setItem('token', data.access_token); 
+        localStorage.setItem("token", data.access_token);
         fetchUserEmail();
       }
     } catch (error) {
-      console.error('Error refreshing token:', error);
+      console.error("Error refreshing token:", error);
       logout();
-    } 
+    }
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout, userEmail, userRole }}>
+    <AuthContext.Provider
+      value={{ isLoggedIn, login, logout, userEmail, userRole }}
+    >
       {children}
     </AuthContext.Provider>
   );
 };
-

@@ -1,3 +1,10 @@
+/*
+This component represents the About page of the application. 
+It includes sections for displaying the mission, cybersecurity resources, participating faculty members, and contact information. 
+Users can filter faculty members by category and contact the organization via email. 
+The component utilizes React state to manage category filtering and Framer Motion for animation effects.
+*/
+
 import React, { useState } from "react";
 import "./about/about.css";
 import FacultyMember from "./about/FacultyMember";
@@ -88,7 +95,7 @@ const About = () => {
               </h3>
               <p className="text-base text-gray-300 text-left">
                 OpenSecurityTraining, started by Xeno Kovah in 2011, was
-                initailly made to host his own classes. OpenSecurityTraining2's
+                initailly made to host his own classes. OpenSecurityTraining's
                 mission is to provide the world's deepest and best cybersecurity
                 training. There are a vast amound of free educational resources
                 that are free to access after signing up.
@@ -103,11 +110,11 @@ const About = () => {
                 Try Hack Me
               </h3>
               <p className="text-base text-gray-300 text-left">
-                TryHackMe is another cybersecurity training platform, with
-                learning content covering all skill levels from the complete
-                beginner to the seasoned hacker. The site has a free sign up
-                after that users will be able to engage in different learning
-                paths based on what they want to learn.
+                TryHackMe is a cybersecurity training platform with learning
+                content covering all skill levels from complete beginner to the
+                seasoned hacker. The site has a free sign up after that users
+                will be able to engage in different learning paths based on what
+                they want to learn.
               </p>
             </motion.a>
           </div>
@@ -169,7 +176,7 @@ const About = () => {
               whileTap={{ scale: 0.9 }}
               onClick={() => handleCategoryChange("steans center")}
               className={`${
-                selectedCategory === "steanscenter"
+                selectedCategory === "steans center"
                   ? "button-faculty blue"
                   : "button-faculty white"
               } mx-2 my-1 mr-4`}

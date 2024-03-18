@@ -1,3 +1,8 @@
+/*
+This component represents a modal for resetting the password.
+It includes elements for entering the verification code sent to the user's email.
+*/
+
 import React, { useState } from "react";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";

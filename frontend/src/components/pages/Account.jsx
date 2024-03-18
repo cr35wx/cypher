@@ -1,3 +1,11 @@
+/*
+This component represents the Account page of the application. 
+It allows users to view their account details, download a dummy form, view event calendars, and logout. 
+The component fetches account details from the server, displays them dynamically based on the user role, and provides 
+functionality for downloading a dummy form and logging out. 
+It utilizes React state and effects for managing data fetching and loading states, as well as Framer Motion for animation effects.
+*/
+
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../AuthContext";
 import { loginImg } from "../../images";

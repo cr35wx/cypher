@@ -1,3 +1,10 @@
+/*
+This component represents a sign-in form for users to log into their accounts. 
+It allows users to enter their email and password, with real-time password visibility. 
+The component handles form submission, validates user input, and displays error messages accordingly. 
+It also provides a "Forgot Password" link to initiate the password reset process and a "Sign Up" link for new users to register.
+*/
+
 import React, { useRef, useState, useEffect } from "react";
 import { loginImg } from "../../images";
 import { Link, useNavigate } from "react-router-dom";
@@ -24,10 +31,10 @@ const SignIn = () => {
   const { login } = useAuth();
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [refreshToken, setRefreshToken] = useState(
-    localStorage.getItem("refresh_token"),
+    localStorage.getItem("refresh_token")
   );
 
-const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);
@@ -187,14 +194,19 @@ const [isModalOpen, setIsModalOpen] = useState(false);
           <div className="text-center">
             <p
               ref={errRef}
-              className={` text-darkBlue font-graduate font-bold py-2 px-4 mb-2 ${errMsg ? "" : "hidden"}`}
+              className={` text-darkBlue font-graduate font-bold py-2 px-4 mb-2 ${
+                errMsg ? "" : "hidden"
+              }`}
             >
               {errMsg}
             </p>
           </div>
         </form>
       </section>
-      <ResetPassModal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)} />
+      <ResetPassModal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+      />
     </>
   );
 };

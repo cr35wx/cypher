@@ -2,7 +2,19 @@ from flask import jsonify
 from .models import StudentParticipant, ClientOrganization
 
 def setup_jwt_callbacks(jwt):
-    # load user 
+    """
+    Sets up JWT callbacks for user lookup, additional claims, and error handling.
+
+    Parameters:
+    - jwt: JWTManager instance for handling JWT-related operations.
+
+    Callbacks:
+    - user_lookup_callback: Looks up user based on JWT identity.
+    - make_additional_claims: Adds additional claims to JWT based on user role.
+    - expired_token_callback: Handles expired token errors.
+    - invalid_token_callback: Handles invalid token errors.
+    - missing_token_callback: Handles missing token errors.
+    """
     @jwt.user_lookup_loader
     def user_lookup_callback(jwt_headers, jwt_data ):
         identity = jwt_data['sub']
@@ -12,7 +24,6 @@ def setup_jwt_callbacks(jwt):
         
         return user
 
-    # additional claims to jwt (the roles!!)
     @jwt.additional_claims_loader
     def make_additional_claims(identity):
         user = user_lookup_callback(None, {'sub': identity})
@@ -23,9 +34,7 @@ def setup_jwt_callbacks(jwt):
             elif user.role == "client":
                 return {"is_client": True}
         return {"is_client": False, "is_student": False}
-        # add admin soon, they will need their our predefined account
 
-    # jwt error handlers
     @jwt.expired_token_loader
     def expired_token_callback(jwt_header, jwt_data):
         return jsonify({"message": "Token has expired", "error": "token_expired"}), 401

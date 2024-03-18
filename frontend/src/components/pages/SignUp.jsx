@@ -1,3 +1,11 @@
+/*
+This component represents a sign-up form for users to create new accounts. 
+It allows users to enter their email and password, with real-time password visibility. 
+The component handles form submission, validates user input, and displays error messages accordingly. 
+It also automatically focuses on the email input field upon rendering. 
+Upon successful registration, users are redirected to either the student or client page based on their email domain.
+*/
+
 import React, { useRef, useState, useEffect } from "react";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
