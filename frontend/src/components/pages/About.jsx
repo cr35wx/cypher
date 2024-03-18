@@ -57,7 +57,7 @@ const About = () => {
           <h2 className="text-4xl font-graduate text-white font-bold mb-4">
             Cybersecurity Resources
           </h2>
-          <p className="text-lg mb-4 text-white">
+          <p className="text-lg mt-8 mb-12 text-gray-300">
             Links to valuable resources useful for learning basic cybersecurity
             knowledge.
           </p>
@@ -65,12 +65,12 @@ const About = () => {
             <motion.a
               whileTap={{ scale: 0.85 }}
               href="https://www.hacker101.com/"
-              className="resource bg-gray-200 rounded-lg p-8 no-underline shadow-md hover:shadow-lg transition duration-300 block"
+              className="block rounded-xl border border-gray-800 p-8 shadow-md transition hover:border-lighterBlue hover:shadow-lighterBlue no-underline"
             >
-              <h3 className="text-2xl underline font-bold mb-4 text-gray-800">
-                Hacker101
+              <h3 className="text-2xl no-underline font-graduate font-bold mb-4 text-white">
+                Hacker 101
               </h3>
-              <p className="text-base text-black">
+              <p className="text-base text-left text-gray-300">
                 Hacker101 is a free educational resource developed by HackerOne
                 to grow and empower the hacker community at large. There are
                 video lessons and curated resources to help you learn the
@@ -81,12 +81,12 @@ const About = () => {
             <motion.a
               whileTap={{ scale: 0.85 }}
               href="https://www.opensecuritytraining.info/"
-              className="resource bg-gray-200 no-underline rounded-lg p-8 shadow-md hover:shadow-lg transition duration-300 block"
+              className="block rounded-xl border border-gray-800 p-8 shadow-md transition hover:border-lighterBlue hover:shadow-lighterBlue no-underline"
             >
-              <h3 className="text-2xl underline font-bold mb-4 text-gray-800">
-                OpenSecurityTraining
+              <h3 className="text-2xl no-underline font-graduate font-bold mb-4 text-white">
+                Open Security Training
               </h3>
-              <p className="text-base text-black">
+              <p className="text-base text-gray-300 text-left">
                 OpenSecurityTraining, started by Xeno Kovah in 2011, was
                 initailly made to host his own classes. OpenSecurityTraining2's
                 mission is to provide the world's deepest and best cybersecurity
@@ -97,12 +97,12 @@ const About = () => {
             <motion.a
               whileTap={{ scale: 0.9 }}
               href="https://tryhackme.com/"
-              className="resource bg-gray-200 no-underline rounded-lg p-8 shadow-md hover:shadow-lg transition duration-300 block"
+              className="block rounded-xl border border-gray-800 p-8 shadow-md transition hover:border-lighterBlue hover:shadow-lighterBlue no-underline"
             >
-              <h3 className="text-2xl underline font-bold mb-4 text-gray-800">
-                TryHackMe
+              <h3 className="text-2xl no-underline font-graduate font-bold mb-4 text-white">
+                Try Hack Me
               </h3>
-              <p className="text-base text-black">
+              <p className="text-base text-gray-300 text-left">
                 TryHackMe is another cybersecurity training platform, with
                 learning content covering all skill levels from the complete
                 beginner to the seasoned hacker. The site has a free sign up
@@ -192,7 +192,7 @@ const About = () => {
           <h2 className="text-4xl font-graduate text-white font-bold mb-4">
             Contact Information
           </h2>
-          <p className="text-lg mb-4 text-white">
+          <p className="text-lg mb-4 text-gray-300">
             Have questions or need more information about our program? Reach out
             to us!
           </p>

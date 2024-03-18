@@ -496,6 +496,8 @@ def verify_reset_code():
             db.session.commit()
             return jsonify({"success": "Code verified successfully."}), 200
         else:
+            db.session.delete(code_in_db)
+            db.session.commit()
             return jsonify({"error": "This code has expired."}), 400
     else:
         return jsonify({"error": "This code is not valid."}), 400
