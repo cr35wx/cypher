@@ -1,5 +1,5 @@
 /*
-This component represents the main application layout and routing configuration.
+App.jsx represents the main application layout and routing configuration.
 It includes routes for different pages such as Home, About, Sign In, Sign Up, Account, and Admin Dashboard.
 PrivateRoutes and PrivateSignUp components handle authentication for protected routes.
 */
