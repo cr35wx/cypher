@@ -49,7 +49,10 @@ export const Footer = () => {
         <span className="block text-sm text-gray-300 text-center">
           <p>
             © 2001-2024 DePaul University | Address: 1 E. Jackson Blvd. Chicago,
-            IL 60604 | Phone: (312) 362-8000 | ADMIN LOGIN
+            IL 60604 | Phone: (312) 362-8000 |{" "}
+            <a href="/admin" className="no-underline text-gray-300">
+              ADMIN
+            </a>
           </p>
         </span>
       </div>
