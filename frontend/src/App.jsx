@@ -41,6 +41,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/resettemp" element={<PasswordReset />} />
+          <Route path="/admin" element={<AdminHack />} />
           <Route element={<PrivateSignUp />}>
             <Route path="/login" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
@@ -49,7 +50,6 @@ function App() {
           </Route>
           <Route element={<PrivateRoutes />}>
             <Route path="/account" element={<Account />} />
-            <Route path="/admin" element={<AdminHack />} />
           </Route>
         </Routes>
         <Footer />
