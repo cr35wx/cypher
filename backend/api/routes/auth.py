@@ -210,8 +210,6 @@ def verify_reset_code():
         ) + timedelta(minutes=15)
 
         if current_time <= code_expiration_time:
-            db.session.delete(code_in_db)
-            db.session.commit()
             return jsonify({"success": "Code verified successfully."}), 200
         else:
             db.session.delete(code_in_db)
@@ -242,7 +240,8 @@ def change_password():
 
     if user and code_in_db:
         # Update the user's password. Ensure you are hashing the password before saving it!
-        user.password = generate_password_hash(new_password)
+        user.password = generate_password_hash(new_password, method="pbkdf2:sha256")
+        db.session.delete(code_in_db)
         db.session.commit()
         return jsonify({"message": "Password successfully changed."}), 200
     else:
