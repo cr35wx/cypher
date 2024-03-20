@@ -9,7 +9,7 @@ from flask import Blueprint, jsonify, request, session
 from sqlalchemy.exc import IntegrityError
 
 from ..app import db
-from ..models import DegreeMajor, StudentParticipant
+from ..models import DegreeMajor, StudentParticipant, Course
 
 STUDENT_ID_LENGTH = 7
 MAX_NAME_LENGTH = 30
@@ -94,6 +94,12 @@ def student_application():
     del session["role"]
 
     return jsonify({"message": "Application submitted successfully."}), 201
+
+
+@student_form.route('/api/courses')
+def get_courses_all():
+    courses = Course.query.order_by(Course.course_id).all()
+    return jsonify([f"{course.course_department}-{course.course_number}" for course in courses])
 
 
 def validate_name(name):
