@@ -76,3 +76,6 @@ To create data required by the diagrams:
 fake.py has more commands such as:  
 `flask fake students 10`  
 this will add 10 records of the StudentParticipants model to the db.  
+
+### See also
+https://janinespears.com/
